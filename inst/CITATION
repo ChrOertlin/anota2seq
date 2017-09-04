@@ -1,0 +1,25 @@
+citHeader("To cite anota2seq in publications use:")
+
+citEntry(entry = "Article",
+         title        = "Genome-wide analysis of differential translation and differential translational buffering using anota2seq",
+         author       = personList(as.person("Christian Oertlin"),
+                                   as.person("Julie Lorent"),
+                                   as.person("Valentina Gandin"),
+                                   as.person("Carl Murie"),
+                                   as.person("Laia Masvidal"),
+                                   as.person("Marie Cargnello"),
+                                   as.person("Luc Furic"),
+                                   as.person("Ivan Topisirovic"),
+                                   as.person("Ola Larsson")),
+         journal      = "bioRxiv",
+         year         = "2017",
+         url          = "http://www.biorxiv.org/content/early/2017/02/08/106922", 
+         doi = "10.1101/106922",
+         publisher = "Cold Spring Harbor Labs Journals",
+         
+         textVersion  =
+             paste("Oertlin C. et al. (2017).",
+                   "Genome-wide analysis of differential translation and differential translational buffering using anota2seq.",
+                   "bioRxiv.",
+                   "URL http://www.biorxiv.org/content/early/2017/02/08/106922")
+)

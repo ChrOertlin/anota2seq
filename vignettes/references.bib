@@ -1,0 +1,205 @@
+@article {Oertlin,
+	author = {Oertlin, Christian and Lorent, Julie and Gandin, Valentina and Murie, Carl and Masvidal, Laia and Cargnello, Marie and Furic, Luc and Topisirovic, Ivan and Larsson, Ola},
+	title = {Genome-wide analysis of differential translation and differential translational buffering using anota2seq},
+	year = {2017},
+	publisher = {Cold Spring Harbor Labs Journals},
+	abstract = {Genome-wide analysis of mRNA translation (translatomics) can improve understanding of biological processes and pathological conditions including cancer. Techniques used to identify the effects of various stimuli on the translatomes such as polysome- and ribosome-profiling necessitate adjustment for changes in total mRNA levels to capture bona fide alterations in translational efficiency. In addition to changes in translational efficiency, which affect protein abundance, translation can also act as a buffering mechanism whereby protein levels remain constant despite changes in mRNA levels (translational buffering). Herein, we present anota2seq, an algorithm for analysis of translatomes, which is applicable to DNA-microarray and RNA sequencing data. In contrast to anota2seq, current methods for analysis of translational efficiency using RNA sequencing data as input identify false positives at high rates and/or fail to distinguish changes in translation efficiency from translational buffering when two conditions (e.g. stimulated and non-stimulated cells) are compared. Moreover, we identify data- acquisition specific thresholds, which are necessary during anota2seq analysis. Finally, we employ anota2seq to show that insulin affects gene expression at multiple levels in a largely mTOR-dependent manner. Thus, the universal anota2seq algorithm allows efficient interrogation of the translatomes, including distinction between the changes in translation efficiency and buffering.},
+	URL = {http://www.biorxiv.org/content/early/2017/02/08/106922},
+	journal = {bioRxiv}
+}
+
+
+@article{love,
+	title = {Moderated estimation of fold change and dispersion for {RNA}-seq data with {DESeq}2},
+	volume = {15},
+	issn = {1474-760X},
+	abstract = {In comparative high-throughput sequencing assays, a fundamental task is the analysis of count data, such as read counts per gene in RNA-seq, for evidence of systematic changes across experimental conditions. Small replicate numbers, discreteness, large dynamic range and the presence of outliers require a suitable statistical approach. We present DESeq2, a method for differential analysis of count data, using shrinkage estimation for dispersions and fold changes to improve stability and interpretability of estimates. This enables a more quantitative analysis focused on the strength rather than the mere presence of differential expression. The DESeq2 package is available at http://www.bioconductor.org/packages/release/bioc/html/DESeq2.html webcite.},
+	language = {eng},
+	number = {12},
+	journal = {Genome Biology},
+	author = {Love, Michael I. and Huber, Wolfgang and Anders, Simon},
+	year = {2014},
+	pmid = {25516281},
+	pmcid = {PMC4302049},
+	keywords = {Algorithms, Computational Biology, High-Throughput Nucleotide Sequencing, Models, Genetic, Sequence Analysis, RNA, Software, rna},
+	pages = {550}
+}
+
+@article{ritchie,
+	title = {limma powers differential expression analyses for {RNA}-sequencing and microarray studies},
+	volume = {43},
+	issn = {1362-4962},
+	abstract = {limma is an R/Bioconductor software package that provides an integrated solution for analysing data from gene expression experiments. It contains rich features for handling complex experimental designs and for information borrowing to overcome the problem of small sample sizes. Over the past decade, limma has been a popular choice for gene discovery through differential expression analyses of microarray and high-throughput PCR data. The package contains particularly strong facilities for reading, normalizing and exploring such data. Recently, the capabilities of limma have been significantly expanded in two important directions. First, the package can now perform both differential expression and differential splicing analyses of RNA sequencing (RNA-seq) data. All the downstream analysis tools previously restricted to microarray data are now available for RNA-seq as well. These capabilities allow users to analyse both RNA-seq and microarray data with very similar pipelines. Second, the package is now able to go past the traditional gene-wise expression analyses in a variety of ways, analysing expression profiles in terms of co-regulated sets of genes or in terms of higher-order expression signatures. This provides enhanced possibilities for biological interpretation of gene expression differences. This article reviews the philosophy and design of the limma package, summarizing both new and historical features, with an emphasis on recent enhancements and features that have not been previously described.},
+	language = {eng},
+	number = {7},
+	journal = {Nucleic Acids Research},
+	author = {Ritchie, Matthew E. and Phipson, Belinda and Wu, Di and Hu, Yifang and Law, Charity W. and Shi, Wei and Smyth, Gordon K.},
+	month = apr,
+	year = {2015},
+	pmid = {25605792},
+	pmcid = {PMC4402510},
+	keywords = {Gene Expression Regulation, Oligonucleotide Array Sequence Analysis, Sequence Analysis, RNA, Software},
+	pages = {e47}
+}
+
+@article{robinson,
+	title = {{edgeR}: a {Bioconductor} package for differential expression analysis of digital gene expression data},
+	volume = {26},
+	issn = {1367-4811},
+	shorttitle = {{edgeR}},
+	abstract = {SUMMARY: It is expected that emerging digital gene expression (DGE) technologies will overtake microarray technologies in the near future for many functional genomics applications. One of the fundamental data analysis tasks, especially for gene expression studies, involves determining whether there is evidence that counts for a transcript or exon are significantly different across experimental conditions. edgeR is a Bioconductor software package for examining differential expression of replicated count data. An overdispersed Poisson model is used to account for both biological and technical variability. Empirical Bayes methods are used to moderate the degree of overdispersion across transcripts, improving the reliability of inference. The methodology can be used even with the most minimal levels of replication, provided at least one phenotype or experimental condition is replicated. The software may have other applications beyond sequencing data, such as proteome peptide count data.
+AVAILABILITY: The package is freely available under the LGPL licence from the Bioconductor web site (http://bioconductor.org).},
+	language = {eng},
+	number = {1},
+	journal = {Bioinformatics (Oxford, England)},
+	author = {Robinson, Mark D. and McCarthy, Davis J. and Smyth, Gordon K.},
+	month = jan,
+	year = {2010},
+	pmid = {19910308},
+	pmcid = {PMC2796818},
+	keywords = {Algorithms, Gene Expression Profiling, Oligonucleotide Array Sequence Analysis, Programming Languages, Signal Processing, Computer-Assisted, Software},
+	pages = {139--140}
+}
+
+@article{wright,
+	title = {A random variance model for detection of differential gene expression in small microarray experiments},
+	volume = {19},
+	issn = {1367-4803},
+	abstract = {MOTIVATION: Microarray techniques provide a valuable way of characterizing the molecular nature of disease. Unfortunately expense and limited specimen availability often lead to studies with small sample sizes. This makes accurate estimation of variability difficult, since variance estimates made on a gene by gene basis will have few degrees of freedom, and the assumption that all genes share equal variance is unlikely to be true.
+RESULTS: We propose a model by which the within gene variances are drawn from an inverse gamma distribution, whose parameters are estimated across all genes. This results in a test statistic that is a minor variation of those used in standard linear models. We demonstrate that the model assumptions are valid on experimental data, and that the model has more power than standard tests to pick up large changes in expression, while not increasing the rate of false positives.
+AVAILABILITY: This method is incorporated into BRB-ArrayTools version 3.0 (http://linus.nci.nih.gov/BRB-ArrayTools.html).
+SUPPLEMENTARY MATERIAL: ftp://linus.nci.nih.gov/pub/techreport/RVM\_supplement.pdf},
+	language = {eng},
+	number = {18},
+	journal = {Bioinformatics (Oxford, England)},
+	author = {Wright, George W. and Simon, Richard M.},
+	month = dec,
+	year = {2003},
+	pmid = {14668230},
+	keywords = {Algorithms, Analysis of Variance, False Positive Reactions, Gene Expression Profiling, Genetic Variation, Models, Genetic, Models, Statistical, Oligonucleotide Array Sequence Analysis, Reproducibility of Results, Sample Size, Sensitivity and Specificity, Sequence Analysis, DNA},
+	pages = {2448--2455}
+}
+
+@article{larsson_fibrotic_2008,
+	title = {Fibrotic myofibroblasts manifest genome-wide derangements of translational control},
+	volume = {3},
+	issn = {1932-6203},
+	abstract = {BACKGROUND: As a group, fibroproliferative disorders of the lung, liver, kidney, heart, vasculature and integument are common, progressive and refractory to therapy. They can emerge following toxic insults, but are frequently idiopathic. Their enigmatic propensity to resist therapy and progress to organ failure has focused attention on the myofibroblast-the primary effector of the fibroproliferative response. We have recently shown that aberrant beta 1 integrin signaling in fibrotic fibroblasts results in defective PTEN function, unrestrained Akt signaling and subsequent activation of the translation initiation machinery. How this pathological integrin signaling alters the gene expression pathway has not been elucidated.
+RESULTS: Using a systems approach to study this question in a prototype fibrotic disease, Idiopathic Pulmonary Fibrosis (IPF); here we show organized changes in the gene expression pathway of primary lung myofibroblasts that persist for up to 9 sub-cultivations in vitro. When comparing IPF and control myofibroblasts in a 3-dimensional type I collagen matrix, more genes differed at the level of ribosome recruitment than at the level of transcript abundance, indicating pathological translational control as a major characteristic of IPF myofibroblasts. To determine the effect of matrix state on translational control, myofibroblasts were permitted to contract the matrix. Ribosome recruitment in control myofibroblasts was relatively stable. In contrast, IPF cells manifested large alterations in the ribosome recruitment pattern. Pathological studies suggest an epithelial origin for IPF myofibroblasts through the epithelial to mesenchymal transition (EMT). In accord with this, we found systems-level indications for TGF-beta -driven EMT as one source of IPF myofibroblasts.
+CONCLUSIONS: These findings establish the power of systems level genome-wide analysis to provide mechanistic insights into fibrotic disorders such as IPF. Our data point to derangements of translational control downstream of aberrant beta 1 integrin signaling as a fundamental component of IPF pathobiology and indicates that TGF-beta -driven EMT is one source for IPF myofibroblasts.},
+	language = {eng},
+	number = {9},
+	journal = {PloS One},
+	author = {Larsson, Ola and Diebold, Deanna and Fan, Danhua and Peterson, Mark and Nho, Richard Seonghun and Bitterman, Peter B. and Henke, Craig A.},
+	month = sep,
+	year = {2008},
+	pmid = {18795102},
+	pmcid = {PMC2528966},
+	keywords = {Aged, Aged, 80 and over, Antigens, CD29, Female, Fibroblasts, Genome, Human, Humans, Male, Middle Aged, Models, Biological, Protein Biosynthesis, Pulmonary Fibrosis, Ribosomes, Signal Transduction, Transforming Growth Factor beta},
+	pages = {e3220}
+}
+
+@article{ingolia,
+	title = {Genome-wide analysis in vivo of translation with nucleotide resolution using ribosome profiling},
+	volume = {324},
+	issn = {1095-9203},
+	abstract = {Techniques for systematically monitoring protein translation have lagged far behind methods for measuring messenger RNA (mRNA) levels. Here, we present a ribosome-profiling strategy that is based on the deep sequencing of ribosome-protected mRNA fragments and enables genome-wide investigation of translation with subcodon resolution. We used this technique to monitor translation in budding yeast under both rich and starvation conditions. These studies defined the protein sequences being translated and found extensive translational control in both determining absolute protein abundance and responding to environmental stress. We also observed distinct phases during translation that involve a large decrease in ribosome density going from early to late peptide elongation as well as widespread regulated initiation at non-adenine-uracil-guanine (AUG) codons. Ribosome profiling is readily adaptable to other organisms, making high-precision investigation of protein translation experimentally accessible.},
+	language = {eng},
+	number = {5924},
+	journal = {Science (New York, N.Y.)},
+	author = {Ingolia, Nicholas T. and Ghaemmaghami, Sina and Newman, John R. S. and Weissman, Jonathan S.},
+	month = apr,
+	year = {2009},
+	pmid = {19213877},
+	pmcid = {PMC2746483},
+	keywords = {5' Untranslated Regions, Codon, Gene Library, Genome, Fungal, Introns, Peptide Chain Elongation, Translational, Peptide Chain Initiation, Translational, Protein Biosynthesis, RNA, Fungal, RNA, Messenger, Ribosomes, Saccharomyces cerevisiae, Saccharomyces cerevisiae Proteins, Sequence Analysis, DNA},
+	pages = {218--223}
+}
+
+@article{warner,
+	title = {A multiple ribosomal structure in protein synthesis},
+	volume = {49},
+	issn = {0027-8424},
+	language = {eng},
+	journal = {Proceedings of the National Academy of Sciences of the United States of America},
+	author = {Warner, J. R. and Knopf, P. M. and Rich, A.},
+	month = jan,
+	year = {1963},
+	pmid = {13998950},
+	pmcid = {PMC300639},
+	keywords = {Nucleoproteins, Protein Biosynthesis, Reticulocytes, Ribosomes, rna},
+	pages = {122--129}
+}
+
+@article{larsson2008,
+	title = {Gene expression - time to change point of view?},
+	volume = {25},
+	issn = {0264-8725},
+	abstract = {Analysis of transcription profiles has been the focus of genome wide characterization of gene expression during the last decade. Downstream of transcription, regulation of translation represents a less explored step in the gene expression pathway. Differential translation can be caused by differential ribosome recruitment, translational elongation or termination although the ribosome recruitment step is thought to be the major source of differential translation. Genome wide studies of differential translation through analysis of ribosome recruitment in a variety of model systems indicate better correlation to protein levels as compared to transcriptional regulation. These studies also indicate translational control as a major transcript specific regulation step. Here we review the current literature on genome wide regulation of ribosome recruitment. We conclude that without considering regulation of ribosome recruitment, important information regarding the links between gene expression and protein levels is lost and that ribosome recruitment will be an integral part of a systems level understanding for regulation of gene expression.},
+	language = {eng},
+	journal = {Biotechnology \& Genetic Engineering Reviews},
+	author = {Larsson, Ola and Nadon, Robert},
+	year = {2008},
+	pmid = {21412350},
+	keywords = {Animals, Gene Expression Profiling, Gene expression, Genome-Wide Association Study, Humans, Messenger, Oligonucleotide Array Sequence Analysis, Protein Biosynthesis, RNA, Ribosomes, Systems Biology, Transcriptional Activation, Untranslated Regions},
+	pages = {77--92}
+}
+
+@article{larsson2010,
+	title = {Identification of differential translation in genome wide studies},
+	volume = {107},
+	issn = {1091-6490},
+	abstract = {Regulation of gene expression through translational control is a fundamental mechanism implicated in many biological processes ranging from memory formation to innate immunity and whose dysregulation contributes to human diseases. Genome wide analyses of translational control strive to identify differential translation independent of cytosolic mRNA levels. For this reason, most studies measure genes' translation levels as log ratios (translation levels divided by corresponding cytosolic mRNA levels obtained in parallel). Counterintuitively, arising from a mathematical necessity, these log ratios tend to be highly correlated with the cytosolic mRNA levels. Accordingly, they do not effectively correct for cytosolic mRNA level and generate substantial numbers of biological false positives and false negatives. We show that analysis of partial variance, which produces estimates of translational activity that are independent of cytosolic mRNA levels, is a superior alternative. When combined with a variance shrinkage method for estimating error variance, analysis of partial variance has the additional benefit of having greater statistical power and identifying fewer genes as translationally regulated resulting merely from unrealistically low variance estimates rather than from large changes in translational activity. In contrast to log ratios, this formal analytical approach estimates translation effects in a statistically rigorous manner, eliminates the need for inefficient and error-prone heuristics, and produces results that agree with biological function. The method is applicable to datasets obtained from both the commonly used polysome microarray method and the sequencing-based ribosome profiling method.},
+	language = {eng},
+	number = {50},
+	journal = {Proceedings of the National Academy of Sciences of the United States of America},
+	author = {Larsson, Ola and Sonenberg, Nahum and Nadon, Robert},
+	month = dec,
+	year = {2010},
+	pmid = {21115840},
+	pmcid = {PMC3003104},
+	keywords = {Databases, Databases, Genetic, Gene Expression Regulation, Gene Expression Regulation, Genetic, Genome, Genome, Human, Genome-Wide Association Study, Genome-Wide Association Study, Human, Humans, Humans, Messenger, Oligonucleotide Array Sequence Analysis, Oligonucleotide Array Sequence Analysis, Protein Biosynthesis, Protein Biosynthesis, RNA, RNA, Messenger, Ribosomes, Ribosomes},
+	pages = {21487--21492}
+}
+
+@article{larsson2011,
+	title = {anota: {Analysis} of differential translation in genome-wide studies},
+	volume = {27},
+	issn = {1367-4811},
+	shorttitle = {anota},
+	abstract = {Translational control of gene expression has emerged as a major mechanism that regulates many biological processes and shows dysregulation in human diseases including cancer. When studying differential translation, levels of both actively translating mRNAs and total cytosolic mRNAs are obtained where the latter is used to correct for a possible contribution of differential cytosolic mRNA levels to the observed differential levels of actively translated mRNAs. We have recently shown that analysis of partial variance (APV) corrects for cytosolic mRNA levels more effectively than the commonly applied log ratio approach. APV provides a high degree of specificity and sensitivity for detecting biologically meaningful translation changes, especially when combined with a variance shrinkage method for estimating random error. Here we describe the anota (analysis of translational activity) R-package which implements APV, allows scrutiny of associated statistical assumptions and provides biologically motivated filters for analysis of genome wide datasets. Although the package was developed for analysis of differential translation in polysome microarray or ribosome-profiling datasets, any high-dimensional data that result in paired controls, such as RNP immunoprecipitation-microarray (RIP-CHIP) datasets, can be successfully analyzed with anota.
+AVAILABILITY: The anota Bioconductor package, www.bioconductor.org.},
+	language = {eng},
+	number = {10},
+	journal = {Bioinformatics (Oxford, England)},
+	author = {Larsson, Ola and Sonenberg, Nahum and Nadon, Robert},
+	month = may,
+	year = {2011},
+	pmid = {21422072},
+	keywords = {Gene Expression Regulation, Gene Expression Regulation, Genome, Genome, Human, Genome-Wide Association Study, Genome-Wide Association Study, Human, Humans, Humans, Messenger, Protein Biosynthesis, Protein Biosynthesis, RNA, RNA, Messenger, Ribosomes, Ribosomes, Software, Software},
+	pages = {1440--1441}
+}
+
+@article{piccirillo,
+	title = {Translational control of immune responses: from transcripts to translatomes},
+	volume = {15},
+	issn = {1529-2916},
+	shorttitle = {Translational control of immune responses},
+	abstract = {Selective translational control of gene expression is emerging as a principal mechanism for the regulation of protein abundance that determines a variety of functions in both the adaptive immune system and the innate immune system. The translation-initiation factor eIF4E acts as a node for such regulation, but non-eIF4E mechanisms are also prevalent. Studies of 'translatomes' (genome-wide pools of translated mRNA) have facilitated mechanistic discoveries by identifying key regulatory components, including transcription factors, that are under translational control. Here we review the current knowledge on mechanisms that regulate translation and thereby modulate immunological function. We further describe approaches for measuring and analyzing translatomes and how such powerful tools can facilitate future insights on the role of translational control in the immune system.},
+	language = {eng},
+	number = {6},
+	journal = {Nature Immunology},
+	author = {Piccirillo, Ciriaco A. and Bjur, Eva and Topisirovic, Ivan and Sonenberg, Nahum and Larsson, Ola},
+	month = jun,
+	year = {2014},
+	pmid = {24840981},
+	keywords = {Adaptor Proteins, Signal Transducing, Animals, Eukaryotic Initiation Factor-4E, Gene Expression Regulation, Humans, Immune System, Mice, Multiprotein Complexes, Phosphoproteins, Protein Biosynthesis, RNA, Messenger, TOR Serine-Threonine Kinases, Transcription, Genetic},
+	pages = {503--511}
+}
+
+@book{Venables,
+  author = {Venables, W.N. and Ripley, B.D.},
+  publisher = {Springer},
+  title = {Modern Applied Statistics with S-PLUS},
+  year = 1999
+}
