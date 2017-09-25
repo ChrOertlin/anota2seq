@@ -32,7 +32,6 @@ on filtering criteria see anota2seqSelSigGenes function help.
 Get the filtering criteria used for the anota2seqSelSigGenes function.
 }
 \examples{
-
 data(anota2seqData)
 #Initialize anota2seqDataSet
 anota2seqDataSet <- anota2seqDataSetFromMatrix(
@@ -53,7 +52,6 @@ anota2seqDataSet <- anota2seqSelSigGenes(anota2seqDataSet,
 thresholds <- anota2seq.get.thresholds(anota2seqDataSet,
                                        analysis = "translation",
                                        selContrast = 1)
-
 }
 \seealso{
 \code{\link{anota2seqSelSigGenes}}

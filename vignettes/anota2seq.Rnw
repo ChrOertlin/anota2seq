@@ -8,7 +8,11 @@
 
 <<style-knitr, eval=TRUE, echo=FALSE, results="asis">>=
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, error = FALSE, tidy = FALSE, eval = TRUE) # turn off verbosity
-BiocStyle::latex2()
+if(packageVersion("BiocStyle") < '2.5.0'){
+    BiocStyle::latex2()
+} else if(packageVersion("BiocStyle") >= '2.5.0'){
+    BiocStyle::latex()
+}
 @
 
 \begin{document}
@@ -116,7 +120,7 @@ ads <- anota2seqDataSetFromMatrix(
 
 <<prepare_SE, echo = FALSE, results = 'hide' >>=
 library(SummarizedExperiment)
-countData <- as.matrix(cbind(anota2seqDataP,anota2seqDataT))
+countData <- as.matrix(cbind(anota2seqDataP[1:1000,],anota2seqDataT[1:1000,]))
 
 # annotations
 anot <- data.frame(

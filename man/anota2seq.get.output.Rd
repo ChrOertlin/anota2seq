@@ -31,10 +31,10 @@ column in the automatically generated or specified contrast matrix.}
 
 \item{getRVM}{TRUE or FALSE indicating whether the RVM output be retrieved. 
 Default is TRUE. NOTE: the output of anota2seqAnalyze (accessed with output
-= "full") is available both with (getRVM = TRUE) and without RVM (getRVM = 
-FALSE). However, when RVM was set to TRUE in the anota2seqRun or 
-anota2seqAnalyze functions all subsequent filtering is done on the RVM 
-output.}
+= "full") is available both with RVM (getRVM = TRUE) and without RVM (getRVM = 
+FALSE). However, when RVM was set to TRUE, respectively FALSE, in the 
+anota2seqRun or anota2seqSelSigGenes functions, all subsequent filtering is 
+done on the RVM, respectively no-RVM, output.}
 }
 \value{
 Returns a data.frame with the following columns:
@@ -61,7 +61,11 @@ Returns a data.frame with the following columns:
   being <0 or >1 is calculated; if the slope is >=0 & <=1 this value is set 
   to 1. For buffering if the slope is <-1 or >0 a p-value for the slope being
   <-1 or >0 is calculated; if the slope is >=-1 & <=0 this value is set to 1;
-  \item apvEff: the group effect; log2FC; \item apvRvmMSerror: the effective 
+  \item apvEff: the group effect; log2FC; Please note that when analyzing 
+  changes in translational efficiency leading to buffering (and only for this 
+  analysis), an identifier with positive apvEff will be interpreted as being 
+  buffered down and a negative apvEff buffered up (see vignette for more 
+  details) \item apvRvmMSerror: the effective 
   mean square error after RVM; \item apvRvmF: the RVM F-value; \item 
   residRvmDf: the residual degrees of freedom after RVM; \item apvRvmP: the 
   RVM p-value; \item apvRvmPAdj: the adjusted RVM p-value. }
@@ -86,16 +90,16 @@ anota2seqSelSigGenes and anota2seqRegModes stored in the anota2seqDataSet
 }
 \details{
 This function is used to access outputs from the anota2seqRun, 
-anota2seqAnalyze and anota2seqSelSigGenes and anota2seqRegModes functions 
+anota2seqAnalyze, anota2seqSelSigGenes and anota2seqRegModes functions 
 stored within the anota2seqDataSet. The output of the anota2seqAnalyze 
-function holds analysis results (slope, p-value of test on slope value, 
-residual error, group effect, mean square error, F-value, residual degrees of
-freedom, p-value, adjusted p-value) on all identifiers. The output of the 
-anota2seqSelSigGenes function is a reduced set based on default filtering 
-criteria or user specified filtering criteria. In the case of running 
-anota2seqRun or anota2seqRegModes, the anota2seqSelSigGenes output will 
+function holds analysis results on all identifiers (slope, p-value of test on 
+slope value, residual error, group effect, mean square error, F-value, residual 
+degrees of freedom, p-value, adjusted p-value) and is accessed with output = 
+"full". The output of the anota2seqSelSigGenes function is a reduced set based 
+on filtering criteria and is accessed using output = "selected". In the case of 
+accessing the output of anota2seqRegModes (output = "regModes"), the output will 
 further be reduced by removal of the overlap between regulatory modes so that
-each mode has a unique set of genes. For this we prioritize regulatory 
+each gene has a unique regulatory mode. For this, we prioritize regulatory 
 patterns so that translation > mRNA abundance > buffering (i.e. if an 
 identifier is found as changing its translational efficiency leading to 
 altered protein levels and mRNA abundance it will be removed from the mRNA 
@@ -136,7 +140,7 @@ translationResultsSig <- anota2seq.get.output(anota2seqDataSet,
 
 }
 \seealso{
-See Also as \code{\link{anota2seqRun}}, 
+\code{\link{anota2seqRun}}, 
   \code{\link{anota2seqAnalyze}}, \code{\link{anota2seqSelSigGenes}}, 
   \code{\link{anota2seqRegModes}}
 }

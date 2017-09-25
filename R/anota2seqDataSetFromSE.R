@@ -1,7 +1,7 @@
 # GO over this again later to make sure it is done the right way .... 
 anota2seqDataSetFromSE<- function(
     se = NULL,
-    assayNum = NULL,
+    assayNum = 1,
     dataType = NULL,
     normalize = FALSE,
     transformation = "TMM-log2",

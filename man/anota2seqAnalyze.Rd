@@ -17,8 +17,8 @@ therefore possible to use custom contrasts using this parameter. The
 input should be a matrix with row names corresponding to treatments 
 (i.e. those in phenoVec or the treatment column of the 
 SummarizedExperiment annotation) and columns corresponding to the 
-different contrasts of interest (see Details section for additional 
-information on how to set up a custom contrast matrix).}
+different contrasts of interest (see Details section and examples for 
+additional information on how to set up a custom contrast matrix).}
 
 \item{correctionMethod}{Correction for multiple testing method. This 
 parameter can be set to "Bonferroni", "Holm", "Hochberg", "SidakSS", 
@@ -29,7 +29,8 @@ package or "qvalue" as implemented in the qvalue package. Default is
 \item{useProgBar}{Should the progress bar be shown? Default is TRUE, show
 progress bar.}
 
-\item{fileStem}{Stem for output file name. Default is "ANOTA2SEQ".}
+\item{fileStem}{Stem for output file name (see Value section). Default is 
+"ANOTA2SEQ".}
 
 \item{analysis}{Specification of which analysis should be performed. Can 
 be set to "translated mRNA","total mRNA", "translation", "buffering" or
@@ -49,11 +50,14 @@ An anota2seqDataSet. anota2seqAnalyze saves its output data in
   "translated mRNA", "total mRNA", "translation" and "buffering"
   respectively. This output contains statistics from the applied APV
   model and can be accessed using \code{\link{anota2seq.get.output}} (See
-  ?\code{\link{anota2seq.get.output}} for a detailed description). Additionally,        \code{\link{anota2seqAnalyze}} saves output for deltaData to the anota2seqDataSet    (See ?\code{\link{anota2seqDataSet}} for a detailed description on deltaData).
+  ?\code{\link{anota2seq.get.output}} for a detailed description). Additionally, 
+  \code{\link{anota2seqAnalyze}} saves fold changes and translational efficiency
+  (TE) scores in the 'deltaData' slot of the anota2seqDataSet object.
+  (See ?\code{\link{anota2seq.get.deltaData}} for a detailed description of deltaData).
   
   \code{\link{anota2seqAnalyze}} creates a plot showing the fit of the inverse gamma 
   distribution used in RVM (i.e. a similar output as compared to that 
-  from anota2seqPerformQC).
+  from anota2seqPerformQC) for each contrast.
 }
 \description{
 Analysis of treatment effects for translated mRNA 
@@ -68,7 +72,7 @@ Analysis of treatment effects for translated mRNA
 The function performs APV on two or more sample categories 
   according to default contrasts or contrasts supplied by the user. The 
   Random Variance Model (RVM) will be applied but the results without 
-  application of the RVM will also be available in the output.
+  RVM will also be available in the output.
   
   More details about setting a contrast matrix: By default (i.e. with 
   contrasts = NULL), the order of the sample classes which are used to 
@@ -82,7 +86,7 @@ The function performs APV on two or more sample categories
   for group c to compare group a and c; -2 for group a, 1 for group b and
   1 for group c to compare group a to b & c. Each column of the contrast 
   matrix should sum to 0 and to analyze orthagonal contrasts the products
-  of all pairwise rows should sum to 0 (see examples). The results in the
+  of all pairwise rows should sum to 0. The results in the
   anota2seqDataSet object will follow the order of the contrasts (i.e. 
   results for e.g. contrast 1 will correspond to the contrasts specified 
   in column 1 of the contrast matrix).
@@ -101,11 +105,20 @@ anota2seqDataSet <- anota2seqDataSetFromMatrix(
 # translated mRNA
 anota2seqDataSet <- anota2seqAnalyze(
     anota2seqDataSet,
-    analysis = c("translation", "translated mRNA")) 
+    analysis = c("translation")) 
 
 # Example to build a custom contrast matrix
-# Use the phenoVec that specifies sample classes
-phenoVec <- c("a","a","a", "b","b", "b", "c","c")
+# For the purpose of this example, we will use the first 6 samples of the 
+# simulated data provided with the package together with the following "dummy"
+# sample classes:
+phenoVec <- c("a","a","b","b","c","c")
+contrastsEx_ads <- anota2seqDataSetFromMatrix(
+    dataP = anota2seqDataP[1:100, 1:6],
+    dataT = anota2seqDataT[1:100, 1:6],
+    phenoVec = phenoVec,
+    dataType = "RNAseq",
+    normalize = TRUE)
+
 # Get the levels of the phenoVec, these will be ordered as in anota2seq
 phenoLev <- levels(as.factor(phenoVec))
 # Construct the matrix with appropriate nrow and ncol
@@ -117,20 +130,16 @@ rownames(myContrast) <- phenoLev
 myContrast[,1] <- c(-1,0,1)
 # Compare a to b& c
 myContrast[,2] <- c(2,-1,-1)
+myContrast
 #   [,1] [,2]
 # a   -1    2
 # b    0   -1
 # c    1   -1
-contrastsEx_ads <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100,],
-    dataT = anota2seqDataT[1:100,],
-    phenoVec = phenoVec,
-    dataType = "RNAseq",
-    normalize = TRUE)
+# The custom contrast matrix can then be used as input of anota2seqAnalyze. 
 contrastsEx_ads <- anota2seqAnalyze(contrastsEx_ads, 
                                     analysis = "translation",
                                     contrasts = myContrast)
 }
 \seealso{
-\code{\link{anota2seq.get.output}}, \code{\link{anota2seqDataSet}}
+\code{\link{anota2seq.get.output}}, \code{\link{anota2seq.get.deltaData}}
 }

@@ -27,8 +27,8 @@ batch (when provided).
 data(anota2seqData)
 # Initialize anota2seqDataSet
 anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:1000,],
-    dataT = anota2seqDataT[1:1000,],
+    dataP = anota2seqDataP[1:100,],
+    dataT = anota2seqDataT[1:100,],
     phenoVec = anota2seqPhenoVec,
     batchVec = c(1, 2, 3, 4, 1, 2, 3, 4),
     dataType = "RNAseq",

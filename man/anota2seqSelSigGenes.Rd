@@ -154,15 +154,12 @@ anota2seqDataSet <- anota2seqDataSetFromMatrix(
     dataType = "RNAseq",
     normalize = TRUE)
 # Run analysis of changes in translational efficiency leading to 
-# altered protein levels and differential expression analysis on 
-# translated mRNA
+# altered protein levels
 anota2seqDataSet <- anota2seqAnalyze(
     anota2seqDataSet,
-    analysis = c("translation", "translated mRNA"))
+    analysis = c("translation"))
 # Select significant genes (with a FDR threshold of 0.15) for changes 
-# in translational efficiency leading to altered protein level and 
-# differential expression analysis of translated mRNA (all available
-# analyzes and contrast)
+# in translational efficiency leading to altered protein level
 anota2seqDataSet <- anota2seqSelSigGenes(anota2seqDataSet,
                                          maxPAdj = .15) 
 }

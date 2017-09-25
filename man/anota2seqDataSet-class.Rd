@@ -59,7 +59,7 @@ slot of the anota2seqDataSet object. Can be accessed using
 = "full".}
 
 \item{\code{translation}}{after running \code{\link{anota2seqAnalyze}} with analysis 
-parameter set to "translated mRNA" (or \code{\link{anota2seqRun}}), its 
+parameter set to "translation" (or \code{\link{anota2seqRun}}), its 
 output (results of the analysis of changes in translational efficiency 
 leading to altered protein levels) will be saved in this slot of the 
 anota2seqDataSet object. Can be accessed using 
@@ -67,7 +67,7 @@ anota2seqDataSet object. Can be accessed using
 = "full".}
 
 \item{\code{buffering}}{after running \code{\link{anota2seqAnalyze}} with analysis 
-parameter set to "translated mRNA" (or \code{\link{anota2seqRun}}), its 
+parameter set to "buffering" (or \code{\link{anota2seqRun}}), its 
 output (results of the analysis of changes in translational efficiency 
 leading to buffering) will be saved in this slot of the anota2seqDataSet 
 object. Can be accessed using \code{\link{anota2seq.get.output}} with 
@@ -117,6 +117,16 @@ results from mRNA type(s) considered in this definition will be saved in
 this slot. Can be accessed using \code{\link{anota2seq.get.output}} with
 analysis = "mRNA abundance" and output = "selected".}
 
-\item{\code{deltaData}}{after running \code{\link{anota2seqAnalyze}} additional output called deltaData will be stored in the anota2seqDataSet. deltaData is a list of matrices with one deltaData matrix for each contrast. For each matrix the rows correspond to the mRNA in the dataset and has the following columns: deltaP, deltaT, deltaPT and deltaTP. deltaP is translated mRNA fold change, deltaT is the total mRNA fold change, deltaPT is the within contrast difference difference of the log ratios  with translated mRNA in the nominator and total mRNA in the denominator and deltaTP is the within contrast difference of the log ratios with total mRNA in the nominator and translated mRNA in the denominator.}
+\item{\code{deltaData}}{after running \code{\link{anota2seqAnalyze}}, an 
+additional output called deltaData will be stored in the anota2seqDataSet. 
+deltaData is a list of matrices with one deltaData matrix for each contrast. 
+For each matrix the rows correspond to the mRNA in the dataset and has the 
+following columns: deltaP, deltaT, deltaPT and deltaTP. deltaP is translated 
+mRNA fold change, deltaT is the total mRNA fold change, deltaPT is the within 
+contrast difference difference of the log ratios with translated mRNA in the 
+nominator and total mRNA in the denominator (deltaPT is commonly called TE score
+= Translational efficiency score) and deltaTP is the within contrast difference 
+of the log ratios with total mRNA in the nominator and translated mRNA in the 
+denominator.}
 }}
 

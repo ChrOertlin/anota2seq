@@ -26,15 +26,15 @@ analysis).
 data(anota2seqData)
 # Initialize anota2seqDataSet
 anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:1000,],
-    dataT = anota2seqDataT[1:1000,],
+    dataP = anota2seqDataP[1:100,],
+    dataT = anota2seqDataT[1:100,],
     phenoVec = anota2seqPhenoVec,
     dataType = "RNAseq",
     normalize = TRUE)
 # Get normalized dataP
 normDataP <- anota2seq.get.normalizedData(anota2seqDataSet)[["dataP"]]
-# Get normalized dataT
-normDataT <- anota2seq.get.normalizedData(anota2seqDataSet)[["dataT"]]
+head(normDataP)
+
 
 }
 \seealso{

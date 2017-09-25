@@ -1,5 +1,5 @@
 Package: anota2seq
-Version: 0.99.0
+Version: 0.99.1
 Title: Generally applicable transcriptome-wide analysis of
         translational efficiency using anota2seq
 Author: Christian Oertlin <christian.oertlin@ki.se>, Julie Lorent <julie.lorent@ki.se>, Ola Larsson <ola.larsson@ki.se>
@@ -15,6 +15,6 @@ biocViews: GeneExpression, DifferentialExpression,
         Microarray,GenomeWideAssociation, BatchEffect, Normalization,
         RNASeq, Sequencing, GeneRegulation, Regression
 NeedsCompilation: no
-Packaged: 2017-09-04 16:42:15 UTC; christian.oertlin
+Packaged: 2017-09-19 09:26:52 UTC; christian.oertlin
 Suggests: BiocStyle,knitr
 VignetteBuilder: knitr

@@ -48,7 +48,7 @@ translational efficiency leading to altered protein levels are colored),
 "buffering" (only identifiers regulated by change in translational 
 efficiency leading to buffering are colored). The object will be required 
 to contain different outputs depending on the value given to this 
-parameter, see Details for more information.}
+parameter (see Details)}
 
 \item{selContrast}{Which contrast(s) should be considered? Descriptions of
 the contrasts can be found in the output from the anota2seqAnalyze object
@@ -68,8 +68,8 @@ default graphics device.}
 (default) or no-RVM p-values/FDR?}
 
 \item{myBw}{Smoothing bandwidth parameter for used in the stats::density 
-function. The same parameter will be used for all within the function 
-generated density plots.}
+function. Within one plot, the same bandwidth will be used for all density 
+curves.}
 
 \item{analysis}{For which analysis should anota2seqPlotGenes be performed. Can be set 
 to "translation", "buffering".}
@@ -110,7 +110,7 @@ These functions generate graphical outputs aiming to provide an
   levels or buffering).
   
   \code{anota2seqPlotGenes}: requires an anota2seqDataSet object containing the output
-  of \code{\link{anota2seqAnalyze}} and code{\link{anota2seqSelSigGenes}} for
+  of \code{\link{anota2seqAnalyze}} and \code{\link{anota2seqSelSigGenes}} for
   translation and/or buffering. In the graphical output of \code{anota2seqPlotGenes}, 
   the results for each significant gene is displayed on a separate row. The 
   first graph shows all samples and per treatment regression lines using the 
@@ -123,13 +123,17 @@ These functions generate graphical outputs aiming to provide an
 \examples{
 data(anota2seqData)
 # Initialize the anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:100,],
-                                      dataT = anota2seqDataT[1:100,],
+anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:500,],
+                                      dataT = anota2seqDataT[1:500,],
                                       phenoVec = anota2seqPhenoVec,
                                       dataType = "RNAseq",
                                       normalize = TRUE)
-# Perform anota2seqRun function                                     
-anota2seqDataSet <- anota2seqRun(anota2seqDataSet, useProgBar = FALSE)
+# Perform anota2seqRun function (performQC is set to FALSE here to limit running 
+# time of this example but the model assumptions should be assessed (see help of
+# anota2seqPerformQC))                               
+anota2seqDataSet <- anota2seqRun(anota2seqDataSet, 
+                                 performQC = FALSE,
+                                 performROT = FALSE)
 # Visualize results
 anota2seqPlotPvalues(anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
 anota2seqPlotFC(anota2seqDataSet, plotToFile = FALSE, selContrast = 1)

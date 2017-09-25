@@ -1,3 +1,12 @@
+CHANGES IN VERSION 0.99.1
+--------------------------
+
+    o the latex2 function of BiocStyle is now deprecated in the devel version of the package. Replace it by latex()
+    o remove inst/doc and build/ folders
+    o update man pages
+    o change default value of assayNum in anota2seqDataSetFromSE to 1
+
+
 CHANGES IN VERSION 0.99.0
 --------------------------
 

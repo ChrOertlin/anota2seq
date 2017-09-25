@@ -47,10 +47,10 @@ analyzed.}
 translated mRNA (e.g. polysome-associated mRNA or RPFs) and total mRNA 
 should be analyzed.}
 
-\item{thresholds}{A list containing thresholds different from the default
-values that are applied during filtering of several parameters as 
-described for the anota2seqSelSigGenes function. This list can contain 
-the following name slots and if different from the below default values
+\item{thresholds}{A list containing thresholds that are applied during filtering 
+of several parameters as described for the anota2seqSelSigGenes function. This 
+list can contain the following name slots and if different from the below 
+default values
 will update such defaults: \itemize{ \item minSlopeTranslation: The
 output can be filtered so that identifiers whose identified slopes in
 analysis of changes in translational efficiency leading to altered
@@ -90,13 +90,13 @@ translated mRNA data [e.g. polysome-associated mRNA or RPFs])
 difference between treatments. The treatments are defined by the 
 selected contrast. Default is log2(1.2). Only applied when analysis
 is set to "buffering". \item deltaP: The output can
-be filtered based on a minimum difference in between the treatment and
+be filtered based on a minimum effect between the treatment and
 control groups in polysome-associated mRNA. Default is NULL (i.e. no
 filtering). Use when analysis 
 parameter is set to "translation" (i.e. changes in translational 
 efficiency leading to altered protein levels) or "translated mRNA" 
 \item deltaT: The output
-can be filtered based on a minimum difference in between the treatment
+can be filtered based on a minimum effect between the treatment
 and control groups in total mRNA. Default is NULL (i.e. no filtering).
 Use when analysis parameter is set to "buffering" or "total mRNA".}}
 
@@ -149,7 +149,7 @@ At the step of analysis, by default (i.e. with contrasts = NULL)
   compare group a and c; -2 for group a, 1 for group b and 1 for group c 
   to compare group a to b & c. Each column of the contrast matrix should 
   sum to 0 and to analyze orthagonal contrasts the products of all 
-  pairwise rows should sum to 0 (see examples). The results in the 
+  pairwise rows should sum to 0. The results in the 
   anota2seqDataSet object will follow the order of the contrasts (i.e. 
   results for e.g. contrast 1 will correspond to the contrasts specified 
   in column 1 of the contrast matrix).
@@ -164,7 +164,9 @@ anota2seqDataSet <- anota2seqDataSetFromMatrix(
     dataType = "RNAseq",
     normalize = TRUE)
 # Perform anota2seqRun function
-# In this example the quality control and residual outlier testing are not performed
+# The quality control and residual outlier testing are not 
+# performed in order to limit the running time of this example, but the model 
+# assumptions should be assessed (see help of anota2seqPerformQC)
 anota2seqDataSet <- anota2seqRun(anota2seqDataSet,
     performQC = FALSE, 
     performROT = FALSE, 
@@ -176,8 +178,8 @@ anota2seqDataSet <- anota2seqRun(anota2seqDataSet,
 # sample classes:
 phenoVec <- c("a","a","b","b","c","c")
 contrastsEx_ads <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100, 1:6],
-    dataT = anota2seqDataT[1:100, 1:6],
+    dataP = anota2seqDataP[1:300, 1:6],
+    dataT = anota2seqDataT[1:300, 1:6],
     phenoVec = phenoVec,
     dataType = "RNAseq",
     normalize = TRUE)
@@ -193,6 +195,7 @@ rownames(myContrast) <- phenoLev
 myContrast[,1] <- c(-1,0,1)
 # Compare a to b& c
 myContrast[,2] <- c(2,-1,-1)
+myContrast
 #   [,1] [,2]
 # a   -1    2
 # b    0   -1
@@ -203,11 +206,12 @@ myContrast[,2] <- c(2,-1,-1)
 # assumptions so we also set onlyGroup to TRUE.
 contrastsEx_ads <- anota2seqRun(contrastsEx_ads,
                                 contrasts = myContrast, 
+                                performQC = FALSE, 
+                                performROT = FALSE,
                                 onlyGroup = TRUE,
                                 thresholds = list(
-                                    maxPAdj = 0.2,
-                                    deltaPT = log2(2),
-                                    deltaTP = log2(2))) 
+                                    maxPAdj = 0.25,
+                                    deltaPT = log2(2))) 
 
 }
 \seealso{

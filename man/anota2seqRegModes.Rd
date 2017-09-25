@@ -50,11 +50,12 @@ The regulatory modes are given a priority order. First, changes
   inclusion into the abundance group based on results from analysis of 
   translated mRNA (e.g. polysome-associated mRNA or RPF), total mRNA or 
   both (see below). Finally, the remaining identifiers can be assessed 
-  for belonging to the translational buffering group. An mRNA abundance 
-  identifier can be defined based on analysis of translated mRNA (e.g. 
-  polysome associated mRNA or or RPF) and total mRNA (and also assuring 
-  that fold changes follow the same direction). To perform such analysis,
-  mRNASelect should be set to c(TRUE, TRUE). Alternatively one can 
+  for belonging to the translational buffering group. 
+  
+  An mRNA abundance identifier can be defined based on analysis of translated 
+  mRNA (e.g. polysome associated mRNA or or RPF) and total mRNA (and also 
+  assuring that fold changes follow the same direction). To perform such 
+  analysis, mRNASelect should be set to c(TRUE, TRUE). Alternatively one can 
   identify mRNA abundance identifiers based on analysis of only 
   translated mRNA (e.g. polysome-associated mRNA or RPFs; mRNASelect = 
   c(TRUE, FALSE)) or only total mRNA (mRNASelect = c(FALSE, TRUE)).

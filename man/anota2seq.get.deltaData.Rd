@@ -4,7 +4,8 @@
 \name{anota2seq.get.deltaData}
 \alias{anota2seq.get.deltaData}
 \alias{anota2seq.get.deltaData,anota2seqDataSet-method}
-\title{Retrieve the deltaData}
+\title{Accessor for the fold changes and TE scores stored in the 'deltaData' 
+slot of an anota2seqDataSet object.}
 \usage{
 anota2seq.get.deltaData(object = NULL, output = NULL, analysis = NULL,
   selContrast = NULL)
@@ -13,11 +14,13 @@ anota2seq.get.deltaData(object = NULL, output = NULL, analysis = NULL,
   output = NULL, analysis = NULL, selContrast = NULL)
 }
 \arguments{
-\item{object}{An anota2seqDataSet.}
+\item{object}{An anota2seqDataSet. Should contain the output of 
+the anota2seqAnalyze function (and of anota2seqSelSigGenes if the output parameter
+is set to "selected", see below).}
 
 \item{output}{A character string specifying whether the deltaData output of the 
-anota2seqAnalyze ("full", this will be deltaData for all genes) or of the 
-anota2seqSelSigGenes ("selected", this will be deltaData for selected genes 
+anota2seqAnalyze ("full", this will output deltaData for all genes) or of the 
+anota2seqSelSigGenes ("selected", this will output deltaData for selected genes 
 only) function should be returned.}
 
 \item{analysis}{A character to specify for which analysis you want to 

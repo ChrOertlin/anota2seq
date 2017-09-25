@@ -10,7 +10,7 @@ anota2seqDataSetFromMatrix(dataP = NULL, dataT = NULL, phenoVec = NULL,
   batchVec = NULL, dataType = NULL, normalize = FALSE,
   transformation = "TMM-log2", filterZeroGenes = FALSE, varCutOff = NULL)
 
-anota2seqDataSetFromSE(se = NULL, assayNum = NULL, dataType = NULL,
+anota2seqDataSetFromSE(se = NULL, assayNum = 1, dataType = NULL,
   normalize = FALSE, transformation = "TMM-log2", filterZeroGenes = FALSE,
   varCutOff = NULL)
 }
@@ -59,7 +59,9 @@ parameter "normalize" to FALSE could be used.}
 anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the 
 \code{ anota2seqDataSetFromSE } functions. Boolean (TRUE/FALSE) that 
 defaults to TRUE. If TRUE, RNAseq data (or other count data) will be 
-normalized and transformed according to the specified transformation.}
+normalized and transformed according to the specified transformation. 
+Microarray data should be normalized by the user before using it as input of 
+\code{anota2seqDataSetFromMatrix} or \code{ anota2seqDataSetFromSE}}
 
 \item{transformation}{This parameter is used when selecting to initiate 
 the anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the
@@ -85,7 +87,7 @@ based on variance. If a cut off is applied, filtering will be performed
 by applying the threshold to the result of the var() function. 
 Filtering is performed per mRNA source (i.e. translated mRNA and total 
 mRNA) and treatment. This parameter can be used to avoid a rare error 
-during anota2seq analysis.}
+during anota2seq analysis (see details).}
 
 \item{se}{This parameter is used if selecting to initiate the 
 anota2seqDataSet using a SummarizedExperiment object with the \code{ 
@@ -97,7 +99,7 @@ annotation needed is supplied within "colData" of the
 SummarizedExperiment object (rows correspond to samples with identical 
 names as in the assay while columns correspond to various annotation). 
 The "colData" must contain the following annotation columns with their 
-names within brackets: \itemize{ \item "RNA": under this column each 
+names within quotes: \itemize{ \item "RNA": under this column each 
 sample must be annotated with one out of two RNA source identifiers: 
 "P" indicates that the sample was obtained from translated mRNA (e.g. 
 polysome-associated mRNA or RPFs) whereas "T" indicates that the sample
@@ -121,7 +123,7 @@ be indicated by a unique identifier (i.e. not used by any other batch).
 anota2seqDataSet using a SummarizedExperiment object and the \code{ 
 anota2seqDataSetFromSE} function and should specify the assay position 
 (retrieved by "assays(se)") containing the expression data for 
-analysis. If NULL (default) the first assay will be used.}
+analysis. By default, the first assay will be used.}
 }
 \value{
 an anota2seqDataSet containing data and covariates ready for 
@@ -129,11 +131,13 @@ an anota2seqDataSet containing data and covariates ready for
   \code{\link{anota2seqRun}}.
 }
 \description{
-Functions used to create an anota2seqDataSet from user 
-  input. The input is the expression data together with the required 
-  annotation. The input can either be of the class SummarizedExperiment 
-  (use \code{ anota2seqDataSetFromSE}) or a set of custom vectors and 
-  matrices (use \code{anota2seqDataSetFromMatrix}).
+Functions used to create an anota2seqDataSet S4 object from user 
+  input. This object will be used to collect data and results from all steps of 
+  the anota2seq workflow and is initiated using one of the 2 available 
+  constructors: \code{anota2seqDataSetFromMatrix} (use when the input data is 
+  provided as a set of custom vectors and matrices) or 
+  \code{anota2seqDataSetFromSE} (use when the input is of the class 
+  SummarizedExperiment).
 }
 \details{
 These functions initiate an anota2seqDataSet and provide 
@@ -160,8 +164,8 @@ These functions initiate an anota2seqDataSet and provide
 }
 \examples{
 data(anota2seqData)
-anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:1000,],
-                                      dataT = anota2seqDataT[1:1000,],
+anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:500,],
+                                      dataT = anota2seqDataT[1:500,],
                                       phenoVec = anota2seqPhenoVec,
                                       dataType = "RNAseq",
                                       normalize = TRUE)
