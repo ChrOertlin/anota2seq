@@ -121,10 +121,11 @@ These functions generate graphical outputs aiming to provide an
   statistics instead.
 }
 \examples{
+\dontrun{
 data(anota2seqData)
 # Initialize the anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:500,],
-                                      dataT = anota2seqDataT[1:500,],
+anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:1000,],
+                                      dataT = anota2seqDataT[1:1000,],
                                       phenoVec = anota2seqPhenoVec,
                                       dataType = "RNAseq",
                                       normalize = TRUE)
@@ -139,5 +140,6 @@ anota2seqPlotPvalues(anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
 anota2seqPlotFC(anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
 anota2seqPlotGenes(anota2seqDataSet, plotToFile = TRUE, analysis = "translation",
            selContrast = 1)
+           }
 
 }

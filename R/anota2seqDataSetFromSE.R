@@ -83,14 +83,14 @@ anota2seqDataSetFromSE<- function(
         batchVec <- NULL
     }
     anota2seqCheckInput(dataP,
-               dataT,
-               phenoVec,
-               batchVec,
-               NULL,
-               "BH",
-               inFunc="fromSE")
+                        dataT,
+                        phenoVec,
+                        batchVec,
+                        NULL,
+                        "BH",
+                        inFunc="fromSE")
     
-
+    
     
     if(dataType == "RNAseq"){
         preProcess <- anota2seqRNAseqPreProcessing(dataP=dataP,
@@ -103,13 +103,13 @@ anota2seqDataSetFromSE<- function(
         dataP <- preProcess$dataP
     }
     
-
+    
     
     # Check for genes that show low variance in the dataset ...
     varCheck <- anota2seqFiltCheckVar(tmpdataP = dataP,
-                                  tmpdataT = dataT,
-                                  varCutOff = varCutOff,
-                                  phenoVec = phenoVec)
+                                      tmpdataT = dataT,
+                                      varCutOff = varCutOff,
+                                      phenoVec = phenoVec)
     
     dataP <- varCheck$dataP
     dataT <- varCheck$dataT

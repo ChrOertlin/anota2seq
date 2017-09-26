@@ -429,7 +429,7 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                   abline(a = 0, b = 1, lty = 2)
                   
                   if(visualizeRegModes == "all"){
-
+                      
                       useRVM <- object@selectedTranslation@useRVM
                       if(!is.null(object@mRNAAbundance@totalmRNA[[selContrast[i]]])){
                           # mRNA abundance up
@@ -487,7 +487,7 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                       abund <- rownames(object@mRNAAbundance@totalmRNA[[selContrast[i]]])[which(object@mRNAAbundance@totalmRNA[[selContrast[i]]][,"singleRegMode"] == "abundance")]
                   }
                   if(visualizeRegModes == "translation"){
-
+                      
                       useRVM <- object@selectedTranslation@useRVM
                       
                       #up regulated differential translation
@@ -507,7 +507,7 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                       transl <- anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)
                   }
                   if(visualizeRegModes == "buffering"){
-
+                      
                       useRVM <- object@selectedBuffering@useRVM
                       
                       #bufferin down

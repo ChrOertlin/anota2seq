@@ -62,23 +62,23 @@ setClassUnion("outOrNULL", members = c("anota2seqOutput", "NULL"))
 setClassUnion("selOutOrNULL", members = c("anota2seqSelectedOutput", "NULL"))
 setClassUnion("abundOrNULL", members =  c("mRNAabundanceOutput", "NULL"))
 setClass("anota2seqDataSet",
-                             slots = c(
-                                 dataT = "matrix",
-                                 dataP = "matrix",
-                                 phenoVec = "character",
-                                 batchVec = "batchVec",
-                                 contrasts = "matrixOrNULL",
-                                 qualityControl = "qcOrNULL",
-                                 residOutlierTest = "residOrNULL",
-                                 translatedmRNA = "outOrNULL",
-                                 totalmRNA = "outOrNULL",
-                                 translation = "outOrNULL",
-                                 buffering = "outOrNULL",
-                                 selectedTranslatedmRNA="selOutOrNULL",
-                                 selectedTotalmRNA = "selOutOrNULL",
-                                 selectedTranslation = "selOutOrNULL",
-                                 selectedBuffering = "selOutOrNULL",
-                                 mRNAAbundance = "abundOrNULL",
-                                 deltaData = "listOrNULL"
-                             ))
+         slots = c(
+             dataT = "matrix",
+             dataP = "matrix",
+             phenoVec = "character",
+             batchVec = "batchVec",
+             contrasts = "matrixOrNULL",
+             qualityControl = "qcOrNULL",
+             residOutlierTest = "residOrNULL",
+             translatedmRNA = "outOrNULL",
+             totalmRNA = "outOrNULL",
+             translation = "outOrNULL",
+             buffering = "outOrNULL",
+             selectedTranslatedmRNA="selOutOrNULL",
+             selectedTotalmRNA = "selOutOrNULL",
+             selectedTranslation = "selOutOrNULL",
+             selectedBuffering = "selOutOrNULL",
+             mRNAAbundance = "abundOrNULL",
+             deltaData = "listOrNULL"
+         ))
 

@@ -440,11 +440,11 @@ anota2seqCheckInput <- function(dataP=NULL,dataT=NULL,phenoVec=NULL,batchVec=NUL
         }
         if (dim(contrasts)[2] != (nPheno - 1)) {
             if (dim(contrasts)[2] > (nPheno - 1)) {
-                 
+                
                 stop("Too many custom contrasts supplied.\nPlease check your contrast matrix.\n")
             }
             if (dim(contrasts)[2] < (nPheno - 1)) {
-                 
+                
                 stop("Too few custom contrasts supplied.\nPlease check your contrast matrix.\n")
             }
         }
@@ -709,7 +709,7 @@ anota2seqNormalize <- function(tmpdataP=NULL,tmpdataT=NULL,transformation=NULL,n
         if(max(range(tmpdataP,na.rm = TRUE))> 100 | max(range(tmpdataT,na.rm = TRUE))> 100){
             colnames(tmpdataT) <- gsub("_tmpColumnCyto","",colnames(tmpdataT))
             colnames(tmpdataP) <- gsub("_tmpColumnPoly","",colnames(tmpdataP))
-             
+            
             stop(" Data range indicates a count scale and normalize was set to FALSE.\nanota2seq requires continuous scale for efficient analysis.\nPlease check the normalization/transformation options (more details in the vignette).") 
         }
         if(max(range(tmpdataP,na.rm = TRUE))< 100  & max(range(tmpdataT,na.rm = TRUE))< 100){

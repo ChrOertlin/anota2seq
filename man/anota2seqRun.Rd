@@ -171,7 +171,8 @@ anota2seqDataSet <- anota2seqRun(anota2seqDataSet,
     performQC = FALSE, 
     performROT = FALSE, 
     useProgBar = FALSE)
-
+    
+\dontrun{    
 # Example to build a custom contrast matrix
 # For the purpose of this example, we will use the first 6 samples of the 
 # simulated data provided with the package together with the following "dummy"
@@ -212,6 +213,7 @@ contrastsEx_ads <- anota2seqRun(contrastsEx_ads,
                                 thresholds = list(
                                     maxPAdj = 0.25,
                                     deltaPT = log2(2))) 
+                                    }
 
 }
 \seealso{

@@ -103,10 +103,11 @@ anota2seqDataSet <- anota2seqDataSetFromMatrix(
 # Run analysis of changes in translational efficiency leading to 
 # altered protein levels and differential expression analysis on 
 # translated mRNA
+\dontrun{
 anota2seqDataSet <- anota2seqAnalyze(
     anota2seqDataSet,
     analysis = c("translation")) 
-
+}
 # Example to build a custom contrast matrix
 # For the purpose of this example, we will use the first 6 samples of the 
 # simulated data provided with the package together with the following "dummy"
@@ -139,6 +140,7 @@ myContrast
 contrastsEx_ads <- anota2seqAnalyze(contrastsEx_ads, 
                                     analysis = "translation",
                                     contrasts = myContrast)
+                                    
 }
 \seealso{
 \code{\link{anota2seq.get.output}}, \code{\link{anota2seq.get.deltaData}}

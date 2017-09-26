@@ -107,7 +107,7 @@ statistics. If RVM is used, it is necessary to verify that the interaction
 RVM p-values also follow the expected NULL distribution.
 }
 \examples{
-
+\dontrun{
 data(anota2seqData)
 anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:100,],
                                       dataT = anota2seqDataT[1:100,],
@@ -116,7 +116,7 @@ anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:100,],
                                       normalize = TRUE)
 
 anota2seqDataSet <- anota2seqPerformQC(anota2seqDataSet)
-
+}
 }
 \seealso{
 \code{\link{anota2seq.get.qualityControl}}

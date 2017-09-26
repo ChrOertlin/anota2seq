@@ -87,7 +87,7 @@ outlier residuals are obtained. The result is presented as both a
 graphical output and an output object.
 }
 \examples{
-
+\dontrun{
 data(anota2seqData)
 # Initialize anota2seqDataSet
 anota2seqDataSet <- anota2seqDataSetFromMatrix(
@@ -101,7 +101,7 @@ anota2seqDataSet <- anota2seqDataSetFromMatrix(
 anota2seqDataSet <- anota2seqPerformQC(anota2seqDataSet)
 # Perform anota2seqResidualOutlierTest function
 anota2seqDataSet <- anota2seqResidOutlierTest(anota2seqDataSet)
-
+}
 }
 \references{
 Venables, W.N. and Ripley, B.D., Modern Applied Statistics with

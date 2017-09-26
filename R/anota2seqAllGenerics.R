@@ -1,8 +1,5 @@
-
-
-
 # accessor normalizedData
-setGeneric("anota2seq.get.normalizedData", 
+setGeneric("anota2seq.get.normalizedData",
            function(object=NULL) standardGeneric("anota2seq.get.normalizedData"))
 # accessor phenoVec
 setGeneric("anota2seq.get.covariates",

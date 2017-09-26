@@ -33,6 +33,7 @@ Retrieves the output of the anota2seqResidualOutlierTest function from the
 anota2seqDataSet.
 }
 \examples{
+
 data(anota2seqData)
 anota2seqDataSet <- anota2seqDataSetFromMatrix(
     dataP = anota2seqDataP[1:100,],
@@ -47,7 +48,7 @@ anota2seqDataSet <- anota2seqResidOutlierTest(anota2seqDataSet)
 
 #Get resdidual outlier testing
 rot <- anota2seq.get.residOutlierTest(anota2seqDataSet)
-  
+
 }
 \seealso{
 \code{\link{anota2seqResidOutlierTest}}
