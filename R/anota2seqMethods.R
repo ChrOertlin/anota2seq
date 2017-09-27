@@ -652,7 +652,7 @@ setMethod("anota2seqPlotPvalues","anota2seqDataSet",
                   for(reg in 1:length(pvalDens[[cont]])){
                       if(reg == 1){
                           plot(pvalDens[[cont]][[reg]],
-                               main = paste("contrast",selContrast[cont],sep=" "),lwd=2,ylim=c(0,maxPval+1),
+                               main = paste("contrast",selContrast[cont],sep=" "),lwd=2,ylim=c(0,maxPval+1),xlim=c(-0.2,1.2),
                                xlab = "P-value",col =tmpColours[names(pvalDens[[cont]])[reg]])
                       }
                       else{
@@ -664,7 +664,7 @@ setMethod("anota2seqPlotPvalues","anota2seqDataSet",
                   for(reg in 1:length(fdrDens[[cont]])){
                       if(reg == 1){
                           plot(fdrDens[[cont]][[reg]],
-                               main = paste("contrast",selContrast[cont],sep=" "),lwd=2,ylim=c(0,maxFDR+1),
+                               main = paste("contrast",selContrast[cont],sep=" "),lwd=2,ylim=c(0,maxFDR+1),xlim=c(-0.2,1.2),
                                xlab = "FDR",col =tmpColours[names(fdrDens[[cont]])[reg]])
                       }
                       else{
