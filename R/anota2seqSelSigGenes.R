@@ -380,13 +380,13 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
             }
             
             if (dim(tmpData)[1] < 1) {
-                warning(paste("No genes pass selected thresholds for analysis of", analysis[reg],".\n",sep=""))
+                warning(paste("No genes pass selected thresholds for analysis of ", analysis[reg],".\n",sep=""))
             }
             
             if (is.null(sortBy) == FALSE & !sortBy %in% "none") {
                 if (sortBy == "Eff") {
                     tmpSorter <- tmpData[useIds, ,drop = FALSE][order(tmpData[useIds, "apvEff", drop = FALSE]), , drop = FALSE]
-                    useIds <- tmpSorter
+                    useIds <- rownames(tmpSorter)
                 }
                 if (sortBy == "p") {
                     tmpSorter <- tmpData[useIds, , drop = FALSE][order(tmpData[useIds, "apvP", drop = FALSE]), , drop = FALSE]
