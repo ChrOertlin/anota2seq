@@ -5,6 +5,9 @@ CHANGES IN VERSION 0.99.1
     o remove inst/doc and build/ folders
     o update man pages
     o change default value of assayNum in anota2seqDataSetFromSE to 1
+    o formatting of anota2seq show method
+    o fixed issues related to sortBy parameter in anota2seqSelSigGenes
+    o minor text edits in messages given to user
 
 
 CHANGES IN VERSION 0.99.0
