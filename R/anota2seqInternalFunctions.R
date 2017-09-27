@@ -25,10 +25,6 @@ showSelectedOutput <- function(anota2seqDataSet,analysis){
                     if(length(outSel) > 2){
                         up <- outSel[outSel[,"apvEff"] > 0,,drop = FALSE]
                         down <- outSel[outSel[,"apvEff"] <0,,drop = FALSE]
-                        if(analysis =="buffering"){
-                            up <- outSel[outSel[,"apvEff"] < 0,,drop = FALSE]
-                            down <- outSel[outSel[,"apvEff"] >0,,drop = FALSE]  
-                        }
                         cat(paste("\t\tTotal: ",nrow(outSel)," genes.\n",sep=""))
                         cat(paste("\t\tPositive log2FC: ",nrow(up)," genes.\n",sep=""))
                         cat(paste("\t\tNegative log2FC: ",nrow(down)," genes.\n",sep=""))
@@ -113,10 +109,6 @@ showRegModeOutput <- function(anota2seqDataSet,regMode,analysis){
                         if(length(outSel) > 2){
                             up <- outSel[outSel[,"apvEff"] > 0,,drop = FALSE]
                             down <- outSel[outSel[,"apvEff"] <0,,drop = FALSE]
-                            if(analysis =="buffering"){
-                                up <- outSel[outSel[,"apvEff"] < 0,,drop = FALSE]
-                                down <- outSel[outSel[,"apvEff"] >0,,drop = FALSE]  
-                            }
                             cat(paste("\t\tTotal: ",nrow(outSel)," genes.\n",sep=""))
                             cat(paste("\t\tPositive log2FC: ",nrow(up)," genes.\n",sep=""))
                             cat(paste("\t\tNegative log2FC: ",nrow(down)," genes.\n",sep=""))
