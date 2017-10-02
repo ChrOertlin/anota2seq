@@ -15,7 +15,10 @@ anota2seq.get.normalizedData(object = NULL)
 }
 \value{
 A list of 2 elements named "dataP" and "dataT"
-  containing the corresponding normalized data to be used for the analysis.
+  containing the corresponding normalized data to be used for the analysis. Note 
+  that dataT and dataP have the same sample order such that 
+e.g. column 1 in dataP is the translated mRNA data for a sample, 
+column 1 in dataT is the total mRNA data.
 }
 \description{
 Retrieve the data that is used in the analysis (i.e. if raw RNAseq counts 

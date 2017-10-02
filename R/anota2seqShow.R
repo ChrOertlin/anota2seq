@@ -31,10 +31,10 @@ setMethod("show","anota2seqDataSet",
                   cat("No differential expression analysis for total mRNA has been detected.\n")
               }
               if(is.null(object@translation) == TRUE){
-                  cat("No analysis of differential translation has been detected.\n")
+                  cat("No analysis of translation has been detected.\n")
               }
               if(is.null(object@buffering) == TRUE){
-                  cat("No analysis of translational buffering has been detected.\n")
+                  cat("No analysis of buffering has been detected.\n")
               }
               if(is.null(object@translatedmRNA) == FALSE){
                   cat("\nOutput for differential expression analysis of translated mRNA detected.\n")
@@ -43,10 +43,10 @@ setMethod("show","anota2seqDataSet",
                   cat("\nOutput for differential expression analysis of total mRNA detected.\n")
               }
               if(is.null(object@translation) == FALSE){
-                  cat("\nOutput for  analysis of differential translation detected.\n")
+                  cat("\nOutput for analysis of translation detected.\n")
               }
               if(is.null(object@buffering) == FALSE){
-                  cat("\nOutput for analysis of translational buffering detected.\n")
+                  cat("\nOutput for analysis of buffering detected.\n")
               }
               
               if(is.null(object@selectedTranslatedmRNA) == TRUE){
@@ -56,10 +56,10 @@ setMethod("show","anota2seqDataSet",
                   cat("No selected data of differential expression analysis for total mRNA has been detected.\n")
               }
               if(is.null(object@selectedTranslation) == TRUE){
-                  cat("No selected data of analysis of differential translation has been detected.\n")
+                  cat("No selected data of analysis of translation has been detected.\n")
               }
               if(is.null(object@selectedBuffering) == TRUE){
-                  cat("No selected data of analysis of translational buffering has been detected.\n")
+                  cat("No selected data of analysis of buffering has been detected.\n")
               }
               
               if(is.null(object@selectedTranslatedmRNA) == FALSE){
@@ -71,11 +71,11 @@ setMethod("show","anota2seqDataSet",
                   showSelectedOutput(object,"total mRNA")
               }
               if(is.null(object@selectedTranslation) == FALSE){
-                  cat("\nOutput for differential expression analysis of translation detected:\n")
+                  cat("\nOutput for analysis of translation detected:\n")
                   showSelectedOutput(object,"translation")
               }
               if(is.null(object@selectedBuffering) == FALSE){
-                  cat("\nOutput for differential expression analysis of buffering detected:\n")
+                  cat("\nOutput for analysis of buffering detected:\n")
                   showSelectedOutput(object,"buffering")
               }
               if(is.null(object@mRNAAbundance) == TRUE){

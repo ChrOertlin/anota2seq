@@ -299,7 +299,7 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
                 if (is.null(maxP) == FALSE) {
                     tmpNames <- rownames(tmpData[tmpData[, "apvP"] <
                                                      maxP, ,drop=FALSE])
-                    tmpData <- tmpData[tmpNames, ]
+                    tmpData <- tmpData[tmpNames, ,drop=FALSE]
                     if (useRVM == TRUE) {
                         tmpDataRvm <- tmpDataRvm[tmpNames, ,drop=FALSE]
                     }

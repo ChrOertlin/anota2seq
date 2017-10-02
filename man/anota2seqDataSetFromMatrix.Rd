@@ -33,7 +33,7 @@ anota2seqDataSet using custom vectors and matrices, and the
 \code{anota2seqDataSetFromMatrix} function. A vector describing the 
 treatments (each treatment should have a unique identifier). Note that 
 dataT, dataP and phenoVec have to have the same sample order such that 
-e.g. column 1 in dataP is the polysome association data for a sample, 
+e.g. column 1 in dataP is the translated mRNA for a sample, 
 column 1 in dataT is the total mRNA data and position 1 in phenoVec 
 describes the sample treatment.}
 
@@ -111,7 +111,8 @@ data for translated mRNA (i.e. "P" under the "RNA" column) and total
 mRNA (i.e. "T" under the "RNA" column) that were derived from the same 
 starting sample. Each pair of "P" and "T" must have a common identifier
 that that is unique for that pair (i.e. is not used by any other pair 
-of "P" and "T"). \item "batch": under this optional column the batch 
+of "P" and "T"). This column will also be used to order columns of translated 
+and total RNA data.\item "batch": under this optional column the batch 
 identity of each sample is indicated (depending on whether the 
 downstream analysis will include a batch parameter or not). A common 
 batch used in downstream analysis is replicate but any other batch that

@@ -545,13 +545,18 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                       
                       
                       
-                      
-                      if(is.null( anota2seq.get.thresholds(object,analysis = "translation",selContrast = selContrast[i]) ) == FALSE){
-                          thresholdsP <- anota2seq.get.thresholds(object,analysis = "translation",selContrast = selContrast[i]) 
+                      thresholdsP <- NULL
+                      thresholdsT <- NULL
+                      if(visualizeRegModes %in% c("all", "translation")){
+                          if(is.null( anota2seq.get.thresholds(object,analysis = "translation",selContrast = selContrast[i]) ) == FALSE){
+                              thresholdsP <- anota2seq.get.thresholds(object,analysis = "translation",selContrast = selContrast[i]) 
+                          }
                       }
                       
-                      if(is.null( anota2seq.get.thresholds(object,analysis = "buffering",selContrast = selContrast[i]) ) == FALSE){
-                          thresholdsT <- anota2seq.get.thresholds(object,analysis = "buffering",selContrast = selContrast[i]) 
+                      if(visualizeRegModes %in% c("all", "buffering")){
+                          if(is.null( anota2seq.get.thresholds(object,analysis = "buffering",selContrast = selContrast[i]) ) == FALSE){
+                              thresholdsT <- anota2seq.get.thresholds(object,analysis = "buffering",selContrast = selContrast[i]) 
+                          }
                       }
                       if(is.null(thresholdsT$selDeltaT) == FALSE){
                           vert <- c(-thresholdsT$selDeltaT, thresholdsT$selDeltaT)
