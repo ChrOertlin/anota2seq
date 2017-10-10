@@ -1,7 +1,7 @@
-## show method for anota2seqDataSet
+## show method for Anota2seqDataSet
 ## This method should give you a general overview of your data
 
-setMethod("show","anota2seqDataSet",
+setMethod("show","Anota2seqDataSet",
           definition = function(object=NULL){
               cat("Information on input data.\n")
               cat(paste("dataP and dataT contain data for",nrow(object@dataP),"mRNA and",ncol(object@dataP),"samples.","\n",sep=" "))

@@ -6,9 +6,9 @@
 \alias{anota2seqPlotFC}
 \alias{anota2seqPlotPvalues}
 \alias{anota2seqPlotGenes}
-\alias{anota2seqPlotFC,anota2seqDataSet-method}
-\alias{anota2seqPlotPvalues,anota2seqDataSet-method}
-\alias{anota2seqPlotGenes,anota2seqDataSet-method}
+\alias{anota2seqPlotFC,Anota2seqDataSet-method}
+\alias{anota2seqPlotPvalues,Anota2seqDataSet-method}
+\alias{anota2seqPlotGenes,Anota2seqDataSet-method}
 \title{Visualization of anota2seq results}
 \usage{
 anota2seqPlotFC(object = NULL, visualizeRegModes = "all",
@@ -20,20 +20,20 @@ anota2seqPlotPvalues(object = NULL, useRVM = TRUE, selContrast = NULL,
 anota2seqPlotGenes(object = NULL, selContrast = NULL, analysis = NULL,
   geneNames = NULL, plotToFile = TRUE, fileName = NULL)
 
-\S4method{anota2seqPlotFC}{anota2seqDataSet}(object = NULL,
+\S4method{anota2seqPlotFC}{Anota2seqDataSet}(object = NULL,
   visualizeRegModes = "all", selContrast = NULL, fileName = NULL,
   plotToFile = TRUE, ...)
 
-\S4method{anota2seqPlotPvalues}{anota2seqDataSet}(object = NULL,
+\S4method{anota2seqPlotPvalues}{Anota2seqDataSet}(object = NULL,
   useRVM = TRUE, selContrast = NULL, myBw = 0.05, plotToFile = TRUE,
   fileName = NULL, ...)
 
-\S4method{anota2seqPlotGenes}{anota2seqDataSet}(object = NULL,
+\S4method{anota2seqPlotGenes}{Anota2seqDataSet}(object = NULL,
   selContrast = NULL, analysis = NULL, geneNames = NULL,
   plotToFile = TRUE, fileName = NULL)
 }
 \arguments{
-\item{object}{An object of class anota2seqDataSet. Should contain output of 
+\item{object}{An object of class Anota2seqDataSet. Should contain output of 
 the anota2seqAnalyze function. To visualize significant identifiers in the 
 fold change plot (\code{anota2seqPlotFC}) and for regression plots 
 (\code{anota2seqPlotGenes}), the object should also contain the output of 
@@ -90,7 +90,7 @@ These functions generate graphical outputs aiming to provide an
   overview of the extents of different regulatory modes of gene expression. 
   The graphical outputs consist of: \enumerate{ \item For all selected 
   contrasts, P-value and FDR density plots indicating the distribution of 
-  P-values and FDRs for all analyzes found in the anota2seqDataSet object. 
+  P-values and FDRs for all analyzes found in the Anota2seqDataSet object. 
   \item Fold change plots where total mRNA log2FC is compared to translated 
   mRNA (e.g. polysome-associated mRNA or RPF) log2FC (for all selected 
   contrasts). \item Per identifier and per treatment fitted regression curves
@@ -99,17 +99,17 @@ These functions generate graphical outputs aiming to provide an
 }
 \details{
 \code{anota2seqPlotFC}: if visualizeRegModes is set to "none", the 
-  anota2seqDataSet object is only required to contains an output of 
+  Anota2seqDataSet object is only required to contains an output of 
   anota2seqAnalyze. If visualizeRegModes is set to "translation" or 
   "buffering", the object should contain the output of anota2seqAnalyze and 
   anota2seqSelSigGenes for the corresponding analysis. Finally, if 
   visualizeRegModes is set to "all" (default), anota2seqRegModes should have 
-  been called on the anota2seqDataSet object so that identifiers can be 
+  been called on the Anota2seqDataSet object so that identifiers can be 
   colored according to the three regulatory modes (i.e. change in mRNA 
   abundance or change in translational efficiency leading to altered protein 
   levels or buffering).
   
-  \code{anota2seqPlotGenes}: requires an anota2seqDataSet object containing the output
+  \code{anota2seqPlotGenes}: requires an Anota2seqDataSet object containing the output
   of \code{\link{anota2seqAnalyze}} and \code{\link{anota2seqSelSigGenes}} for
   translation and/or buffering. In the graphical output of \code{anota2seqPlotGenes}, 
   the results for each significant gene is displayed on a separate row. The 
@@ -122,23 +122,23 @@ These functions generate graphical outputs aiming to provide an
 }
 \examples{
 \dontrun{
-data(anota2seqData)
-# Initialize the anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:1000,],
-                                      dataT = anota2seqDataT[1:1000,],
-                                      phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+# Initialize the Anota2seqDataSet
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seq_data_P[1:1000,],
+                                      dataT = anota2seq_data_T[1:1000,],
+                                      phenoVec = anota2seq_pheno_vec,
                                       dataType = "RNAseq",
                                       normalize = TRUE)
 # Perform anota2seqRun function (performQC is set to FALSE here to limit running 
 # time of this example but the model assumptions should be assessed (see help of
 # anota2seqPerformQC))                               
-anota2seqDataSet <- anota2seqRun(anota2seqDataSet, 
+Anota2seqDataSet <- anota2seqRun(Anota2seqDataSet, 
                                  performQC = FALSE,
                                  performROT = FALSE)
 # Visualize results
-anota2seqPlotPvalues(anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
-anota2seqPlotFC(anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
-anota2seqPlotGenes(anota2seqDataSet, plotToFile = TRUE, analysis = "translation",
+anota2seqPlotPvalues(Anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
+anota2seqPlotFC(Anota2seqDataSet, plotToFile = FALSE, selContrast = 1)
+anota2seqPlotGenes(Anota2seqDataSet, plotToFile = TRUE, analysis = "translation",
            selContrast = 1)
            }
 

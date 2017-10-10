@@ -50,8 +50,8 @@ anota2seqDataSetFromMatrix <- function(
         stop("Input data range indicates a non continuous scale. \n
              Make sure the input data is normalized and if coming from RNAsequencing transformed to a continuous scale.\n")
     }
-    # initialize the anota2seqDataSet class first so that checks on phenoVec and contrast get performed.
-    anota2seqClass <- new("anota2seqDataSet",
+    # initialize the Anota2seqDataSet class first so that checks on phenoVec and contrast get performed.
+    anota2seqClass <- new("Anota2seqDataSet",
                           dataP = dataP,
                           dataT = dataT,
                           phenoVec = as.character(phenoVec),

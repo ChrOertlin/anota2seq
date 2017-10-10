@@ -1,13 +1,13 @@
-anota2seqPerformQC <- function(anota2seqDataSet = NULL, 
+anota2seqPerformQC <- function(Anota2seqDataSet = NULL, 
                                generateSingleGenePlots=FALSE, fileName="ANOTA2SEQ_translation_vs_mRNA_individual_regressions.pdf",
                                nReg=200, correctionMethod="BH", useDfb=TRUE, useDfbSim=TRUE, nDfbSimData=2000, 
                                useRVM=TRUE, onlyGroup=FALSE, useProgBar=TRUE, fileStem="ANOTA2SEQ"){
     
-    if(is.null(anota2seqDataSet)){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(is.null(Anota2seqDataSet)){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
-    if(class(anota2seqDataSet)!= "anota2seqDataSet"){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(class(Anota2seqDataSet)!= "Anota2seqDataSet"){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
     if(is.null(generateSingleGenePlots)){
         stop("Please provide generateSingleGenePlots parameter. Must be set to TRUE or FALSE.\n")
@@ -63,16 +63,16 @@ anota2seqPerformQC <- function(anota2seqDataSet = NULL,
     
     
     
-    anota2seqCheckInput(dataP = anota2seqDataSet@dataP,
-                        dataT = anota2seqDataSet@dataT,
-                        phenoVec = anota2seqDataSet@phenoVec,
-                        batchVec = anota2seqDataSet@batchVec,
+    anota2seqCheckInput(dataP = Anota2seqDataSet@dataP,
+                        dataT = Anota2seqDataSet@dataT,
+                        phenoVec = Anota2seqDataSet@phenoVec,
+                        batchVec = Anota2seqDataSet@batchVec,
                         contrasts = NULL,
                         correctionMethod=correctionMethod)
     
-    dataP <- anota2seqDataSet@dataP
-    dataT <- anota2seqDataSet@dataT
-    phenoVec <- anota2seqDataSet@phenoVec
+    dataP <- Anota2seqDataSet@dataP
+    dataT <- Anota2seqDataSet@dataT
+    phenoVec <- Anota2seqDataSet@phenoVec
     nData <- dim(dataP)[1]
     phenoVecOrg <- phenoVec
     phenoVec <- as.factor(phenoVec)
@@ -266,7 +266,7 @@ anota2seqPerformQC <- function(anota2seqDataSet = NULL,
     }
     ################################
     ##Create a return object
-    dataOut <- new("anota2seqQualityControl",
+    dataOut <- new("Anota2seqQualityControl",
                    omniIntStats = rvmSummary,
                    omniGroupStats = rvmSummaryGroup,
                    groupIntercepts = groupIntercepts,
@@ -280,8 +280,8 @@ anota2seqPerformQC <- function(anota2seqDataSet = NULL,
                    abParametersInt = abInt,
                    abParametersGroup = abGroup)
     
-    anota2seqDataSet@qualityControl <- dataOut
+    Anota2seqDataSet@qualityControl <- dataOut
     
-    return(anota2seqDataSet)
+    return(Anota2seqDataSet)
 }
 

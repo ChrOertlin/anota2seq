@@ -6,10 +6,10 @@
   abundance or changes in translational efficiency leading to altered 
   protein levels or buffering)}
 \usage{
-anota2seqRegModes(anota2seqDataSet = NULL, mRNASelect = c(TRUE, TRUE))
+anota2seqRegModes(Anota2seqDataSet = NULL, mRNASelect = c(TRUE, TRUE))
 }
 \arguments{
-\item{anota2seqDataSet}{An anota2seqDataSet containing the output of the 
+\item{Anota2seqDataSet}{An Anota2seqDataSet containing the output of the 
 anota2seqAnalyze and anota2seqSelSigGenes function for all analyzes.}
 
 \item{mRNASelect}{A logical vector with length 2 that specifies how mRNA 
@@ -23,13 +23,13 @@ identifiers need to pass thresholds for both changes in translated mRNA
 and total mRNA.}
 }
 \value{
-An anota2seqDataSet. anota2seqRegModes adds a column specifying 
+An Anota2seqDataSet. anota2seqRegModes adds a column specifying 
   the regulatory modes of each significant identifier to the dataframe in
   the 'selectedTranslatedmRNA', 'selectedTotalmRNA', 
   'selectedTranslation' and 'selectedBuffering' slots of the 
-  anota2seqDataSet. It also saves the output of anota2seqSelSigGenes for 
+  Anota2seqDataSet. It also saves the output of anota2seqSelSigGenes for 
   identifier regulated by mRNA abundance in the mRNAAbundance slot of the
-  object. See \code{\link{anota2seq.get.output}} for a detailed
+  object. See \code{\link{anota2seqGetOutput}} for a detailed
   description of these outputs.
 }
 \description{
@@ -61,24 +61,24 @@ The regulatory modes are given a priority order. First, changes
   c(TRUE, FALSE)) or only total mRNA (mRNASelect = c(FALSE, TRUE)).
 }
 \examples{
-# Initialize the anota2seqDataSet
-data(anota2seqData)
-anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100,],
-    dataT = anota2seqDataT[1:100,],
-    phenoVec = anota2seqPhenoVec,
+# Initialize the Anota2seqDataSet
+data(anota2seq_data)
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(
+    dataP = anota2seq_data_P[1:100,],
+    dataT = anota2seq_data_T[1:100,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",
     normalize = TRUE)
 
 # Perform analysis of changes in translational efficiency leading to altered
 # protein levels or buffering; and differential expression of translated mRNA
 # and total mRNA
-anota2seqDataSet <- anota2seqAnalyze(anota2seqDataSet,
+Anota2seqDataSet <- anota2seqAnalyze(Anota2seqDataSet,
                                      analysis = c("translated mRNA","total mRNA",
                                                   "translation","buffering"))
 
 # Select as significant genes of all analyzes, genes with a FDR < 0.15
-anota2seqDataSet <- anota2seqSelSigGenes(anota2seqDataSet,
+Anota2seqDataSet <- anota2seqSelSigGenes(Anota2seqDataSet,
                                          maxPAdj = .15,
                                          analysis = c("translated mRNA",
                                                       "total mRNA",
@@ -87,7 +87,7 @@ anota2seqDataSet <- anota2seqSelSigGenes(anota2seqDataSet,
                                          selContrast = 1)
 
 # Determine which identifiers belong to which regulatory modes.
-anota2seqDataSet <- anota2seqRegModes(anota2seqDataSet)
+Anota2seqDataSet <- anota2seqRegModes(Anota2seqDataSet)
 
 }
 \references{

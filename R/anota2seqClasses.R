@@ -3,7 +3,7 @@ setClassUnion("listOrNULL",members=c("list", "NULL"))
 setClassUnion("numOrNULL",members =c("numeric","NULL"))
 setClassUnion("batchVec",members=c("numeric","character","NULL"))
 setClassUnion("matrixOrNULL",members = c("matrix","NULL"))
-setClass("anota2seqQualityControl",
+setClass("Anota2seqQualityControl",
          slots = c(
              omniIntStats = "matrix",
              omniGroupStats = "matrix",
@@ -18,7 +18,7 @@ setClass("anota2seqQualityControl",
              abParametersInt = "numOrNULL",
              abParametersGroup = "numOrNULL"
          ))
-setClass("anota2seqResidOutlierTest",
+setClass("Anota2seqResidOutlierTest",
          slots = c(
              confInt = "numeric",
              inputResiduals = "matrix",
@@ -30,7 +30,7 @@ setClass("anota2seqResidOutlierTest",
              nObtained= "numeric"
          ))
 ## Class that holds the standard output of the anota2seqAnalyse function (slightly reduced to avoid redundancy)
-setClass("anota2seqOutput",
+setClass("Anota2seqOutput",
          slots=c(
              apvStats = "listOrNULL",
              apvStatsRvm = "listOrNULL",
@@ -39,7 +39,7 @@ setClass("anota2seqOutput",
              abList = "list"
          ))
 ## Class that holds the output of anota2seqSelectSignificantGenes 
-setClass("anota2seqSelectedOutput",
+setClass("Anota2seqSelectedOutput",
          slots= c(
              selectedData = "listOrNULL",
              selectedRvmData = "listOrNULL",
@@ -48,7 +48,7 @@ setClass("anota2seqSelectedOutput",
              usedThresholds = "listOrNULL",
              regModes = "logical"
          ))
-setClass("mRNAabundanceOutput",
+setClass("Anota2seqMRNAabundanceOutput",
          slots = c(
              totalmRNA = "listOrNULL",
              translatedmRNA = "listOrNULL",
@@ -56,12 +56,12 @@ setClass("mRNAabundanceOutput",
              mRNASelect = "logical",
              regModes = "logical"
          ))
-setClassUnion("qcOrNULL",members = c("anota2seqQualityControl", "NULL"))
-setClassUnion("residOrNULL", members = c("anota2seqResidOutlierTest", "NULL"))
-setClassUnion("outOrNULL", members = c("anota2seqOutput", "NULL"))
-setClassUnion("selOutOrNULL", members = c("anota2seqSelectedOutput", "NULL"))
-setClassUnion("abundOrNULL", members =  c("mRNAabundanceOutput", "NULL"))
-setClass("anota2seqDataSet",
+setClassUnion("qcOrNULL",members = c("Anota2seqQualityControl", "NULL"))
+setClassUnion("residOrNULL", members = c("Anota2seqResidOutlierTest", "NULL"))
+setClassUnion("outOrNULL", members = c("Anota2seqOutput", "NULL"))
+setClassUnion("selOutOrNULL", members = c("Anota2seqSelectedOutput", "NULL"))
+setClassUnion("abundOrNULL", members =  c("Anota2seqMRNAabundanceOutput", "NULL"))
+setClass("Anota2seqDataSet",
          slots = c(
              dataT = "matrix",
              dataP = "matrix",

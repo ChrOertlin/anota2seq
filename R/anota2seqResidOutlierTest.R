@@ -1,16 +1,16 @@
-anota2seqResidOutlierTest <- function(anota2seqDataSet = NULL, confInt=0.01, iter=5, 
+anota2seqResidOutlierTest <- function(Anota2seqDataSet = NULL, confInt=0.01, iter=5, 
                                       generateSingleGenePlots=FALSE, nGraphs=200, 
                                       generateSummaryPlot=TRUE, residFitPlot=TRUE, useProgBar=TRUE){
     ##########################
     #########Input param checks
-    if(is.null(anota2seqDataSet)){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(is.null(Anota2seqDataSet)){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
-    if(class(anota2seqDataSet)!= "anota2seqDataSet"){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(class(Anota2seqDataSet)!= "Anota2seqDataSet"){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
-    if(is.null(anota2seqDataSet@qualityControl)){
-        stop("No qualityControl slot found in anota2seqDataSet.\nPlease run the anota2seqPerformQC function on the anota2seqDataSet before running anota2seqResidOutlierTest.\n")
+    if(is.null(Anota2seqDataSet@qualityControl)){
+        stop("No qualityControl slot found in Anota2seqDataSet.\nPlease run the anota2seqPerformQC function on the Anota2seqDataSet before running anota2seqResidOutlierTest.\n")
     }
     if(is.null(confInt)){
         stop("Please provide confInt parameter. Must a numeric value between 0 and 1.\n")
@@ -57,7 +57,7 @@ anota2seqResidOutlierTest <- function(anota2seqDataSet = NULL, confInt=0.01, ite
     
     ##########################
     ##Get data
-    residualMatrix <- anota2seqDataSet@qualityControl@residuals
+    residualMatrix <- Anota2seqDataSet@qualityControl@residuals
     nData <- dim(residualMatrix)[1]
     geneNames <- rownames(residualMatrix)
     ######################################################
@@ -132,7 +132,7 @@ anota2seqResidOutlierTest <- function(anota2seqDataSet = NULL, confInt=0.01, ite
     expected <- nData *dim(residualMatrixOutlier)[2] *confInt
     obtained <- sum(residualMatrixOutlierLog)
     ################################################
-    outputList <- new("anota2seqResidOutlierTest",
+    outputList <- new("Anota2seqResidOutlierTest",
                       confInt = confInt,
                       inputResiduals = residualMatrix,
                       rnormIter = iter,
@@ -152,11 +152,11 @@ anota2seqResidOutlierTest <- function(anota2seqDataSet = NULL, confInt=0.01, ite
     if(residFitPlot==TRUE){
         jpeg("ANOTA2SEQ_residual_vs_fitted.jpeg", width=900, height=900, quality=100)
         par(mfrow=c(2,1))
-        plot(x=as.vector(anota2seqDataSet@qualityControl@fittedValues), y=as.vector(anota2seqDataSet@qualityControl@residuals), ylab="residuals", xlab="Fitted values", main="Residual vs fitted values")
+        plot(x=as.vector(Anota2seqDataSet@qualityControl@fittedValues), y=as.vector(Anota2seqDataSet@qualityControl@residuals), ylab="residuals", xlab="Fitted values", main="Residual vs fitted values")
         dev.off()
     }
     
-    anota2seqDataSet@residOutlierTest <- outputList
-    return(anota2seqDataSet)   
+    Anota2seqDataSet@residOutlierTest <- outputList
+    return(Anota2seqDataSet)   
 }
 

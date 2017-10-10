@@ -5,14 +5,14 @@
 \title{Perform quality control to ensure that the supplied data set is suitable 
 for Analysis of Partial Variance (APV) within anota2seq.}
 \usage{
-anota2seqPerformQC(anota2seqDataSet = NULL, generateSingleGenePlots = FALSE,
+anota2seqPerformQC(Anota2seqDataSet = NULL, generateSingleGenePlots = FALSE,
   fileName = "ANOTA2SEQ_translation_vs_mRNA_individual_regressions.pdf",
   nReg = 200, correctionMethod = "BH", useDfb = TRUE, useDfbSim = TRUE,
   nDfbSimData = 2000, useRVM = TRUE, onlyGroup = FALSE,
   useProgBar = TRUE, fileStem = "ANOTA2SEQ")
 }
 \arguments{
-\item{anota2seqDataSet}{An object of class anota2seqDataSet.}
+\item{Anota2seqDataSet}{An object of class Anota2seqDataSet.}
 
 \item{generateSingleGenePlots}{anota2seq can plot the regression for each gene. 
 However, as there are many genes, this output is normally not 
@@ -60,9 +60,9 @@ TRUE, show progress bar.}
 Default is "ANOTA2SEQ".}
 }
 \value{
-An anota2seqDataSet. anota2seqPerformQC saves its output data in the 
-  'qualityControl' slot of the anota2seqDataSet, see
-  \code{\link{anota2seq.get.qualityControl}} for a detailed description of
+An Anota2seqDataSet. anota2seqPerformQC saves its output data in the 
+  'qualityControl' slot of the Anota2seqDataSet, see
+  \code{\link{anota2seqGetQualityControl}} for a detailed description of
   this output.
   
   anota2seqPerformQC also generates several graphical outputs. One output 
@@ -108,16 +108,16 @@ RVM p-values also follow the expected NULL distribution.
 }
 \examples{
 \dontrun{
-data(anota2seqData)
-anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:100,],
-                                      dataT = anota2seqDataT[1:100,],
-                                      phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seq_data_P[1:100,],
+                                      dataT = anota2seq_data_T[1:100,],
+                                      phenoVec = anota2seq_pheno_vec,
                                       dataType = "RNAseq",
                                       normalize = TRUE)
 
-anota2seqDataSet <- anota2seqPerformQC(anota2seqDataSet)
+Anota2seqDataSet <- anota2seqPerformQC(Anota2seqDataSet)
 }
 }
 \seealso{
-\code{\link{anota2seq.get.qualityControl}}
+\code{\link{anota2seqGetQualityControl}}
 }

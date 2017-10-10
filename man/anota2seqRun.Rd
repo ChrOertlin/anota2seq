@@ -4,13 +4,13 @@
 \alias{anota2seqRun}
 \title{Wrapper for several functions which provide one-step analysis}
 \usage{
-anota2seqRun(anota2seqDataSet = NULL, contrasts = NULL, performQC = TRUE,
+anota2seqRun(Anota2seqDataSet = NULL, contrasts = NULL, performQC = TRUE,
   onlyGroup = FALSE, performROT = TRUE, generateSingleGenePlots = FALSE,
   analyzeBuffering = TRUE, analyzemRNA = TRUE, thresholds = NULL,
   useRVM = TRUE, correctionMethod = "BH", useProgBar = TRUE)
 }
 \arguments{
-\item{anota2seqDataSet}{Object of class anota2seqDataSet}
+\item{Anota2seqDataSet}{Object of class Anota2seqDataSet}
 
 \item{contrasts}{If NULL (default), the contrasts will be created 
 automatically and may not correspond to those of interest. It is 
@@ -113,7 +113,7 @@ package or "qvalue" as implemented in the qvalue package. Default is
 progress bar.}
 }
 \value{
-An anota2seqDataSet containing normalized data, model covariates 
+An Anota2seqDataSet containing normalized data, model covariates 
   and contrasts as well as outputs of all functions called by 
   \code{anota2seqRun}. anota2seqRun will also output all diagnostic plots
   provided by \code{\link{anota2seqPerformQC}}, 
@@ -150,24 +150,24 @@ At the step of analysis, by default (i.e. with contrasts = NULL)
   to compare group a to b & c. Each column of the contrast matrix should 
   sum to 0 and to analyze orthagonal contrasts the products of all 
   pairwise rows should sum to 0. The results in the 
-  anota2seqDataSet object will follow the order of the contrasts (i.e. 
+  Anota2seqDataSet object will follow the order of the contrasts (i.e. 
   results for e.g. contrast 1 will correspond to the contrasts specified 
   in column 1 of the contrast matrix).
 }
 \examples{
-data(anota2seqData)
-# Initialize anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100,],
-    dataT = anota2seqDataT[1:100,],
-    phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+# Initialize Anota2seqDataSet
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(
+    dataP = anota2seq_data_P[1:100,],
+    dataT = anota2seq_data_T[1:100,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",
     normalize = TRUE)
 # Perform anota2seqRun function
 # The quality control and residual outlier testing are not 
 # performed in order to limit the running time of this example, but the model 
 # assumptions should be assessed (see help of anota2seqPerformQC)
-anota2seqDataSet <- anota2seqRun(anota2seqDataSet,
+Anota2seqDataSet <- anota2seqRun(Anota2seqDataSet,
     performQC = FALSE, 
     performROT = FALSE, 
     useProgBar = FALSE)
@@ -179,8 +179,8 @@ anota2seqDataSet <- anota2seqRun(anota2seqDataSet,
 # sample classes:
 phenoVec <- c("a","a","b","b","c","c")
 contrastsEx_ads <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:300, 1:6],
-    dataT = anota2seqDataT[1:300, 1:6],
+    dataP = anota2seq_data_P[1:300, 1:6],
+    dataT = anota2seq_data_T[1:300, 1:6],
     phenoVec = phenoVec,
     dataType = "RNAseq",
     normalize = TRUE)

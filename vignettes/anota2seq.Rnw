@@ -37,7 +37,7 @@ This bias from spurious correlations can be solved by using per-identifier regre
 \section{Workflow}
 Analysis of translational activity using anota2seq includes the following steps:
 \begin{enumerate}
-\item Initialize an anota2seqDataSet and pre-process RNA sequencing data using \Rfunction{anota2seqDataSetFromMatrix} or \Rfunction{anota2seqDataSetFromSE}. See section \ref{preproc}
+\item Initialize an Anota2seqDataSet and pre-process RNA sequencing data using \Rfunction{anota2seqDataSetFromMatrix} or \Rfunction{anota2seqDataSetFromSE}. See section \ref{preproc}
 \item Assessment of model assumptions using \Rfunction{anota2seqPerformQC} and \Rfunction{ anota2seqResidOutlierTest}. See section \ref{qc}
 \item Analysis of changes in mRNA abundance and translational efficiency leading to altered protein levels or buffering using \Rfunction{anota2seqAnalyze}. See section \ref{analysis}
 \item Selection of identifiers and classification into different regulatory modes of gene expression using \Rfunction{anota2seqSelSigGenes} and \Rfunction{anota2seqRegModes}.  See section \ref{genesSection} and \ref{regModesSection} respectively.
@@ -46,17 +46,17 @@ Analysis of translational activity using anota2seq includes the following steps:
 
 \section{Getting started}
 
-anota2seq provides a wrapper function called \Rfunction{anota2seqRun} which performs all analysis steps with relevant default parameters. Here we show an overview of the whole workflow using this function. We illustrate an analysis using count data from a RNA sequencing experiment on total mRNA (called anota2seqDataT here) and on translated mRNA (polysome-associated mRNA or Ribosome Protected Fragments, data called anota2seqDataP) on at least 2 conditions ("ctrl" and "treatment" here) and a vector of sample annotation (called anota2seqPhenoVec). The following code performs normalization, assesses model assumptions and performs the analysis for the default contrast (treatment vs. control in this case):
+anota2seq provides a wrapper function called \Rfunction{anota2seqRun} which performs all analysis steps with relevant default parameters. Here we show an overview of the whole workflow using this function. We illustrate an analysis using count data from a RNA sequencing experiment on total mRNA (called anota2seq\_data\_T here) and on translated mRNA (polysome-associated mRNA or Ribosome Protected Fragments, data called anota2seq\_data\_P) on at least 2 conditions ("ctrl" and "treatment" here) and a vector of sample annotation (called anota2seq\_pheno\_vec). The following code performs normalization, assesses model assumptions and performs the analysis for the default contrast (treatment vs. control in this case):
 <<load_library_and_data, echo=TRUE, eval = TRUE >>=
 library(anota2seq)
-data(anota2seqData)
+data(anota2seq_data)
 @
 
 <<gettingStarted, echo = TRUE, message = FALSE, results = 'hide', eval = TRUE >>=
 ads <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:1000,],
-    dataT = anota2seqDataT[1:1000,],
-    phenoVec = anota2seqPhenoVec,
+    dataP = anota2seq_data_P[1:1000,],
+    dataT = anota2seq_data_T[1:1000,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",
     normalize = TRUE)
 ads <- anota2seqRun(ads)
@@ -74,7 +74,7 @@ anota2seqPlotFC(ads, selContrast = 1, plotToFile = FALSE)
 The following code chunk illustrates how to access the top list of significant changes in translational efficiency leading to altered protein levels (effect, adjusted p-value, regulatory mode):
 <<gettingStarted_getListOfSignificantGenes_translation, echo = TRUE, eval = TRUE >>=
 head(
-    anota2seq.get.output(
+    anota2seqGetOutput(
         ads, analysis = "translation", output = "selected", getRVM = TRUE, 
         selContrast = 1)[, c("apvEff", "apvRvmPAdj", "singleRegMode")])
 @
@@ -86,16 +86,16 @@ This provided an overview of the features of the package. Each step of the analy
 \subsection{Input Data}\label{inputSection}
 anota2seq can analyze data from both ribosome-profiling and polysome-profiling quantified by RNAseq or DNA-microarrays. anota2seq cannot use data from competitive two channel experiments when the polysome- associated mRNA is directly compared to total mRNA as these do not allow independent estimates of polysome- associated mRNA and total mRNA levels\footnote{A two-channel reference design should be applicable although we have not tested this data type.}. anota2seq requires 3 replicate experiments per group if there is 2 treatments. If there is more than two treatments, two replicates is sufficient but will result in reduced statistical power as compared to three replicates. We recommend three replicates in most cases.\\
 
-In this vignette, we will use simulated data provided with the package to illustrate how to perform each step of the analysis. These data originate from the study by Oertlin et al. \cite{Oertlin} which compared methods for analysis of translatomes quantified by RNAseq. Eight samples were simulated from 2 sample classes ("control" and "treatment"); both total mRNA (anota2seqDataT, raw RNAseq counts) and paired translated mRNA (anota2seqDataP, raw RNAseq counts) are provided together with a sample class vector (anota2seqPhenoVec).
+In this vignette, we will use simulated data provided with the package to illustrate how to perform each step of the analysis. These data originate from the study by Oertlin et al. \cite{Oertlin} which compared methods for analysis of translatomes quantified by RNAseq. Eight samples were simulated from 2 sample classes ("control" and "treatment"); both total mRNA (anota2seq\_data\_T, raw RNAseq counts) and paired translated mRNA (anota2seq\_data\_P, raw RNAseq counts) are provided together with a sample class vector (anota2seq\_pheno\_vec).
 
 <<load_data, echo=TRUE, eval=TRUE >>=
-data(anota2seqData)
+data(anota2seq_data)
 # Polysome-associated mRNA and total mRNA columns must follow the same order
-head(anota2seqDataP, n = 2)
-head(anota2seqDataT, n = 2)
+head(anota2seq_data_P, n = 2)
+head(anota2seq_data_T, n = 2)
 # phenoVec must describe the sample class for corresponding columns 
 # in dataT and dataP
-anota2seqPhenoVec
+anota2seq_pheno_vec
 @
 
 \subsection{Normalization and transformation of the raw data}\label{preproc}
@@ -105,12 +105,12 @@ anota2seq gives the options to supply normalized DNA-microarrays data, normalize
 
 In general, RMA is an efficient normalization for DNA-microarray data (for Affymetrix GeneChips) while TMM-log2 normalization \cite{robinson, ritchie} is efficient for RNAseq data (this is the default method in anota2seq when raw RNAseq data is provided as input). The rlog algorithm from \Biocpkg{DESeq2} \cite{love} can also be used within anota2seq.\\
 
-Normalization and transformation of RNAseq data are performed at the step of initialization of an \Rclass{anota2seqDataSet} object in the \Rfunction{anota2seqDataSetFromMatrix} and \Rfunction{anota2seqDataSetFromSE} functions. Filtering of identifiers with 0 counts in at least one sample is also available when raw RNAseq data is provided (parameter \Rcode{filterZeroGenes}). Additionally, users can filter the dataset to remove identifiers with no variance in each mRNA source prior to analysis. This filtering prevents an APV analysis without variance which will result in an error and a halt in the analysis (parameter \Rcode{varCutOff}). 
+Normalization and transformation of RNAseq data are performed at the step of initialization of an \Rclass{Anota2seqDataSet} object in the \Rfunction{anota2seqDataSetFromMatrix} and \Rfunction{anota2seqDataSetFromSE} functions. Filtering of identifiers with 0 counts in at least one sample is also available when raw RNAseq data is provided (parameter \Rcode{filterZeroGenes}). Additionally, users can filter the dataset to remove identifiers with no variance in each mRNA source prior to analysis. This filtering prevents an APV analysis without variance which will result in an error and a halt in the analysis (parameter \Rcode{varCutOff}). 
 <<initialize_object_from_matrix, echo = TRUE, message = FALSE, eval = TRUE >>=
 ads <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:1000,],    
-    dataT = anota2seqDataT[1:1000,],
-    phenoVec = anota2seqPhenoVec,
+    dataP = anota2seq_data_P[1:1000,],    
+    dataT = anota2seq_data_T[1:1000,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",   
     filterZeroGenes = TRUE, 
     normalize = TRUE,       
@@ -120,7 +120,7 @@ ads <- anota2seqDataSetFromMatrix(
 
 <<prepare_SE, echo = FALSE, results = 'hide' >>=
 library(SummarizedExperiment)
-countData <- as.matrix(cbind(anota2seqDataP[1:1000,],anota2seqDataT[1:1000,]))
+countData <- as.matrix(cbind(anota2seq_data_P[1:1000,],anota2seq_data_T[1:1000,]))
 
 # annotations
 anot <- data.frame(
@@ -140,7 +140,7 @@ mySummarizedExperiment <- SummarizedExperiment(
     colData = anot)
 @
 
-Similarly, an \Rclass{anota2seqDataSet} object can be initialized from a \Rclass{SummarizedExperiment} object using \Rfunction{anota2seqDataSetFromSE} as follows\footnote{see \Rcode{help(anota2seqDataSetFromSE)} for details on required \Rcode{colData} formatting}:
+Similarly, an \Rclass{Anota2seqDataSet} object can be initialized from a \Rclass{SummarizedExperiment} object using \Rfunction{anota2seqDataSetFromSE} as follows\footnote{see \Rcode{help(anota2seqDataSetFromSE)} for details on required \Rcode{colData} formatting}:
 <<initialize_object_from_SE, echo = TRUE >>=
 adsFromSE <- anota2seqDataSetFromSE(
     se = mySummarizedExperiment,
@@ -155,12 +155,12 @@ To apply APV, multiple assumptions need to be fulfilled for tens of thousands of
 
 Using the following code, anota2seq performs quality control checks and outputs diagnostic plots (Fig. \ref{singleReg} to \ref{int}) which are further described below.
 <<assess_model_assumptions, echo = TRUE, eval = FALSE >>=
-ads <- anota2seqPerformQC(anota2seqDataSet = ads,
+ads <- anota2seqPerformQC(Anota2seqDataSet = ads,
                           generateSingleGenePlots = TRUE)
 @
 
 <<assess_model_assumptions_echoFALSE, echo = FALSE, results = 'hide' >>=
-ads <- anota2seqPerformQC(anota2seqDataSet = ads,
+ads <- anota2seqPerformQC(Anota2seqDataSet = ads,
                           generateSingleGenePlots = TRUE, fileName = "figure/singleReg.pdf", 
                           fileStem = "figure/")
 @
@@ -227,12 +227,12 @@ Once the data set has been validated as suitable for analysis, significant chang
 
 Translational buffering is a regulatory pattern which decouples mRNA levels from protein levels (despite altered levels of total mRNAs between conditions, translated mRNA levels remain constant; mRNAs under such a regulatory pattern are colored in dark and light blue in the example presented in Fig. \ref{fig:gettingStartedVisualizeResults}) and which potentially holds important information regarding how gene expression is regulated. anota2seq allows to distinguish between changes in translational efficiency leading to altered protein levels (orange and red colored mRNAs in Fig. \ref{fig:gettingStartedVisualizeResults}) and buffering. Both analyzes can be performed on our sample data using the following code:
 <<analysis_translation_and_buffering, echo=TRUE, results = 'hide', eval = FALSE >>=
-ads <- anota2seqAnalyze(anota2seqDataSet = ads,
+ads <- anota2seqAnalyze(Anota2seqDataSet = ads,
                         analysis = c("translation", "buffering"))
 @
 
 <<analysis_translation_and_buffering_echoFALSE, echo = FALSE, results = 'hide', eval = TRUE >>=
-ads <- anota2seqAnalyze(anota2seqDataSet = ads,
+ads <- anota2seqAnalyze(Anota2seqDataSet = ads,
                         analysis = c("translation", "buffering"),
                         fileStem = "figure/")
 @
@@ -251,7 +251,7 @@ RVM is an empirical Bayes method which has been shown to increase statistical po
 
 \Rfunction{anota2seqAnalyze} outputs details of the tests for each identifier (information about slopes of the APV model, test statistics, effect, unadjusted and adjusted p-value):
 <<show_output_Analyze, echo=TRUE, eval = TRUE >>=
-head(anota2seq.get.output(
+head(anota2seqGetOutput(
     ads, analysis = "translation",
     output = "full",
     selContrast = 1,
@@ -278,7 +278,7 @@ The output from \Rfunction{anota2seqAnalyze} can be filtered using the \Rfunctio
 
 An example of code to perform this filtering is as follows:
 <<selSigGenes_translation_buffering, echo = TRUE, eval = TRUE, results = 'hide' >>=
-ads <- anota2seqSelSigGenes(anota2seqDataSet = ads,
+ads <- anota2seqSelSigGenes(Anota2seqDataSet = ads,
                             selContrast = 1,
                             minSlopeTranslation = -1,
                             maxSlopeTranslation = 2,
@@ -287,7 +287,7 @@ ads <- anota2seqSelSigGenes(anota2seqDataSet = ads,
                             maxPAdj = 0.05)
 @
 
-Once the \Robject{anota2seqDataSet} object has been filtered, single gene regressions can be visualized using the \Rfunction{anota2seqPlotGenes} function (Fig. \ref{fig:singleGeneRegressions_translation} and \ref{fig:singleGeneRegressions_buffering}). The graphical output includes both the graphical interpretation of the APV analysis and the key statistics from both the standard and the RVM based analysis. 
+Once the \Robject{Anota2seqDataSet} object has been filtered, single gene regressions can be visualized using the \Rfunction{anota2seqPlotGenes} function (Fig. \ref{fig:singleGeneRegressions_translation} and \ref{fig:singleGeneRegressions_buffering}). The graphical output includes both the graphical interpretation of the APV analysis and the key statistics from both the standard and the RVM based analysis. 
 
 <<singleGeneRegressions_translation, echo = TRUE, message = FALSE, eval = TRUE, fig.wide=TRUE, fig.asp=1, fig.keep = "first", fig.cap = "Visualization provided by the \\Rfunction{anota2seqPlotGenes} function for analysis of changes in translational efficiency leading to altered protein levels. The left graph shows the identifier per identifier regressions between translated mRNA (in this case polysome-associated mRNA) and total mRNA levels. Plotting symbols are taken from the \\Rcode{phenoVec} argument supplied to the \\Rfunction{anota2seqAnalyze} function and the lines are the regression lines per treatment using the common slope identified in APV (shown in the main title). The right and middle graphs show key statistics for the analyzed identifier with and without RVM, respectively. These graphs (shown here for only 3 identifiers) can be visualized for all identifiers selected in \\Rfunction{anota2seqSelSigGenes}." >>=
 anota2seqPlotGenes(ads, selContrast = 1, analysis = "translation", plotToFile = FALSE)
@@ -308,10 +308,10 @@ Translational buffering is defined as changes in total mRNA level that are not p
 \subsection{Categorizing genes into regulatory modes}\label{regModesSection}
 Polysome or ribosome profiling allows the user to distinguish between three regulatory modes: changes in mRNA abundance (i.e. similar changes in total mRNA levels and levels of translated mRNA) and translational efficiency leading to altered protein levels or buffering \cite{Oertlin}. For that, the \Rfunction{anota2seqAnalyze} and \Rfunction{anota2seqSelSigGenes} functions have to be run with parameter \Rcode{analysis} set to "translation" and "buffering" as shown above but analysis of differential expression of total mRNA and translated mRNA is also required. For that, the same functions can be used with \Rcode{analysis} parameter set to "total mRNA" and "translated mRNA" as shown below:
 <<analyze_and_selSigGenes_total_translated, echo=FALSE, results = 'hide', eval = TRUE >>=
-ads <- anota2seqAnalyze(anota2seqDataSet = ads,
+ads <- anota2seqAnalyze(Anota2seqDataSet = ads,
                         analysis = c("total mRNA", "translated mRNA"),
                         fileStem = "figure/")
-ads <- anota2seqSelSigGenes(anota2seqDataSet = ads,
+ads <- anota2seqSelSigGenes(Anota2seqDataSet = ads,
                             analysis = c("total mRNA", "translated mRNA"),      
                             selContrast = 1,
                             minSlopeTranslation = -1,
@@ -322,9 +322,9 @@ ads <- anota2seqSelSigGenes(anota2seqDataSet = ads,
 @
 
 <<analyze_and_selSigGenes_total_translated_echoFALSE, echo=TRUE, results = 'hide', eval = FALSE >>=
-ads <- anota2seqAnalyze(anota2seqDataSet = ads,
+ads <- anota2seqAnalyze(Anota2seqDataSet = ads,
                         analysis = c("total mRNA", "translated mRNA"))
-ads <- anota2seqSelSigGenes(anota2seqDataSet = ads,
+ads <- anota2seqSelSigGenes(Anota2seqDataSet = ads,
                             analysis = c("total mRNA", "translated mRNA"),      
                             selContrast = 1,
                             minSlopeTranslation = -1,
@@ -339,10 +339,10 @@ Once all analyzes have been performed, all regulated identifiers can be categori
 ads <- anota2seqRegModes(ads)
 @
 
-Notably, there is a hierarchy such that mRNAs identified as changing their translational efficiency leading to altered protein levels will belong to the translation group and no other group; mRNAs that change their levels in the translated pool and total mRNA pool but are not identified as changing their translational efficiency leading to altered protein levels will be in the abundance group; and mRNAs that are identified as changing their translational efficiency leading to buffering and are not in the former two groups are allocated to the set of buffered mRNAs. Specifically, the \Rfunction{anota2seqRegModes} function adds a column named "singleRegModes" indicating the classification into regulatory modes in the data.frame containing gene by gene statistical results. This output can be accessed by using \Rfunction{anota2seq.get.output} with \Rcode{output} parameter set to "regModes". 
+Notably, there is a hierarchy such that mRNAs identified as changing their translational efficiency leading to altered protein levels will belong to the translation group and no other group; mRNAs that change their levels in the translated pool and total mRNA pool but are not identified as changing their translational efficiency leading to altered protein levels will be in the abundance group; and mRNAs that are identified as changing their translational efficiency leading to buffering and are not in the former two groups are allocated to the set of buffered mRNAs. Specifically, the \Rfunction{anota2seqRegModes} function adds a column named "singleRegModes" indicating the classification into regulatory modes in the data.frame containing gene by gene statistical results. This output can be accessed by using \Rfunction{anota2seqGetOutput} with \Rcode{output} parameter set to "regModes". 
 
 << regModesOutput, echo=TRUE, eval = TRUE >>=
-head(anota2seq.get.output(object = ads, output="regModes", 
+head(anota2seqGetOutput(object = ads, output="regModes", 
                           selContrast = 1, analysis="buffering",
                           getRVM = TRUE))[, c("apvSlope", "apvEff", "apvRvmP", 
                                               "apvRvmPAdj", "singleRegMode")]
@@ -359,7 +359,7 @@ anota2seqPlotFC(ads, selContrast = 1, plotToFile = FALSE)
 In addition to application of each of the functions within anota2seq which provides the maximum flexibility, the anota2seq package provides the option to perform a one-step analysis of translated mRNA, total mRNA and changes in translational efficiency leading to altered protein levels or buffering. This analysis performs quality control followed by analysis of changes in translational efficiency affecting protein levels or buffering. A filtering is also performed (as in \Rfunction{anota2seqSelSigGenes}) as well as categorization into regulatory modes.
 <<wrapperFunction, echo=TRUE, eval = FALSE >>=
 ads <- anota2seqRun(
-    anota2seqDataSet = ads,   
+    Anota2seqDataSet = ads,   
     thresholds = list(   
         maxPAdj = 0.05,
         minEff = 1.5),

@@ -1,51 +1,51 @@
-anota2seqAnalyze <- function (anota2seqDataSet= NULL,contrasts=NULL, correctionMethod = "BH",
+anota2seqAnalyze <- function (Anota2seqDataSet= NULL,contrasts=NULL, correctionMethod = "BH",
                               useProgBar = TRUE, fileStem = "ANOTA2SEQ",
                               analysis = c("translation","buffering","translated mRNA","total mRNA"))
 {
-    if(is.null(anota2seqDataSet)){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(is.null(Anota2seqDataSet)){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
-    if(class(anota2seqDataSet)!= "anota2seqDataSet"){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(class(Anota2seqDataSet)!= "Anota2seqDataSet"){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
-    anota2seqCheckInput(dataP = anota2seqDataSet@dataP,
-                        dataT = anota2seqDataSet@dataT,
-                        phenoVec = anota2seqDataSet@phenoVec,
-                        batchVec = anota2seqDataSet@batchVec,
+    anota2seqCheckInput(dataP = Anota2seqDataSet@dataP,
+                        dataT = Anota2seqDataSet@dataT,
+                        phenoVec = Anota2seqDataSet@phenoVec,
+                        batchVec = Anota2seqDataSet@batchVec,
                         contrasts = contrasts,
                         correctionMethod=correctionMethod)
     if(is.null(contrasts) == FALSE){
-        anota2seqDataSet@contrasts <- contrasts
+        Anota2seqDataSet@contrasts <- contrasts
     }
     
     #########################################################
     anota2seqCheckParameter(analysis = analysis,
                             inFunc = "analysis")
-    phenoVec <- anota2seqDataSet@phenoVec
-    batchVec <- anota2seqDataSet@batchVec
-    contrasts <- anota2seqDataSet@contrasts
+    phenoVec <- Anota2seqDataSet@phenoVec
+    batchVec <- Anota2seqDataSet@batchVec
+    contrasts <- Anota2seqDataSet@contrasts
     
     
     for(reg in 1:length(analysis)){
         
         if(analysis[reg]=="translated mRNA"){
             message("Starting analysis of translated mRNA (RPFs). \n")
-            dataP <- anota2seqDataSet@dataP
+            dataP <- Anota2seqDataSet@dataP
             dataT <- NULL
         }
         if(analysis[reg]=="total mRNA"){
             message("Starting analysis of total mRNA. \n")
-            dataP <- anota2seqDataSet@dataT
+            dataP <- Anota2seqDataSet@dataT
             dataT <- NULL
         }
         if(analysis[reg] =="translation"){
-            dataP <- anota2seqDataSet@dataP
-            dataT <- anota2seqDataSet@dataT
+            dataP <- Anota2seqDataSet@dataP
+            dataT <- Anota2seqDataSet@dataT
             message("Starting analysis of translation.\n")
         }
         if(analysis[reg] == "buffering"){
-            dataP <- anota2seqDataSet@dataT
-            dataT <- anota2seqDataSet@dataP
+            dataP <- Anota2seqDataSet@dataT
+            dataT <- Anota2seqDataSet@dataP
             message("Starting analysis of translational buffering.\n")
         }
         
@@ -85,7 +85,7 @@ anota2seqAnalyze <- function (anota2seqDataSet= NULL,contrasts=NULL, correctionM
                 tmpCont <- contrasts(tmpList$phenoType)
                 tmpCont[1, ] <- (-1)
                 contrasts(tmpList$phenoType) <- tmpCont
-                anota2seqDataSet@contrasts <- tmpCont
+                Anota2seqDataSet@contrasts <- tmpCont
             }
             if (i == 1) {
                 tmpOut <- contrasts(tmpList$phenoType)
@@ -328,18 +328,18 @@ anota2seqAnalyze <- function (anota2seqDataSet= NULL,contrasts=NULL, correctionM
             
         }
         
-        if(is.null(anota2seqDataSet@deltaData)){
-            anota2seqDataSet@deltaData <- rep(list(NULL),dim(anota2seqDataSet@contrasts)[2])
-            for(cont in 1:dim(anota2seqDataSet@contrasts)[2]){
-                anota2seqDataSet@deltaData[[cont]] <- anota2seqCalculateDeltaData(dataP=anota2seqDataSet@dataP,
-                                                                                  dataT=anota2seqDataSet@dataT,
-                                                                                  phenoVec=anota2seqDataSet@phenoVec,
-                                                                                  useIds = rownames(anota2seqDataSet@dataP),
-                                                                                  contrasts=anota2seqDataSet@contrasts,
+        if(is.null(Anota2seqDataSet@deltaData)){
+            Anota2seqDataSet@deltaData <- rep(list(NULL),dim(Anota2seqDataSet@contrasts)[2])
+            for(cont in 1:dim(Anota2seqDataSet@contrasts)[2]){
+                Anota2seqDataSet@deltaData[[cont]] <- anota2seqCalculateDeltaData(dataP=Anota2seqDataSet@dataP,
+                                                                                  dataT=Anota2seqDataSet@dataT,
+                                                                                  phenoVec=Anota2seqDataSet@phenoVec,
+                                                                                  useIds = rownames(Anota2seqDataSet@dataP),
+                                                                                  contrasts=Anota2seqDataSet@contrasts,
                                                                                   selContr=cont)
             }
         }
-        outputList <- new("anota2seqOutput", 
+        outputList <- new("Anota2seqOutput", 
                           apvStats = statsList, 
                           apvStatsRvm = statsListRvm,
                           correctionMethod = correctionMethod, 
@@ -347,24 +347,24 @@ anota2seqAnalyze <- function (anota2seqDataSet= NULL,contrasts=NULL, correctionM
                           abList = abList)
         
         if(analysis[reg] == "translated mRNA"){
-            anota2seqDataSet@translatedmRNA <- outputList
+            Anota2seqDataSet@translatedmRNA <- outputList
             message("End of translated mRNA analysis.\n")
         }
         if(analysis[reg] == "total mRNA"){
-            anota2seqDataSet@totalmRNA <- outputList
+            Anota2seqDataSet@totalmRNA <- outputList
             message("End of total mRNA analysis.\n")
         }
         
         if(analysis[reg]== "translation"){
-            anota2seqDataSet@translation <- outputList
+            Anota2seqDataSet@translation <- outputList
             message("End of analysis of translation.\n")
         }
         
         if(analysis[reg] == "buffering"){
-            anota2seqDataSet@buffering <- outputList
+            Anota2seqDataSet@buffering <- outputList
             message("End of analysis of translational buffering.\n")
         }
     }
-    return(anota2seqDataSet)
+    return(Anota2seqDataSet)
 }
 

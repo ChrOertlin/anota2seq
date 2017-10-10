@@ -4,12 +4,12 @@
 \alias{anota2seqResidOutlierTest}
 \title{Test for normality of residuals}
 \usage{
-anota2seqResidOutlierTest(anota2seqDataSet = NULL, confInt = 0.01,
+anota2seqResidOutlierTest(Anota2seqDataSet = NULL, confInt = 0.01,
   iter = 5, generateSingleGenePlots = FALSE, nGraphs = 200,
   generateSummaryPlot = TRUE, residFitPlot = TRUE, useProgBar = TRUE)
 }
 \arguments{
-\item{anota2seqDataSet}{An object of class anota2seqDataSet that also 
+\item{Anota2seqDataSet}{An object of class Anota2seqDataSet that also 
 contains the output of the anota2seqPerformQC function.}
 
 \item{confInt}{Controls how many samples from the normal distribution
@@ -44,9 +44,9 @@ residuals. Default is TRUE, generate the plot.}
 progress bar.}
 }
 \value{
-An anota2seqDataSet. anota2seqResidOutlierTest saves its output
-  data in the 'residOutlierTest' slot of the anota2seqDataSet, see 
-  \code{\link{anota2seq.get.residOutlierTest}} for a detailed description
+An Anota2seqDataSet. anota2seqResidOutlierTest saves its output
+  data in the 'residOutlierTest' slot of the Anota2seqDataSet, see 
+  \code{\link{anota2seqGetResidOutlierTest}} for a detailed description
   of this output. 
   
   anota2seqResidOutlierTest also generates a graphical
@@ -88,19 +88,19 @@ graphical output and an output object.
 }
 \examples{
 \dontrun{
-data(anota2seqData)
-# Initialize anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100,],
-    dataT = anota2seqDataT[1:100,],
-    phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+# Initialize Anota2seqDataSet
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(
+    dataP = anota2seq_data_P[1:100,],
+    dataT = anota2seq_data_T[1:100,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",
     normalize = TRUE)
 # Perform anota2seqPerformQC function. This must be performed prior the running
 # the anota2seqResidualOutlierTest function.
-anota2seqDataSet <- anota2seqPerformQC(anota2seqDataSet)
+Anota2seqDataSet <- anota2seqPerformQC(Anota2seqDataSet)
 # Perform anota2seqResidualOutlierTest function
-anota2seqDataSet <- anota2seqResidOutlierTest(anota2seqDataSet)
+Anota2seqDataSet <- anota2seqResidOutlierTest(Anota2seqDataSet)
 }
 }
 \references{
@@ -108,5 +108,5 @@ Venables, W.N. and Ripley, B.D., Modern Applied Statistics with
   S-PLUS, \emph{springer} (1999).
 }
 \seealso{
-\code{\link{anota2seq.get.residOutlierTest}}
+\code{\link{anota2seqGetResidOutlierTest}}
 }

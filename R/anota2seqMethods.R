@@ -1,4 +1,4 @@
-setMethod("anota2seq.get.output","anota2seqDataSet",
+setMethod("anota2seqGetOutput","Anota2seqDataSet",
           function(object = NULL, analysis= NULL, output = NULL,selContrast = NULL,getRVM= TRUE) {
               s4MethodChecks(object=object,analysis=analysis,output=output,selContrast=selContrast,getRVM=getRVM,inFunc = "output")
               if(output == "full"){
@@ -186,7 +186,7 @@ setMethod("anota2seq.get.output","anota2seqDataSet",
                   if(analysis == "translation"){
                       if(is.null(object@selectedTranslation) == FALSE){
                           if(object@selectedTranslation@regModes == FALSE){
-                              stop("No anota2seqRegModes output found for translation analysis.\nPlease run the anota2seqRegModes function on the anota2seqDataSet.\n")
+                              stop("No anota2seqRegModes output found for translation analysis.\nPlease run the anota2seqRegModes function on the Anota2seqDataSet.\n")
                           }
                           if(getRVM != object@selectedTranslation@useRVM){
                               stop(paste("Can only retrieve selected data with RVM status used in anota2seqSelSigGenes.\n",
@@ -212,7 +212,7 @@ setMethod("anota2seq.get.output","anota2seqDataSet",
                   if(analysis == "buffering"){
                       if(is.null(object@selectedBuffering) == FALSE){
                           if(object@selectedBuffering@regModes == FALSE){
-                              stop("No anota2seqRegModes output found for buffering analysis.\nPlease run the anota2seqRegModes function on the anota2seqDataSet.\n")
+                              stop("No anota2seqRegModes output found for buffering analysis.\nPlease run the anota2seqRegModes function on the Anota2seqDataSet.\n")
                           }
                           if(getRVM != object@selectedBuffering@useRVM){
                               stop(paste("Can only retrieve selected data with RVM status used in anota2seqSelSigGenes.\n",
@@ -245,7 +245,7 @@ setMethod("anota2seq.get.output","anota2seqDataSet",
                                          object@mRNAAbundance@useRVM,".\nPlease provide correct RVM parameter.\n"))
                           }
                           if(object@mRNAAbundance@regModes == FALSE){
-                              stop("No anota2seqRegModes output found for mRNA abundance analysis.\nPlease run the anota2seqRegModes function on the anota2seqDataSet.\n")
+                              stop("No anota2seqRegModes output found for mRNA abundance analysis.\nPlease run the anota2seqRegModes function on the Anota2seqDataSet.\n")
                           }
                           mRNASelect <- object@mRNAAbundance@mRNASelect
                           if(mRNASelect[1] == TRUE & mRNASelect[2] == TRUE){
@@ -263,7 +263,7 @@ setMethod("anota2seq.get.output","anota2seqDataSet",
                   }
               }#if regModes
           })
-setMethod("anota2seq.get.qualityControl","anota2seqDataSet",
+setMethod("anota2seqGetQualityControl","Anota2seqDataSet",
           function(object= NULL){
               s4MethodChecks(object=object,inFunc = "NA")
               if(is.null(object@qualityControl) == FALSE){
@@ -284,11 +284,11 @@ setMethod("anota2seq.get.qualityControl","anota2seqDataSet",
               }
               
               if(is.null(object@qualityControl) == TRUE){
-                  stop("No quality control detected. Please run the anota2seqPerformQC function on the anota2seqDataSet.\n")
+                  stop("No quality control detected. Please run the anota2seqPerformQC function on the Anota2seqDataSet.\n")
               }
               
           })
-setMethod("anota2seq.get.residOutlierTest","anota2seqDataSet",
+setMethod("anota2seqGetResidOutlierTest","Anota2seqDataSet",
           function(object= NULL){
               s4MethodChecks(object=object,inFunc = "NA")
               
@@ -304,15 +304,15 @@ setMethod("anota2seq.get.residOutlierTest","anota2seqDataSet",
                   ))
               }
               if(is.null(object@residOutlierTest) == TRUE){
-                  stop("No residOutlierTest detected. Please run the anota2seqResidOutlierTest function on the anota2seqDataSet. \n")
+                  stop("No residOutlierTest detected. Please run the anota2seqResidOutlierTest function on the Anota2seqDataSet. \n")
               }
           })
-setMethod("anota2seq.get.deltaData","anota2seqDataSet",
+setMethod("anota2seqGetDeltaData","Anota2seqDataSet",
           function(object = NULL,output=NULL,analysis = NULL,selContrast = NULL){
               s4MethodChecks(object=object,output=output,analysis=analysis,selContrast=selContrast,inFunc = "delta")
               if(output == "full"){
                   if(is.null(object@deltaData)){
-                      stop("No deltaData found. Please run the anota2seqAnalyze function on the anota2seqDataSet.\n")
+                      stop("No deltaData found. Please run the anota2seqAnalyze function on the Anota2seqDataSet.\n")
                   }
                   if(analysis == "translation"){
                       return(object@deltaData[[selContrast]][,c("deltaP","deltaPT"),drop=FALSE])
@@ -330,67 +330,67 @@ setMethod("anota2seq.get.deltaData","anota2seqDataSet",
               }
               
               if(output == "selected"){
-                  if(is.null(anota2seq.get.output.class(object,output="selected",analysis=analysis)) == TRUE){
-                      stop("selected deltaData (i.e. output set to selected) can only be retrieved if anota2seqSelSigGenes has been run for specified analysis.\nPlease run anota2seqSelSigGenes on the anota2seqDataSet.\n")
+                  if(is.null(anota2seqGetOutputClass(object,output="selected",analysis=analysis)) == TRUE){
+                      stop("selected deltaData (i.e. output set to selected) can only be retrieved if anota2seqSelSigGenes has been run for specified analysis.\nPlease run anota2seqSelSigGenes on the Anota2seqDataSet.\n")
                   }
-                  if(is.null(anota2seq.get.output.class(object,output="selected",analysis=analysis)) == FALSE){
-                      tmpDat <- anota2seq.get.output.class(object,output="selected",analysis=analysis)
+                  if(is.null(anota2seqGetOutputClass(object,output="selected",analysis=analysis)) == FALSE){
+                      tmpDat <- anota2seqGetOutputClass(object,output="selected",analysis=analysis)
                       return(tmpDat@deltaData[[selContrast]])
                   }
               }
           })
-setMethod("anota2seq.get.thresholds","anota2seqDataSet",
+setMethod("anota2seqGetThresholds","Anota2seqDataSet",
           function(object = NULL,analysis= NULL,selContrast = NULL){
               s4MethodChecks(object=object,analysis=analysis,selContrast=selContrast,inFunc = "tresholds")
-              if(is.null(anota2seq.get.output.class(object,output="selected",analysis=analysis)) == TRUE){
-                  stop("thresholds can only be retrieved if anota2seqSelSigGenes has been run for specified analysis.\nPlease run anota2seqSelSigGenes on the anota2seqDataSet.\n")
+              if(is.null(anota2seqGetOutputClass(object,output="selected",analysis=analysis)) == TRUE){
+                  stop("thresholds can only be retrieved if anota2seqSelSigGenes has been run for specified analysis.\nPlease run anota2seqSelSigGenes on the Anota2seqDataSet.\n")
               }
-              if(is.null(anota2seq.get.output.class(object,output="selected",analysis=analysis)) == FALSE){
-                  tmpDat <- anota2seq.get.output.class(object,output="selected",analysis=analysis)
+              if(is.null(anota2seqGetOutputClass(object,output="selected",analysis=analysis)) == FALSE){
+                  tmpDat <- anota2seqGetOutputClass(object,output="selected",analysis=analysis)
                   return(tmpDat@usedThresholds[[selContrast]])
               }
           })
-setMethod("anota2seq.get.normalizedData","anota2seqDataSet",
+setMethod("anota2seqGetNormalizedData","Anota2seqDataSet",
           definition = function(object){ 
               s4MethodChecks(object=object,inFunc = "NA")
               if(is.null(object@dataP) | is.null(object@dataT)){
-                  stop("No dataP or dataT found in anota2seqDataSet.\n")
+                  stop("No dataP or dataT found in Anota2seqDataSet.\n")
               }
               return(list(dataP = object@dataP,dataT = object@dataT))
           })
-setMethod("anota2seq.get.covariates","anota2seqDataSet",
+setMethod("anota2seqGetCovariates","Anota2seqDataSet",
           function(object) {
               s4MethodChecks(object=object,inFunc = "NA")
               if(is.null(object@phenoVec)){
-                  stop("No phenoVec found in anota2seqDataSet.\n")
+                  stop("No phenoVec found in Anota2seqDataSet.\n")
               }
               return(list(phenoVec = object@phenoVec,batchVec=object@batchVec))
           })
-setMethod("anota2seq.get.contrasts","anota2seqDataSet",
+setMethod("anota2seqGetContrasts","Anota2seqDataSet",
           function(object){
               s4MethodChecks(object=object,inFunc = "NA")
               if(is.null(object@contrasts)){
                   warning("No contrasts found. Contrasts are set with the anota2seqAnalyze or anota2seqRun function.\n")
               }
               return(object@contrasts)})
-setMethod("anota2seqPlotFC","anota2seqDataSet",
+setMethod("anota2seqPlotFC","Anota2seqDataSet",
           function(object=NULL,visualizeRegModes="all",selContrast= NULL,fileName= NULL,plotToFile = TRUE, ...){    
               message("Creating Fold-change plots.\n")
               if(is.null(object@buffering)&is.null(object@translation)&is.null(object@translatedmRNA)&is.null(object@totalmRNA)){
                   stop("No anota2seqAnalyze output detected. Please run the anota2seqAnalyze function before using the anota2seqPlotFC function.")
               }
               if(visualizeRegModes == "translation"){
-                  if(is.null(anota2seq.get.output.class(object,analysis = "translation","selected"))){
+                  if(is.null(anota2seqGetOutputClass(object,analysis = "translation","selected"))){
                       stop("No anota2seqAnalyse output for translation detected. Please run  anota2seqSelSigGenes with analysis parameter set to translation before proceeding.\n")
                   }
               }
               if(visualizeRegModes == "buffering"){
-                  if(is.null(anota2seq.get.output.class(object,analysis = "buffering","selected"))){
+                  if(is.null(anota2seqGetOutputClass(object,analysis = "buffering","selected"))){
                       stop("No anota2seqAnalyse output for buffering detected. Please run anota2seqSelSigGenes with analysis parameter set to buffering before proceeding.\n")
                   }
               }
               if(visualizeRegModes == "all"){
-                  if(anota2seq.get.output.class(object,analysis = "translation","selected")@regModes == FALSE){
+                  if(anota2seqGetOutputClass(object,analysis = "translation","selected")@regModes == FALSE){
                       stop("No regModes found. Please run the anota2seqRegModes function on the object before generating fold change plots.\n")
                   }
               }
@@ -450,40 +450,40 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                               pch=19,col=cols["mRNA abundance down"],cex=.5)
                           
                       }
-                      if(!is.null(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))& !is.null(anota2seq.get.output(object,"translation","full",selContrast[i],useRVM))){
+                      if(!is.null(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))& !is.null(anota2seqGetOutput(object,"translation","full",selContrast[i],useRVM))){
                           
                           #up regulated differential translation
-                          points(x= deltaT[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0 & anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"  )]],
-                              y= deltaP[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                                  which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0& anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"   )]],
+                          points(x= deltaT[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0 & anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"  )]],
+                              y= deltaP[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                                  which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0& anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"   )]],
                               pch=19,col=cols["translation up"],cex=.5)
                           # down regulated differential translation
-                          points(x= deltaT[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0 & anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"  )]],
-                              y= deltaP[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                                  which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0& anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"   )]],
+                          points(x= deltaT[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0 & anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"  )]],
+                              y= deltaP[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                                  which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0& anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"   )]],
                               pch=19,col=cols["translation down"],cex=.5)
                       }
                       
-                      if(!is.null(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))& !is.null(anota2seq.get.output(object,"buffering","full",selContrast[i],useRVM))){
+                      if(!is.null(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))& !is.null(anota2seqGetOutput(object,"buffering","full",selContrast[i],useRVM))){
                           
                           #up regulated differential buffering
-                          points(x= deltaT[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] < 0 & anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
-                              y= deltaP[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                                  which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"]< 0& anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
+                          points(x= deltaT[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] < 0 & anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
+                              y= deltaP[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                                  which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"]< 0& anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
                               pch=19,col=cols["buffering up"],cex=.5)
                           # down regulated differential buffering
-                          points(x= deltaT[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0 & anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
-                              y= deltaP[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                                  which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0 & anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
+                          points(x= deltaT[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0 & anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
+                              y= deltaP[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                                  which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0 & anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering")]],
                               pch=19,col=cols["buffering down"],cex=.5)
                       }
                       
-                      transl <- anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"),]
-                      buff <- anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering"),]
+                      transl <- anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"singleRegMode"] == "translation"),]
+                      buff <- anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"singleRegMode"] == "buffering"),]
                       abund <- rownames(object@mRNAAbundance@totalmRNA[[selContrast[i]]])[which(object@mRNAAbundance@totalmRNA[[selContrast[i]]][,"singleRegMode"] == "abundance")]
                   }
                   if(visualizeRegModes == "translation"){
@@ -491,40 +491,40 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                       useRVM <- object@selectedTranslation@useRVM
                       
                       #up regulated differential translation
-                      points(x= deltaT[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                          which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0)]],
-                          y= deltaP[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0)]],
+                      points(x= deltaT[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                          which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0)]],
+                          y= deltaP[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] >= 0)]],
                           pch=19,col=cols["translation up"],cex=.5)
                       # down regulated differential translation
-                      points(x= deltaT[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                          which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0 )]],
-                          y= deltaP[rownames(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0)]],
+                      points(x= deltaT[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                          which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0 )]],
+                          y= deltaP[rownames(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)[,"apvEff"] < 0)]],
                           pch=19,col=cols["translation down"],cex=.5)
                       buff <- NULL
                       abund <- NULL
-                      transl <- anota2seq.get.output(object,"translation","selected",selContrast[i],useRVM)
+                      transl <- anota2seqGetOutput(object,"translation","selected",selContrast[i],useRVM)
                   }
                   if(visualizeRegModes == "buffering"){
                       
                       useRVM <- object@selectedBuffering@useRVM
                       
                       #bufferin down
-                      points(x= deltaT[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                          which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0)]],
-                          y= deltaP[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0)]],
+                      points(x= deltaT[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                          which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0)]],
+                          y= deltaP[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] > 0)]],
                           pch=19,col=cols["buffering down"],cex=.5)
                       #buffering up
-                      points(x= deltaT[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                          which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] < 0)]],
-                          y= deltaP[rownames(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM))[
-                              which(anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] < 0)]],
+                      points(x= deltaT[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                          which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] < 0)]],
+                          y= deltaP[rownames(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM))[
+                              which(anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)[,"apvEff"] < 0)]],
                           pch=19,col=cols["buffering up"],cex=.5)
                       transl <- NULL
                       abund <- NULL
-                      buff <- anota2seq.get.output(object,"buffering","selected",selContrast[i],useRVM)
+                      buff <- anota2seqGetOutput(object,"buffering","selected",selContrast[i],useRVM)
                   }
                   
                   if(visualizeRegModes%in%c("all","buffering","translation")){
@@ -548,14 +548,14 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
                       thresholdsP <- NULL
                       thresholdsT <- NULL
                       if(visualizeRegModes %in% c("all", "translation")){
-                          if(is.null( anota2seq.get.thresholds(object,analysis = "translation",selContrast = selContrast[i]) ) == FALSE){
-                              thresholdsP <- anota2seq.get.thresholds(object,analysis = "translation",selContrast = selContrast[i]) 
+                          if(is.null( anota2seqGetThresholds(object,analysis = "translation",selContrast = selContrast[i]) ) == FALSE){
+                              thresholdsP <- anota2seqGetThresholds(object,analysis = "translation",selContrast = selContrast[i]) 
                           }
                       }
                       
                       if(visualizeRegModes %in% c("all", "buffering")){
-                          if(is.null( anota2seq.get.thresholds(object,analysis = "buffering",selContrast = selContrast[i]) ) == FALSE){
-                              thresholdsT <- anota2seq.get.thresholds(object,analysis = "buffering",selContrast = selContrast[i]) 
+                          if(is.null( anota2seqGetThresholds(object,analysis = "buffering",selContrast = selContrast[i]) ) == FALSE){
+                              thresholdsT <- anota2seqGetThresholds(object,analysis = "buffering",selContrast = selContrast[i]) 
                           }
                       }
                       if(is.null(thresholdsT$selDeltaT) == FALSE){
@@ -580,7 +580,7 @@ setMethod("anota2seqPlotFC","anota2seqDataSet",
               }
               
           })
-setMethod("anota2seqPlotPvalues","anota2seqDataSet",
+setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
           function(object=NULL,useRVM = TRUE,selContrast = NULL,myBw = 0.05,plotToFile=TRUE, fileName= NULL, ...){ 
               message("Creating pvalue and FDR density plots.\n") 
               if(is.null(object@buffering)&is.null(object@translation)&is.null(object@translatedmRNA)&is.null(object@totalmRNA)){
@@ -601,8 +601,8 @@ setMethod("anota2seqPlotPvalues","anota2seqDataSet",
               
               for( contr in 1:length(selContrast)){
                   for(regs in 1:length(regulations)){
-                      if(is.null(anota2seq.get.output(object,regulations[regs],output = "full",selContrast  = selContrast[contr],getRVM = useRVM)) == FALSE){
-                          plotList[[contr]][[regs]] <- anota2seq.get.output(object,regulations[regs],output = "full",selContrast = selContrast[contr],getRVM = useRVM)
+                      if(is.null(anota2seqGetOutput(object,regulations[regs],output = "full",selContrast  = selContrast[contr],getRVM = useRVM)) == FALSE){
+                          plotList[[contr]][[regs]] <- anota2seqGetOutput(object,regulations[regs],output = "full",selContrast = selContrast[contr],getRVM = useRVM)
                           nameList[[contr]] <- c(nameList[[contr]],regulations[regs])
                       }
                   }
@@ -685,25 +685,25 @@ setMethod("anota2seqPlotPvalues","anota2seqDataSet",
                   }
               }
           })
-setMethod("anota2seqPlotGenes","anota2seqDataSet",
+setMethod("anota2seqPlotGenes","Anota2seqDataSet",
           function(object= NULL,selContrast=NULL,analysis=NULL,geneNames = NULL,plotToFile = TRUE,fileName=NULL){
               s4MethodChecks(object=object,selContrast=selContrast,analysis = analysis,plotToFile=plotToFile,inFunc = "anota2seqPlotGenes")
-              if(is.null(anota2seq.get.output.class(object,analysis,"selected"))){
-                  stop("No anota2seqSelSigGenes output in anota2seqDataSet found.\n Please run the anota2seqSelSigGenes function on the anota2seqDataSet.\n")
+              if(is.null(anota2seqGetOutputClass(object,analysis,"selected"))){
+                  stop("No anota2seqSelSigGenes output in Anota2seqDataSet found.\n Please run the anota2seqSelSigGenes function on the Anota2seqDataSet.\n")
               }
               
               phenoVec <- object@phenoVec
-              anota2seqSigObj <- anota2seq.get.output.class(object,analysis = analysis,output = "full")
+              anota2seqSigObj <- anota2seqGetOutputClass(object,analysis = analysis,output = "full")
               if (analysis == "translation"){
                   useRVM <- object@selectedTranslation@useRVM
-                  useIds <- rownames(anota2seq.get.output(object,analysis,"selected",selContrast))
+                  useIds <- rownames(anota2seqGetOutput(object,analysis,"selected",selContrast))
                   dataX <- object@dataT
                   dataY <- object@dataP
                   labx = "total mRNA"
                   laby = "translated mRNA"
               } else if (analysis == "buffering"){
                   useRVM <- object@selectedTranslation@useRVM
-                  useIds <- rownames(anota2seq.get.output(object,analysis,"selected",selContrast))
+                  useIds <- rownames(anota2seqGetOutput(object,analysis,"selected",selContrast))
                   dataX <- object@dataP
                   dataY <- object@dataT
                   labx = "translated mRNA"
@@ -839,7 +839,7 @@ setMethod("anota2seqPlotGenes","anota2seqDataSet",
               }
               
           })
-setMethod("anota2seq.get.output.class","anota2seqDataSet",
+setMethod("anota2seqGetOutputClass","Anota2seqDataSet",
           function(object , analysis, output) {
               
               if(!analysis %in% c("translated mRNA","total mRNA","translation","buffering","mRNA abundance")){
@@ -921,7 +921,7 @@ setMethod("anota2seq.get.output.class","anota2seqDataSet",
                   
               }
           })
-setMethod("set.output", "anota2seqDataSet",
+setMethod("anota2seqSetOutput", "Anota2seqDataSet",
           function(object,analysis,output,input){
               
               if(!analysis %in% c("translated mRNA","total mRNA","translation","buffering")){
@@ -969,7 +969,7 @@ setMethod("set.output", "anota2seqDataSet",
               }
               return(object)
           })
-setMethod("set.selected.output","anota2seqDataSet",
+setMethod("anota2seqSetSelectedOutput","Anota2seqDataSet",
           function(object,analysis,selContrast, input){
               if(!analysis %in% c("translated mRNA","total mRNA","translation","buffering")){
                   stop("analysis parameter wrong ... must be one of the following\n translated mRNA, total mRNA, translation or buffering ... ")
@@ -1014,7 +1014,7 @@ setMethod("set.selected.output","anota2seqDataSet",
               }
               return(object)
           })
-setMethod("anota2seq.get.availableAnalyzes","anota2seqDataSet",
+setMethod("anota2seqGetAvailableAnalyzes","Anota2seqDataSet",
           function(object = NULL){
               availableAnalyzes <- c("translated mRNA", "total mRNA", "translation", "buffering")[
                   c(!is.null(object@translatedmRNA), !is.null(object@totalmRNA),

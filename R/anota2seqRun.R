@@ -1,10 +1,10 @@
-anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL, 
+anota2seqRun <- function(Anota2seqDataSet = NULL,contrasts = NULL, 
                          performQC = TRUE, onlyGroup = FALSE, performROT = TRUE, 
                          generateSingleGenePlots = FALSE, analyzeBuffering =TRUE, 
                          analyzemRNA = TRUE, thresholds = NULL, useRVM = TRUE, correctionMethod ="BH", useProgBar = TRUE){
     
-    if(is.null(anota2seqDataSet)){
-        stop("Please provide an anota2seqDataSet.")
+    if(is.null(Anota2seqDataSet)){
+        stop("Please provide an Anota2seqDataSet.")
     }
     if(is.null(performQC)){
         stop("Please provide performQC parameter. Must be either TRUE or FALSE.\n")
@@ -47,10 +47,10 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
     
     
     
-    anota2seqCheckInput(dataP = anota2seqDataSet@dataP,
-                        dataT = anota2seqDataSet@dataT,
-                        phenoVec = anota2seqDataSet@phenoVec,
-                        batchVec = anota2seqDataSet@batchVec,
+    anota2seqCheckInput(dataP = Anota2seqDataSet@dataP,
+                        dataT = Anota2seqDataSet@dataT,
+                        phenoVec = Anota2seqDataSet@phenoVec,
+                        batchVec = Anota2seqDataSet@batchVec,
                         contrasts = contrasts,
                         correctionMethod=correctionMethod)
     #significance filtering parameters
@@ -91,16 +91,16 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
         if(!onlyGroup%in%c("TRUE","FALSE")){
             stop("onlyGroup parameter must be either TRUE or FALSE.\n")
         }
-        anota2seqDataSet <- anota2seqPerformQC(anota2seqDataSet,
+        Anota2seqDataSet <- anota2seqPerformQC(Anota2seqDataSet,
                                                useProgBar=useProgBar,
                                                generateSingleGenePlots = generateSingleGenePlots,
                                                onlyGroup = onlyGroup)
     }
     if(performROT == TRUE){
-        if(is.null(anota2seqDataSet@qualityControl)){
-            warning("The residual outlier test could not be performed because it requires anota2seqPerformQC to have successfully been run on the anota2seqDataSet object.\n")
+        if(is.null(Anota2seqDataSet@qualityControl)){
+            warning("The residual outlier test could not be performed because it requires anota2seqPerformQC to have successfully been run on the Anota2seqDataSet object.\n")
         } else {
-            anota2seqDataSet <- anota2seqResidOutlierTest(anota2seqDataSet,useProgBar=useProgBar,generateSingleGenePlots = generateSingleGenePlots)
+            Anota2seqDataSet <- anota2seqResidOutlierTest(Anota2seqDataSet,useProgBar=useProgBar,generateSingleGenePlots = generateSingleGenePlots)
         }
     }
     
@@ -118,7 +118,7 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
     if(analyzemRNA == TRUE & analyzeBuffering == TRUE){
         analyzeVec <- c("translated mRNA","total mRNA","translation","buffering")
     }
-    anota2seqDataSet <- anota2seqAnalyze(anota2seqDataSet,
+    Anota2seqDataSet <- anota2seqAnalyze(Anota2seqDataSet,
                                          contrasts= contrasts,
                                          correctionMethod = correctionMethod,
                                          useProgBar=useProgBar,
@@ -126,7 +126,7 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
     
     
     #extract the usedContrast from the translation object should be there...
-    contrasts <- anota2seqDataSet@contrasts
+    contrasts <- Anota2seqDataSet@contrasts
     message("Start filtering for significant genes ... \n")
     message("Your filtering parameters are:\n")
     message(paste("minSlopeTranslation: ", parameters$minSlopeTranslation,"\n"),sep="")
@@ -141,7 +141,7 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
     message(paste("deltaP: ", parameters$deltaP,"\n"),sep="")
     message(paste("deltaT: ", parameters$deltaT,"\n"),sep="")
     message("\n")
-    anota2seqDataSet <- anota2seqSelSigGenes(anota2seqDataSet,
+    Anota2seqDataSet <- anota2seqSelSigGenes(Anota2seqDataSet,
                                              selContrast = c(1:dim(contrasts)[2]),
                                              useRVM=useRVM,
                                              minSlopeTranslation = parameters$minSlopeTranslation,
@@ -159,8 +159,8 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
     noNull <- TRUE
     # ADD test - if anota2seqSelSigGenes for is NULL for any of the analysis stop here
     for( reg in 1:length(analyzeVec)){
-        for(contr in 1:dim(anota2seqDataSet@contrasts)[2]){
-            if(is.null(anota2seq.get.output(object = anota2seqDataSet,analysis = analyzeVec[reg],output = "selected",selContrast = contr,getRVM=useRVM))){
+        for(contr in 1:dim(Anota2seqDataSet@contrasts)[2]){
+            if(is.null(anota2seqGetOutput(object = Anota2seqDataSet,analysis = analyzeVec[reg],output = "selected",selContrast = contr,getRVM=useRVM))){
                 noNull <- FALSE
                 warning(paste("No significant genes found for analysis of ", analyzeVec[reg], " contrast ",contr,".\n No assessment of regulatory modes possible.\n"))
             }
@@ -169,13 +169,13 @@ anota2seqRun <- function(anota2seqDataSet = NULL,contrasts = NULL,
     
     
     if(analyzemRNA == TRUE & analyzeBuffering == TRUE & noNull == TRUE){
-        anota2seqDataSet <- anota2seqRegModes(anota2seqDataSet)
+        Anota2seqDataSet <- anota2seqRegModes(Anota2seqDataSet)
     }
     
     if(analyzemRNA == FALSE | analyzeBuffering == FALSE){
         warning("analyzeBuffering and/or analyzemRNA parameter set to FALSE, no assessment of regulatory modes possible.\n For assessment of regulatory modes analyzemRNA and analyzeBuffering must be set to TRUE.\n")   
     }
     
-    return(anota2seqDataSet)
+    return(Anota2seqDataSet)
 }
 

@@ -1,3 +1,9 @@
+CHANGES IN VERSION 0.99.2
+--------------------------
+
+    o renaming to adhere to Bioconductor naming style for classes, functions and data objects
+    o correct mistake in man page of anota2seqData
+
 CHANGES IN VERSION 0.99.1
 --------------------------
 

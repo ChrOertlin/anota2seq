@@ -4,7 +4,7 @@
 \name{anota2seqDataSetFromMatrix}
 \alias{anota2seqDataSetFromMatrix}
 \alias{anota2seqDataSetFromSE}
-\title{anota2seqDataSet constructors.}
+\title{Anota2seqDataSet constructors.}
 \usage{
 anota2seqDataSetFromMatrix(dataP = NULL, dataT = NULL, phenoVec = NULL,
   batchVec = NULL, dataType = NULL, normalize = FALSE,
@@ -16,20 +16,20 @@ anota2seqDataSetFromSE(se = NULL, assayNum = 1, dataType = NULL,
 }
 \arguments{
 \item{dataP}{This parameter is used if selecting to initiate the 
-anota2seqDataSet using custom vectors and matrices, and the 
+Anota2seqDataSet using custom vectors and matrices, and the 
 \code{anota2seqDataSetFromMatrix} function.  A matrix containing data 
 for translated mRNA (e.g. polysome-associated mRNA or RPF). Rows must 
 correspond to identifiers (only non-numerical row names are allowed) 
 and columns to samples.}
 
 \item{dataT}{This parameter is used if selecting to initiate the 
-anota2seqDataSet using custom vectors and matrices, and the 
+Anota2seqDataSet using custom vectors and matrices, and the 
 \code{anota2seqDataSetFromMatrix} function. A matrix containing data 
 for total mRNA. Rows must correspond to identifiers (only non-numerical
 row names are allowed) and columns to samples.}
 
 \item{phenoVec}{This parameter is used if selecting to initiate the 
-anota2seqDataSet using custom vectors and matrices, and the 
+Anota2seqDataSet using custom vectors and matrices, and the 
 \code{anota2seqDataSetFromMatrix} function. A vector describing the 
 treatments (each treatment should have a unique identifier). Note that 
 dataT, dataP and phenoVec have to have the same sample order such that 
@@ -38,7 +38,7 @@ column 1 in dataT is the total mRNA data and position 1 in phenoVec
 describes the sample treatment.}
 
 \item{batchVec}{This parameter is used if selecting to initiate the 
-anota2seqDataSet using custom vectors and matrices, and the 
+Anota2seqDataSet using custom vectors and matrices, and the 
 \code{anota2seqDataSetFromMatrix} function.  A vector describing 
 annotation of the samples according to their batch (each batch should 
 have a unique identifier). Note that dataT, dataP and batchVec have to 
@@ -47,7 +47,7 @@ polysome association data for a sample, column 1 in dataT is the total
 mRNA data and position 1 in batchVec describes the batch identity.}
 
 \item{dataType}{This parameter is used when selecting to initiate the 
-anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the 
+Anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the 
 \code{ anota2seqDataSetFromSE } functions. Specify the platform on 
 which data were acquired. Can be set to either "microarray" (i.e. 
 already on a continuous log transformed scale) or "RNAseq" (i.e. count 
@@ -56,7 +56,7 @@ scale, "microarray" or "RNAseq" in combination with setting the
 parameter "normalize" to FALSE could be used.}
 
 \item{normalize}{This parameter is used when selecting to initiate the 
-anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the 
+Anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the 
 \code{ anota2seqDataSetFromSE } functions. Boolean (TRUE/FALSE) that 
 defaults to TRUE. If TRUE, RNAseq data (or other count data) will be 
 normalized and transformed according to the specified transformation. 
@@ -64,7 +64,7 @@ Microarray data should be normalized by the user before using it as input of
 \code{anota2seqDataSetFromMatrix} or \code{ anota2seqDataSetFromSE}}
 
 \item{transformation}{This parameter is used when selecting to initiate 
-the anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the
+the Anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the
 \code{ anota2seqDataSetFromSE } functions. Selection of method for 
 normalization. Must be a vector containing "rlog" or "TMM-log2" that is
 considered only when dataType = "RNAseq" and normalize = TRUE. The 
@@ -73,13 +73,13 @@ normalized using the TMM normalization prior to log2 counts per million
 computation using the voom function of the limma package.}
 
 \item{filterZeroGenes}{This parameter is used when selecting to initiate 
-the anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the
+the Anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the
 \code{ anota2seqDataSetFromSE } functions. Boolean (TRUE/FALSE) that 
 defaults to FALSE. If set to TRUE, genes with 0 counts in at least 1 
 sample will be removed prior to normalization.}
 
 \item{varCutOff}{This parameter is a numeric value (or NULL) used when 
-selecting to initiate the anota2seqDataSet using the 
+selecting to initiate the Anota2seqDataSet using the 
 \code{anota2seqDataSetFromMatrix} or the \code{anota2seqDataSetFromSE} 
 functions. This parameter indicates if and by which threshold variance 
 filtering should be applied. The default is NULL, i.e. no filtering 
@@ -90,7 +90,7 @@ mRNA) and treatment. This parameter can be used to avoid a rare error
 during anota2seq analysis (see details).}
 
 \item{se}{This parameter is used if selecting to initiate the 
-anota2seqDataSet using a SummarizedExperiment object with the \code{ 
+Anota2seqDataSet using a SummarizedExperiment object with the \code{ 
 anota2seqDataSetFromSE} function. Within the SummarizedExperiment 
 object the expression data is supplied as one assay containing data for
 both translated mRNA (e.g. polysome-associated mRNA or RPFs) and total 
@@ -121,18 +121,18 @@ be indicated by a unique identifier (i.e. not used by any other batch).
 }}
 
 \item{assayNum}{This parameter is used if selecting to initiate the 
-anota2seqDataSet using a SummarizedExperiment object and the \code{ 
+Anota2seqDataSet using a SummarizedExperiment object and the \code{ 
 anota2seqDataSetFromSE} function and should specify the assay position 
 (retrieved by "assays(se)") containing the expression data for 
 analysis. By default, the first assay will be used.}
 }
 \value{
-an anota2seqDataSet containing data and covariates ready for 
+an Anota2seqDataSet containing data and covariates ready for 
   analysis using \code{\link{anota2seqAnalyze}} or 
   \code{\link{anota2seqRun}}.
 }
 \description{
-Functions used to create an anota2seqDataSet S4 object from user 
+Functions used to create an Anota2seqDataSet S4 object from user 
   input. This object will be used to collect data and results from all steps of 
   the anota2seq workflow and is initiated using one of the 2 available 
   constructors: \code{anota2seqDataSetFromMatrix} (use when the input data is 
@@ -141,7 +141,7 @@ Functions used to create an anota2seqDataSet S4 object from user
   SummarizedExperiment).
 }
 \details{
-These functions initiate an anota2seqDataSet and provide 
+These functions initiate an Anota2seqDataSet and provide 
   possibilities to filter, transform and normalize the data. The input 
   can be either of the SummarizedExperiment class including the 
   annotation as outlined above or as a set of matrices of vectors that 
@@ -164,10 +164,10 @@ These functions initiate an anota2seqDataSet and provide
   calculated in the absence of variance.
 }
 \examples{
-data(anota2seqData)
-anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seqDataP[1:500,],
-                                      dataT = anota2seqDataT[1:500,],
-                                      phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(dataP = anota2seq_data_P[1:500,],
+                                      dataT = anota2seq_data_T[1:500,],
+                                      phenoVec = anota2seq_pheno_vec,
                                       dataType = "RNAseq",
                                       normalize = TRUE)
 

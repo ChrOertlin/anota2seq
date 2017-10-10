@@ -1,24 +1,24 @@
 # accessor normalizedData
-setGeneric("anota2seq.get.normalizedData",
-           function(object=NULL) standardGeneric("anota2seq.get.normalizedData"))
+setGeneric("anota2seqGetNormalizedData",
+           function(object=NULL) standardGeneric("anota2seqGetNormalizedData"))
 # accessor phenoVec
-setGeneric("anota2seq.get.covariates",
-           function(object=NULL) standardGeneric("anota2seq.get.covariates"))
+setGeneric("anota2seqGetCovariates",
+           function(object=NULL) standardGeneric("anota2seqGetCovariates"))
 # accessor selContrast
-setGeneric("anota2seq.get.contrasts",
-           function(object=NULL) standardGeneric("anota2seq.get.contrasts"))
-setGeneric("anota2seq.get.output",
-           function(object=NULL, analysis=NULL, output=NULL,selContrast=NULL,getRVM =NULL) standardGeneric("anota2seq.get.output"))
-setGeneric("anota2seq.get.qualityControl",
-           function(object=NULL) standardGeneric("anota2seq.get.qualityControl"))
-setGeneric("anota2seq.get.residOutlierTest",
-           function(object=NULL) standardGeneric("anota2seq.get.residOutlierTest"))
-setGeneric("anota2seq.get.deltaData",
-           function(object=NULL,output=NULL,analysis=NULL,selContrast=NULL) standardGeneric("anota2seq.get.deltaData"))
-setGeneric("anota2seq.get.thresholds",
-           function(object=NULL,analysis=NULL,selContrast=NULL) standardGeneric("anota2seq.get.thresholds"))
-setGeneric("anota2seq.get.availableAnalyzes",
-           function(object = NULL) standardGeneric("anota2seq.get.availableAnalyzes"))
+setGeneric("anota2seqGetContrasts",
+           function(object=NULL) standardGeneric("anota2seqGetContrasts"))
+setGeneric("anota2seqGetOutput",
+           function(object=NULL, analysis=NULL, output=NULL,selContrast=NULL,getRVM =NULL) standardGeneric("anota2seqGetOutput"))
+setGeneric("anota2seqGetQualityControl",
+           function(object=NULL) standardGeneric("anota2seqGetQualityControl"))
+setGeneric("anota2seqGetResidOutlierTest",
+           function(object=NULL) standardGeneric("anota2seqGetResidOutlierTest"))
+setGeneric("anota2seqGetDeltaData",
+           function(object=NULL,output=NULL,analysis=NULL,selContrast=NULL) standardGeneric("anota2seqGetDeltaData"))
+setGeneric("anota2seqGetThresholds",
+           function(object=NULL,analysis=NULL,selContrast=NULL) standardGeneric("anota2seqGetThresholds"))
+setGeneric("anota2seqGetAvailableAnalyzes",
+           function(object = NULL) standardGeneric("anota2seqGetAvailableAnalyzes"))
 
 setGeneric("anota2seqPlotFC",
            function(object=NULL,visualizeRegModes="all",selContrast= NULL,fileName= NULL,plotToFile = TRUE, ...) standardGeneric("anota2seqPlotFC"))
@@ -28,13 +28,13 @@ setGeneric("anota2seqPlotPvalues",
 setGeneric("anota2seqPlotGenes",
            function(object= NULL,selContrast=NULL,analysis=NULL,geneNames = NULL,plotToFile = TRUE,fileName=NULL) standardGeneric("anota2seqPlotGenes"))
 
-setGeneric("set.selected.output", 
-           function(object=NULL,analysis=NULL,selContrast=NULL,input=NULL) standardGeneric("set.selected.output"))
+setGeneric("anota2seqSetSelectedOutput", 
+           function(object=NULL,analysis=NULL,selContrast=NULL,input=NULL) standardGeneric("anota2seqSetSelectedOutput"))
 
-setGeneric("anota2seq.get.output.class",
-           function(object=NULL, analysis=NULL, output=NULL) standardGeneric("anota2seq.get.output.class"))
-setGeneric("set.output",
-           function(object=NULL,analysis=NULL,output=NULL,input=NULL) standardGeneric("set.output"))
+setGeneric("anota2seqGetOutputClass",
+           function(object=NULL, analysis=NULL, output=NULL) standardGeneric("anota2seqGetOutputClass"))
+setGeneric("anota2seqSetOutput",
+           function(object=NULL,analysis=NULL,output=NULL,input=NULL) standardGeneric("anota2seqSetOutput"))
 
 
 

@@ -32,7 +32,7 @@ anota2seqDataSetFromSE<- function(
         stop("colData in the provided SummarizedExperoment has no RNA column. Please read the anota2seqDataSetFromSE function help about the RNA column in colData of your SummarizedExperiment. \n")
     }
     if(length(levels(as.factor(anot[,"RNA"]))) > 2 | length(levels(as.factor(anot[,"RNA"]))) < 2 ){
-        stop("RNA column in colData must describe exactly two RNA sources. Please read the anota2seqDataSet function help about the RNA column in colData of your SummarizedExperiment.")
+        stop("RNA column in colData must describe exactly two RNA sources. Please read the Anota2seqDataSet function help about the RNA column in colData of your SummarizedExperiment.")
     }
     if(length(levels(as.factor(anot[,"RNA"]))) == 2){
         msg <- NULL
@@ -43,21 +43,21 @@ anota2seqDataSetFromSE<- function(
             msg <- c(msg,"No T found in RNA column in colData.\n")
         }
         if(is.null(msg) == FALSE){
-            stop(paste(msg,"Please read the anota2seqDataSet function help about the RNA column in colData of your SummarizedExperiment.\n",sep=""))
+            stop(paste(msg,"Please read the Anota2seqDataSet function help about the RNA column in colData of your SummarizedExperiment.\n",sep=""))
         }
     }
     if("samplePairs" %in% colnames(anot) == FALSE){
-        stop("colData provided has no samplePairs column.  Please read the anota2seqDataSet function about the samplePairs column in colData of your SummarizedExperiment. \n")
+        stop("colData provided has no samplePairs column.  Please read the Anota2seqDataSet function about the samplePairs column in colData of your SummarizedExperiment. \n")
     }
     if(length(unique(anot[,"samplePairs"])) < ncol(assays(se)[[assayNum]])/2){
-        stop("Too few sample pairs described in colData. Please read the anota2seqDataSet function about the samplePairs column in colData of your SummarizedExperiment.\n")
+        stop("Too few sample pairs described in colData. Please read the Anota2seqDataSet function about the samplePairs column in colData of your SummarizedExperiment.\n")
     }
     if(length(unique(anot[,"samplePairs"])) > ncol(assays(se)[[assayNum]])/2){
-        stop("Too many sample pairs described in colData. Please read the anota2seqDataSet function about the samplePairs column in colData of your SummarizedExperiment.\n")
+        stop("Too many sample pairs described in colData. Please read the Anota2seqDataSet function about the samplePairs column in colData of your SummarizedExperiment.\n")
     }
     
     if("treatment" %in% colnames(anot) == FALSE){
-        stop("colData provided has no treatment column. Please read the anota2seqDataSet function help about the treatment column in colData of your SummarizedExperiment. \n")
+        stop("colData provided has no treatment column. Please read the Anota2seqDataSet function help about the treatment column in colData of your SummarizedExperiment. \n")
     }
     
     anotP <- anot[anot[,"RNA"] == "P",]
@@ -117,8 +117,8 @@ anota2seqDataSetFromSE<- function(
         message()
         stop("Input data range indicates a non continuous scale.\nMake sure the input data is normalized and if coming from RNAsequencing transformed to a continuous scale.\n")
     }
-    # initialize the anota2seqDataSet class first so that checks on phenoVec and contrast get performed.
-    anota2seqClass <- new("anota2seqDataSet",
+    # initialize the Anota2seqDataSet class first so that checks on phenoVec and contrast get performed.
+    anota2seqClass <- new("Anota2seqDataSet",
                           dataP = dataP,
                           dataT = dataT,
                           phenoVec = phenoVec,

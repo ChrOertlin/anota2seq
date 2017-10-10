@@ -4,10 +4,10 @@
 \alias{anota2seqSelSigGenes}
 \title{Select identifiers from the output of \code{anota2seqAnalyze}.}
 \usage{
-anota2seqSelSigGenes(anota2seqDataSet = NULL, useRVM = TRUE,
-  analysis = anota2seq.get.availableAnalyzes(anota2seqDataSet),
+anota2seqSelSigGenes(Anota2seqDataSet = NULL, useRVM = TRUE,
+  analysis = anota2seqGetAvailableAnalyzes(Anota2seqDataSet),
   selIds = NULL, selContrast = seq(along =
-  1:dim(anota2seq.get.contrasts(anota2seqDataSet))[2]),
+  1:dim(anota2seqGetContrasts(Anota2seqDataSet))[2]),
   minSlopeTranslation = NULL, maxSlopeTranslation = NULL,
   minSlopeBuffering = NULL, maxSlopeBuffering = NULL, slopeP = NULL,
   minEff = NULL, maxP = NULL, maxPAdj = NULL, selDeltaPT = NULL,
@@ -15,7 +15,7 @@ anota2seqSelSigGenes(anota2seqDataSet = NULL, useRVM = TRUE,
   sortBy = c("rvmP", "none", "Eff", "p"))
 }
 \arguments{
-\item{anota2seqDataSet}{An anota2seqDataSet containing the output from 
+\item{Anota2seqDataSet}{An Anota2seqDataSet containing the output from 
 the anota2seqAnalyze function performed on the analysis to be filtered 
 by anota2seqSelSigGenes.}
 
@@ -27,7 +27,7 @@ p-values or on non-RVM p-values? Default is TRUE i.e. RVM p-values.}
 analysis(es) should be considered for filtering. Should be at least one
 of the following: "translated mRNA", "total mRNA", "translation" or 
 "buffering". By default, filtering will be performed on all available 
-analyzes in the anota2seqDataSet object.}
+analyzes in the Anota2seqDataSet object.}
 
 \item{selIds}{The function can consider only a subset of the identifiers 
 from the input data set. For custom selection of identifiers, supply a
@@ -39,7 +39,7 @@ identifiers.}
 filtering and sorting? Descriptions of the contrasts can be found in
 the output from the anota2seqAnalyze object in the usedContrasts slot.
 Indicate the contrast(s) by a numeric vector of the column number(s).
-By default, all available contrasts in the anota2seqDataSet object are
+By default, all available contrasts in the Anota2seqDataSet object are
 filtered.}
 
 \item{minSlopeTranslation}{The output can be filtered so that identifiers
@@ -130,13 +130,13 @@ parameter is set to "buffering" or "total mRNA".}
 ("p"), raw RVM p-value ("rvmP") or not sorted ("none"). Default is "rvmP" when useRVM is set to TRUE and "p" when useRVM is set to FALSE.}
 }
 \value{
-An anota2seqDataSet. anota2seqSelSigGenes saves its output data 
+An Anota2seqDataSet. anota2seqSelSigGenes saves its output data 
   in the 'selectedTranslatedmRNA', 'selectedTotalmRNA', 
   'selectedTranslation' and 'selectedBuffering' slots of the 
-  anota2seqDataSet when analysis is set to "translated mRNA", "total 
+  Anota2seqDataSet when analysis is set to "translated mRNA", "total 
   mRNA", "translation" and "buffering" respectively. This output contains
   statistics from the applied APV model on selected genes, see 
-  \code{\link{anota2seq.get.output}} for a detailed description.
+  \code{\link{anota2seqGetOutput}} for a detailed description.
 }
 \description{
 This function filters the output based on significance 
@@ -145,25 +145,25 @@ This function filters the output based on significance
 }
 \examples{
 
-data(anota2seqData)
-# Initialize the anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100,],
-    dataT = anota2seqDataT[1:100,],
-    phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+# Initialize the Anota2seqDataSet
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(
+    dataP = anota2seq_data_P[1:100,],
+    dataT = anota2seq_data_T[1:100,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",
     normalize = TRUE)
 # Run analysis of changes in translational efficiency leading to 
 # altered protein levels
-anota2seqDataSet <- anota2seqAnalyze(
-    anota2seqDataSet,
+Anota2seqDataSet <- anota2seqAnalyze(
+    Anota2seqDataSet,
     analysis = c("translation"))
 # Select significant genes (with a FDR threshold of 0.15) for changes 
 # in translational efficiency leading to altered protein level
-anota2seqDataSet <- anota2seqSelSigGenes(anota2seqDataSet,
+Anota2seqDataSet <- anota2seqSelSigGenes(Anota2seqDataSet,
                                          maxPAdj = .15) 
 }
 \seealso{
 \code{\link{anota2seqAnalyze}}, 
-  \code{\link{anota2seq.get.output}}
+  \code{\link{anota2seqGetOutput}}
 }

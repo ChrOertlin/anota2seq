@@ -2,24 +2,24 @@
 ##################################### 
 ####################################
 #Function used to display selected output stats in the show() methods
-showSelectedOutput <- function(anota2seqDataSet,analysis){
+showSelectedOutput <- function(Anota2seqDataSet,analysis){
     
     # get the selectedOutput class ...
-    if(is.null(anota2seq.get.output.class(anota2seqDataSet,analysis,"selected")) == FALSE){
-        outSelClass <- anota2seq.get.output.class(anota2seqDataSet,analysis,"selected")
+    if(is.null(anota2seqGetOutputClass(Anota2seqDataSet,analysis,"selected")) == FALSE){
+        outSelClass <- anota2seqGetOutputClass(Anota2seqDataSet,analysis,"selected")
         cat(paste("Selected output of ",analysis, " contains:\n",sep=""))
         if(outSelClass@useRVM == TRUE){
-            for(cont in 1:dim(anota2seqDataSet@contrasts)[2]){
+            for(cont in 1:dim(Anota2seqDataSet@contrasts)[2]){
                 cat(paste("\tfor contrast",cont,"\n",sep=" "))
                 
-                if(is.null(anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE))== FALSE){
-                    outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)
+                if(is.null(anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE))== FALSE){
+                    outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)
                     if(analysis == "mRNA abundance"){
-                        if(anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] ==TRUE &anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] ==TRUE){
-                            outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)[[1]]
+                        if(Anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] ==TRUE &Anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] ==TRUE){
+                            outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)[[1]]
                         }
                         else{
-                            outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)
+                            outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)
                         }
                     }
                     if(length(outSel) > 2){
@@ -34,23 +34,23 @@ showSelectedOutput <- function(anota2seqDataSet,analysis){
                     }
                 }
                 
-                if(is.null(anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE))== TRUE){
-                    outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)
+                if(is.null(anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE))== TRUE){
+                    outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)
                     message("No significant output with set filtering criteria, try to change the thresholds...")
                 }
             }
         }
         if(outSelClass@useRVM == FALSE){
-            for(cont in 1:dim(anota2seqDataSet@contrasts)[2]){
+            for(cont in 1:dim(Anota2seqDataSet@contrasts)[2]){
                 cat(paste("\tfor contrast",cont,"\n",sep=" "))
-                if(is.null(anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE))== FALSE){
-                    outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)
+                if(is.null(anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE))== FALSE){
+                    outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)
                     if(analysis == "mRNA abundance"){
-                        if(anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] ==TRUE &anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] ==TRUE){
-                            outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)[[1]]
+                        if(Anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] ==TRUE &Anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] ==TRUE){
+                            outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)[[1]]
                         }
                         else{
-                            outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)
+                            outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)
                         }
                     }
                     if(length(outSel) > 2){
@@ -64,8 +64,8 @@ showSelectedOutput <- function(anota2seqDataSet,analysis){
                         message("No significant output with set filtering criteria, try to change the thresholds...")
                     }
                 }
-                if(is.null(anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE))== TRUE){
-                    outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)
+                if(is.null(anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE))== TRUE){
+                    outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)
                     message("No significant output with set filtering criteria, try to change the thresholds...")
                 }
             }
@@ -75,33 +75,33 @@ showSelectedOutput <- function(anota2seqDataSet,analysis){
 ###################################
 ###################################
 #Function used to display regulatory mode output stats in the show() methods
-showRegModeOutput <- function(anota2seqDataSet,regMode,analysis){
+showRegModeOutput <- function(Anota2seqDataSet,regMode,analysis){
     # Check whether any analysis selSigGenes has been performed
-    if(is.null(anota2seq.get.output.class(anota2seqDataSet,"translation","selected"))|
-       is.null(anota2seq.get.output.class(anota2seqDataSet,"translated mRNA","selected"))|
-       is.null(anota2seq.get.output.class(anota2seqDataSet,"buffering","selected"))|
-       is.null(anota2seq.get.output.class(anota2seqDataSet,"total mRNA","selected"))){
+    if(is.null(anota2seqGetOutputClass(Anota2seqDataSet,"translation","selected"))|
+       is.null(anota2seqGetOutputClass(Anota2seqDataSet,"translated mRNA","selected"))|
+       is.null(anota2seqGetOutputClass(Anota2seqDataSet,"buffering","selected"))|
+       is.null(anota2seqGetOutputClass(Anota2seqDataSet,"total mRNA","selected"))){
         cat("No regulatory modes specified.\n")
     }
     # Display regModes gene number for transation, buffering and mRNA abundance for each contrast...
-    if(anota2seqDataSet@selectedTranslation@regModes == TRUE){
+    if(Anota2seqDataSet@selectedTranslation@regModes == TRUE){
         # get the selectedOutput class ...
-        if(is.null(anota2seq.get.output.class(anota2seqDataSet,analysis,"selected")) == FALSE){
-            outSelClass <- anota2seq.get.output.class(anota2seqDataSet,analysis,"selected")
+        if(is.null(anota2seqGetOutputClass(Anota2seqDataSet,analysis,"selected")) == FALSE){
+            outSelClass <- anota2seqGetOutputClass(Anota2seqDataSet,analysis,"selected")
             cat(paste("\nRegulatory mode output of ",analysis, " contains:\n",sep=""))
             if(outSelClass@useRVM == TRUE){
-                for(cont in 1:dim(anota2seqDataSet@contrasts)[2]){
+                for(cont in 1:dim(Anota2seqDataSet@contrasts)[2]){
                     cat(paste("\tfor contrast",cont,"\n",sep=" "))
                     
-                    if(is.null(anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE))== FALSE){
-                        outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)
+                    if(is.null(anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE))== FALSE){
+                        outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)
                         
                         if(analysis == "mRNA abundance"){
-                            if(anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] ==TRUE &anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] ==TRUE){
-                                outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)[[1]]
+                            if(Anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] ==TRUE &Anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] ==TRUE){
+                                outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)[[1]]
                             }
                             else{
-                                outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,TRUE)
+                                outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,TRUE)
                             }
                         }
                         
@@ -121,16 +121,16 @@ showRegModeOutput <- function(anota2seqDataSet,regMode,analysis){
                 }
             }
             if(outSelClass@useRVM == FALSE){
-                for(cont in 1:dim(anota2seqDataSet@contrasts)[2]){
+                for(cont in 1:dim(Anota2seqDataSet@contrasts)[2]){
                     cat(paste("for contrast",cont,"\n",sep=" "))
-                    if(is.null(anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE))== FALSE){
-                        outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)
+                    if(is.null(anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE))== FALSE){
+                        outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)
                         if(analysis == "mRNA abundance"){
-                            if(anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] == TRUE &anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] == TRUE){
-                                outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)[[1]]
+                            if(Anota2seqDataSet@mRNAAbundance@mRNASelect[[1]] == TRUE &Anota2seqDataSet@mRNAAbundance@mRNASelect[[2]] == TRUE){
+                                outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)[[1]]
                             }
                             else{
-                                outSel <- anota2seq.get.output(anota2seqDataSet,analysis,"selected",cont,FALSE)
+                                outSel <- anota2seqGetOutput(Anota2seqDataSet,analysis,"selected",cont,FALSE)
                             }
                         }
                         outSel <- outSel[which(outSel[,"singleRegMode"] == regMode),]
@@ -155,7 +155,7 @@ showRegModeOutput <- function(anota2seqDataSet,regMode,analysis){
 # S4methods input checks ...
 s4MethodChecks <- function(object,selContrast,output,analysis,useRVM,getRVM,visualizeRegModes,plotToFile,myBw,inFunc){
     if(is.null(object)){
-        stop("Please provide an anota2seqDataSet.\n")
+        stop("Please provide an Anota2seqDataSet.\n")
     }
     if(inFunc%in%c("output","delta","thresholds")){
         if(is.null(selContrast)){
@@ -444,7 +444,7 @@ anota2seqCheckInput <- function(dataP=NULL,dataT=NULL,phenoVec=NULL,batchVec=NUL
             stop("Sum for each column in the contrast matrix must be 0. Please check your contrast matrix.\n")
         }
         if(identical(rownames( contrasts),levels(as.factor( phenoVec))) == FALSE){
-            stop("Contrast matrix rownames are wrong.\nCheck the anota2seqDataSet help for an example to build a custom contrast matrix.\n")
+            stop("Contrast matrix rownames are wrong.\nCheck the Anota2seqDataSet help for an example to build a custom contrast matrix.\n")
         }
         if(is.null(limma::nonEstimable(contrasts)) == FALSE){
             stop("contrast matrix is not full rank. Please check your contrast matrix.\n")

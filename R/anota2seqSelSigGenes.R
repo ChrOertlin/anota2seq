@@ -1,8 +1,8 @@
 
-anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
-                                  analysis = anota2seq.get.availableAnalyzes(anota2seqDataSet),
+anota2seqSelSigGenes <- function (Anota2seqDataSet = NULL, useRVM = TRUE,
+                                  analysis = anota2seqGetAvailableAnalyzes(Anota2seqDataSet),
                                   selIds = NULL,
-                                  selContrast = seq(along = 1:dim(anota2seq.get.contrasts(anota2seqDataSet))[2]),
+                                  selContrast = seq(along = 1:dim(anota2seqGetContrasts(Anota2seqDataSet))[2]),
                                   minSlopeTranslation = NULL,
                                   maxSlopeTranslation = NULL, minSlopeBuffering = NULL,
                                   maxSlopeBuffering = NULL,  slopeP = NULL, minEff = NULL, maxP = NULL,
@@ -10,18 +10,18 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
                                   selDeltaP = NULL, selDeltaT = NULL, sortBy = c("rvmP", "none", "Eff", "p"))
 {
     
-    if(is.null(anota2seqDataSet)){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(is.null(Anota2seqDataSet)){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
-    if(class(anota2seqDataSet)!= "anota2seqDataSet"){
-        stop("Please provide an anota2seqDataSet.\n")
+    if(class(Anota2seqDataSet)!= "Anota2seqDataSet"){
+        stop("Please provide an Anota2seqDataSet.\n")
     }
     
-    if(is.null(anota2seq.get.output.class(anota2seqDataSet,"translated mRNA","full"))&
-       is.null(anota2seq.get.output.class(anota2seqDataSet,"total mRNA","full"))&
-       is.null(anota2seq.get.output.class(anota2seqDataSet,"translation","full"))&
-       is.null(anota2seq.get.output.class(anota2seqDataSet,"buffering","full"))){
-        stop("No anota2seqAnalyze output found in the anota2seqDataSet. Please run anota2seqAnalyze before using anota2seqSelSigGenes.\n")
+    if(is.null(anota2seqGetOutputClass(Anota2seqDataSet,"translated mRNA","full"))&
+       is.null(anota2seqGetOutputClass(Anota2seqDataSet,"total mRNA","full"))&
+       is.null(anota2seqGetOutputClass(Anota2seqDataSet,"translation","full"))&
+       is.null(anota2seqGetOutputClass(Anota2seqDataSet,"buffering","full"))){
+        stop("No anota2seqAnalyze output found in the Anota2seqDataSet. Please run anota2seqAnalyze before using anota2seqSelSigGenes.\n")
     }
     
     if(is.null(analysis) == TRUE){
@@ -32,7 +32,7 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
         stop("Please provide one or more contrasts using the selContrast parameter.\n")
     }
     
-    if(max(selContrast) > dim(anota2seqDataSet@contrasts)[2]){
+    if(max(selContrast) > dim(Anota2seqDataSet@contrasts)[2]){
         stop("One of the selected contrasts does not exist. selContrast must be a numeric vector with 1 or more contrasts.\n The values cannot be greater than the number of columns in the contrast matrix.")
     }
     if(is.null(useRVM)){
@@ -164,7 +164,7 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
     
     for(reg in 1:length(analysis)){
         for(cont in 1:length(selContrast)){
-            if(is.null(anota2seq.get.output(object = anota2seqDataSet,
+            if(is.null(anota2seqGetOutput(object = Anota2seqDataSet,
                                             analysis = analysis[reg],
                                             selContrast = selContrast[cont],
                                             output = "full",
@@ -216,12 +216,12 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
         for(contr in 1:length(selContrast)){
             message(paste("\tfiltering contrast ",selContrast[contr],".\n",sep=""))
             ### Set anota2seqSigObj according to analyse
-            anota2seqSigObj <- anota2seq.get.output.class(anota2seqDataSet,analysis = analysis[reg],output = "full")
-            if(is.null(anota2seq.get.output.class(anota2seqDataSet,analysis[reg],"selected")) == TRUE){
-                anota2seqDataSet <- set.output(anota2seqDataSet,
+            anota2seqSigObj <- anota2seqGetOutputClass(Anota2seqDataSet,analysis = analysis[reg],output = "full")
+            if(is.null(anota2seqGetOutputClass(Anota2seqDataSet,analysis[reg],"selected")) == TRUE){
+                Anota2seqDataSet <- anota2seqSetOutput(Anota2seqDataSet,
                                                analysis[reg],
                                                "selected",
-                                               new("anota2seqSelectedOutput",
+                                               new("Anota2seqSelectedOutput",
                                                    selectedData = rep(list(NULL),dim(anota2seqSigObj@usedContrasts)[2]),
                                                    selectedRvmData = rep(list(NULL),dim(anota2seqSigObj@usedContrasts)[2]),
                                                    useRVM = useRVM,
@@ -230,9 +230,9 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
                                                )
                 )
             }
-            dataT <- anota2seqDataSet@dataT
-            dataP <- anota2seqDataSet@dataP
-            phenoVec <- anota2seqDataSet@phenoVec
+            dataT <- Anota2seqDataSet@dataT
+            dataP <- Anota2seqDataSet@dataP
+            phenoVec <- Anota2seqDataSet@phenoVec
             
             if (selContrast[contr] > dim(anota2seqSigObj@usedContrasts)[2]) {
                 
@@ -244,10 +244,10 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
                 tmpDataRvm <- anota2seqSigObj@apvStatsRvm[[selContrast[contr]]]
             }
             
-            deltaP <- as.matrix(anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaP"])
-            deltaT <- as.matrix(anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaT"])
-            deltaPT <- as.matrix(anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaPT"])
-            deltaTP <- as.matrix(anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaTP"])
+            deltaP <- as.matrix(Anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaP"])
+            deltaT <- as.matrix(Anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaT"])
+            deltaPT <- as.matrix(Anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaPT"])
+            deltaTP <- as.matrix(Anota2seqDataSet@deltaData[[selContrast[contr]]][,"deltaTP"])
             colnames(deltaP) <- "deltaP"
             colnames(deltaT) <- "deltaT"
             colnames(deltaPT) <- "deltaPT"
@@ -428,7 +428,7 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
                 deltaPT <- NULL
                 deltaP <- NULL
             }
-            anota2seqDataSet <- set.selected.output(anota2seqDataSet,
+            Anota2seqDataSet <- anota2seqSetSelectedOutput(Anota2seqDataSet,
                                                     analysis[reg],
                                                     selContrast[contr],
                                                     list(selectedData = as.data.frame(tmpDataOut),
@@ -448,5 +448,5 @@ anota2seqSelSigGenes <- function (anota2seqDataSet = NULL, useRVM = TRUE,
         }
         message("Filtering for analysis ",analysis[reg]," done.\n")
     }
-    return(anota2seqDataSet)
+    return(Anota2seqDataSet)
 }

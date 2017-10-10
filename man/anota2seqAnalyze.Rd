@@ -4,12 +4,12 @@
 \alias{anota2seqAnalyze}
 \title{Analysis of translational activity}
 \usage{
-anota2seqAnalyze(anota2seqDataSet = NULL, contrasts = NULL,
+anota2seqAnalyze(Anota2seqDataSet = NULL, contrasts = NULL,
   correctionMethod = "BH", useProgBar = TRUE, fileStem = "ANOTA2SEQ",
   analysis = c("translation", "buffering", "translated mRNA", "total mRNA"))
 }
 \arguments{
-\item{anota2seqDataSet}{An object of class anota2seqDataSet}
+\item{Anota2seqDataSet}{An object of class Anota2seqDataSet}
 
 \item{contrasts}{If NULL (default), the contrasts will be created 
 automatically and may not correspond to those of interest. It is 
@@ -44,16 +44,16 @@ will be performed. Default is c("translated mRNA", "total mRNA",
 "translation", "buffering") i.e. all analyzes are performed.}
 }
 \value{
-An anota2seqDataSet. anota2seqAnalyze saves its output data in 
+An Anota2seqDataSet. anota2seqAnalyze saves its output data in 
   the 'translatedmRNA', 'totalmRNA', 'translation' and 'buffering' slots 
-  of the anota2seqDataSet output object when analysis is set to
+  of the Anota2seqDataSet output object when analysis is set to
   "translated mRNA", "total mRNA", "translation" and "buffering"
   respectively. This output contains statistics from the applied APV
-  model and can be accessed using \code{\link{anota2seq.get.output}} (See
-  ?\code{\link{anota2seq.get.output}} for a detailed description). Additionally, 
+  model and can be accessed using \code{\link{anota2seqGetOutput}} (See
+  ?\code{\link{anota2seqGetOutput}} for a detailed description). Additionally, 
   \code{\link{anota2seqAnalyze}} saves fold changes and translational efficiency
-  (TE) scores in the 'deltaData' slot of the anota2seqDataSet object.
-  (See ?\code{\link{anota2seq.get.deltaData}} for a detailed description of deltaData).
+  (TE) scores in the 'deltaData' slot of the Anota2seqDataSet object.
+  (See ?\code{\link{anota2seqGetDeltaData}} for a detailed description of deltaData).
   
   \code{\link{anota2seqAnalyze}} creates a plot showing the fit of the inverse gamma 
   distribution used in RVM (i.e. a similar output as compared to that 
@@ -87,25 +87,25 @@ The function performs APV on two or more sample categories
   1 for group c to compare group a to b & c. Each column of the contrast 
   matrix should sum to 0 and to analyze orthagonal contrasts the products
   of all pairwise rows should sum to 0. The results in the
-  anota2seqDataSet object will follow the order of the contrasts (i.e. 
+  Anota2seqDataSet object will follow the order of the contrasts (i.e. 
   results for e.g. contrast 1 will correspond to the contrasts specified 
   in column 1 of the contrast matrix).
 }
 \examples{
-data(anota2seqData)
-# Initialize anota2seqDataSet
-anota2seqDataSet <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100,],
-    dataT = anota2seqDataT[1:100,],
-    phenoVec = anota2seqPhenoVec,
+data(anota2seq_data)
+# Initialize Anota2seqDataSet
+Anota2seqDataSet <- anota2seqDataSetFromMatrix(
+    dataP = anota2seq_data_P[1:100,],
+    dataT = anota2seq_data_T[1:100,],
+    phenoVec = anota2seq_pheno_vec,
     dataType = "RNAseq",
     normalize = TRUE)
 # Run analysis of changes in translational efficiency leading to 
 # altered protein levels and differential expression analysis on 
 # translated mRNA
 \dontrun{
-anota2seqDataSet <- anota2seqAnalyze(
-    anota2seqDataSet,
+Anota2seqDataSet <- anota2seqAnalyze(
+    Anota2seqDataSet,
     analysis = c("translation")) 
 }
 # Example to build a custom contrast matrix
@@ -114,8 +114,8 @@ anota2seqDataSet <- anota2seqAnalyze(
 # sample classes:
 phenoVec <- c("a","a","b","b","c","c")
 contrastsEx_ads <- anota2seqDataSetFromMatrix(
-    dataP = anota2seqDataP[1:100, 1:6],
-    dataT = anota2seqDataT[1:100, 1:6],
+    dataP = anota2seq_data_P[1:100, 1:6],
+    dataT = anota2seq_data_T[1:100, 1:6],
     phenoVec = phenoVec,
     dataType = "RNAseq",
     normalize = TRUE)
@@ -143,5 +143,5 @@ contrastsEx_ads <- anota2seqAnalyze(contrastsEx_ads,
                                     
 }
 \seealso{
-\code{\link{anota2seq.get.output}}, \code{\link{anota2seq.get.deltaData}}
+\code{\link{anota2seqGetOutput}}, \code{\link{anota2seqGetDeltaData}}
 }
