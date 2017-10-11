@@ -1,11 +1,11 @@
 # GO over this again later to make sure it is done the right way .... 
 anota2seqDataSetFromSE<- function(
-    se = NULL,
+    se,
     assayNum = 1,
-    dataType = NULL,
+    dataType,
     normalize = FALSE,
     transformation = "TMM-log2",
-    filterZeroGenes = FALSE,
+    filterZeroGenes = ifelse(dataType == "RNAseq" & normalize == TRUE, TRUE, FALSE),
     varCutOff = NULL)
 {
     if(is.null(se) == TRUE){

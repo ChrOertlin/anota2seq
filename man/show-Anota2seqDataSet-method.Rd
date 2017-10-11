@@ -6,7 +6,7 @@
 \alias{show}
 \title{Show information for an Anota2seqDataSet}
 \usage{
-\S4method{show}{Anota2seqDataSet}(object = NULL)
+\S4method{show}{Anota2seqDataSet}(object)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet.}

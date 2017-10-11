@@ -1,4 +1,4 @@
-anota2seqAnalyze <- function (Anota2seqDataSet= NULL,contrasts=NULL, correctionMethod = "BH",
+anota2seqAnalyze <- function (Anota2seqDataSet, contrasts=NULL, correctionMethod = "BH",
                               useProgBar = TRUE, fileStem = "ANOTA2SEQ",
                               analysis = c("translation","buffering","translated mRNA","total mRNA"))
 {

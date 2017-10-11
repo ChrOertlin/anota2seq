@@ -7,11 +7,10 @@
 \title{Accessor for the fold changes and TE scores stored in the 'deltaData' 
 slot of an Anota2seqDataSet object.}
 \usage{
-anota2seqGetDeltaData(object = NULL, output = NULL, analysis = NULL,
-  selContrast = NULL)
+anota2seqGetDeltaData(object, output, analysis, selContrast)
 
-\S4method{anota2seqGetDeltaData}{Anota2seqDataSet}(object = NULL, 
-  output = NULL, analysis = NULL, selContrast = NULL)
+\S4method{anota2seqGetDeltaData}{Anota2seqDataSet}(object, output, analysis, 
+  selContrast)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet. Should contain the output of 

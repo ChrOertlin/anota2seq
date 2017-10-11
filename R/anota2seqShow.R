@@ -2,7 +2,7 @@
 ## This method should give you a general overview of your data
 
 setMethod("show","Anota2seqDataSet",
-          definition = function(object=NULL){
+          definition = function(object){
               cat("Information on input data.\n")
               cat(paste("dataP and dataT contain data for",nrow(object@dataP),"mRNA and",ncol(object@dataP),"samples.","\n",sep=" "))
               cat("\n")

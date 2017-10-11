@@ -4,7 +4,7 @@
 \alias{anota2seqRun}
 \title{Wrapper for several functions which provide one-step analysis}
 \usage{
-anota2seqRun(Anota2seqDataSet = NULL, contrasts = NULL, performQC = TRUE,
+anota2seqRun(Anota2seqDataSet, contrasts = NULL, performQC = TRUE,
   onlyGroup = FALSE, performROT = TRUE, generateSingleGenePlots = FALSE,
   analyzeBuffering = TRUE, analyzemRNA = TRUE, thresholds = NULL,
   useRVM = TRUE, correctionMethod = "BH", useProgBar = TRUE)

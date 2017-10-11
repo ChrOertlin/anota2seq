@@ -4,7 +4,7 @@
 \alias{anota2seqSelSigGenes}
 \title{Select identifiers from the output of \code{anota2seqAnalyze}.}
 \usage{
-anota2seqSelSigGenes(Anota2seqDataSet = NULL, useRVM = TRUE,
+anota2seqSelSigGenes(Anota2seqDataSet, useRVM = TRUE,
   analysis = anota2seqGetAvailableAnalyzes(Anota2seqDataSet),
   selIds = NULL, selContrast = seq(along =
   1:dim(anota2seqGetContrasts(Anota2seqDataSet))[2]),

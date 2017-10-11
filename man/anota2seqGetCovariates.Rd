@@ -7,9 +7,9 @@
 \title{Accessor for the 'phenoVec' and 'batchVec' slots of an Anota2seqDataSet 
 object.}
 \usage{
-anota2seqGetCovariates(object = NULL)
+anota2seqGetCovariates(object)
 
-\S4method{anota2seqGetCovariates}{Anota2seqDataSet}(object = NULL)
+\S4method{anota2seqGetCovariates}{Anota2seqDataSet}(object)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet.}

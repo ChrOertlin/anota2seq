@@ -6,11 +6,10 @@
 \alias{anota2seqGetThresholds,Anota2seqDataSet-method}
 \title{Get filtering criteria thresholds}
 \usage{
-anota2seqGetThresholds(object = NULL, analysis = NULL,
-  selContrast = NULL)
+anota2seqGetThresholds(object, analysis, selContrast)
 
-\S4method{anota2seqGetThresholds}{Anota2seqDataSet}(object = NULL,
-  analysis = NULL, selContrast = NULL)
+\S4method{anota2seqGetThresholds}{Anota2seqDataSet}(object, analysis, 
+  selContrast)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet.}

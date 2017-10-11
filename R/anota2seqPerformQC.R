@@ -1,4 +1,4 @@
-anota2seqPerformQC <- function(Anota2seqDataSet = NULL, 
+anota2seqPerformQC <- function(Anota2seqDataSet, 
                                generateSingleGenePlots=FALSE, fileName="ANOTA2SEQ_translation_vs_mRNA_individual_regressions.pdf",
                                nReg=200, correctionMethod="BH", useDfb=TRUE, useDfbSim=TRUE, nDfbSimData=2000, 
                                useRVM=TRUE, onlyGroup=FALSE, useProgBar=TRUE, fileStem="ANOTA2SEQ"){

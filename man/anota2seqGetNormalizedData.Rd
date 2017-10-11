@@ -6,9 +6,9 @@
 \alias{anota2seqGetNormalizedData,Anota2seqDataSet-method}
 \title{Accessor for the 'normalizedDataP' and 'normalizedDataT' slots of an Anota2seqDataSet object.}
 \usage{
-anota2seqGetNormalizedData(object = NULL)
+anota2seqGetNormalizedData(object)
 
-\S4method{anota2seqGetNormalizedData}{Anota2seqDataSet}(object = NULL)
+\S4method{anota2seqGetNormalizedData}{Anota2seqDataSet}(object)
 }
 \arguments{
 \item{object}{A Anota2seqDataSet.}

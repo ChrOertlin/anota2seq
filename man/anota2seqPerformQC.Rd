@@ -5,7 +5,7 @@
 \title{Perform quality control to ensure that the supplied data set is suitable 
 for Analysis of Partial Variance (APV) within anota2seq.}
 \usage{
-anota2seqPerformQC(Anota2seqDataSet = NULL, generateSingleGenePlots = FALSE,
+anota2seqPerformQC(Anota2seqDataSet, generateSingleGenePlots = FALSE,
   fileName = "ANOTA2SEQ_translation_vs_mRNA_individual_regressions.pdf",
   nReg = 200, correctionMethod = "BH", useDfb = TRUE, useDfbSim = TRUE,
   nDfbSimData = 2000, useRVM = TRUE, onlyGroup = FALSE,

@@ -4,7 +4,7 @@
 \alias{anota2seqAnalyze}
 \title{Analysis of translational activity}
 \usage{
-anota2seqAnalyze(Anota2seqDataSet = NULL, contrasts = NULL,
+anota2seqAnalyze(Anota2seqDataSet, contrasts = NULL,
   correctionMethod = "BH", useProgBar = TRUE, fileStem = "ANOTA2SEQ",
   analysis = c("translation", "buffering", "translated mRNA", "total mRNA"))
 }

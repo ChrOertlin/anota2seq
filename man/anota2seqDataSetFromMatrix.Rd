@@ -6,12 +6,14 @@
 \alias{anota2seqDataSetFromSE}
 \title{Anota2seqDataSet constructors.}
 \usage{
-anota2seqDataSetFromMatrix(dataP = NULL, dataT = NULL, phenoVec = NULL,
-  batchVec = NULL, dataType = NULL, normalize = FALSE,
-  transformation = "TMM-log2", filterZeroGenes = FALSE, varCutOff = NULL)
+anota2seqDataSetFromMatrix(dataP, dataT, phenoVec, batchVec = NULL, dataType, 
+  normalize = FALSE, transformation = "TMM-log2", 
+  filterZeroGenes = ifelse(dataType == "RNAseq" & normalize == TRUE, TRUE, FALSE), 
+  varCutOff = NULL)
 
-anota2seqDataSetFromSE(se = NULL, assayNum = 1, dataType = NULL,
-  normalize = FALSE, transformation = "TMM-log2", filterZeroGenes = FALSE,
+anota2seqDataSetFromSE(se, assayNum = 1, dataType, normalize = FALSE, 
+  transformation = "TMM-log2", 
+  filterZeroGenes = ifelse(dataType == "RNAseq" & normalize == TRUE, TRUE, FALSE),
   varCutOff = NULL)
 }
 \arguments{
@@ -74,9 +76,9 @@ computation using the voom function of the limma package.}
 
 \item{filterZeroGenes}{This parameter is used when selecting to initiate 
 the Anota2seqDataSet using the \code{anota2seqDataSetFromMatrix} or the
-\code{ anota2seqDataSetFromSE } functions. Boolean (TRUE/FALSE) that 
-defaults to FALSE. If set to TRUE, genes with 0 counts in at least 1 
-sample will be removed prior to normalization.}
+\code{ anota2seqDataSetFromSE } functions. Boolean (TRUE/FALSE); if set to 
+TRUE, genes with 0 counts in at least 1 sample will be removed prior to 
+normalization.}
 
 \item{varCutOff}{This parameter is a numeric value (or NULL) used when 
 selecting to initiate the Anota2seqDataSet using the 

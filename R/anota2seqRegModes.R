@@ -1,4 +1,4 @@
-anota2seqRegModes <- function(Anota2seqDataSet = NULL, mRNASelect = c(TRUE,TRUE)){
+anota2seqRegModes <- function(Anota2seqDataSet, mRNASelect = c(TRUE,TRUE)){
     if(is.null(Anota2seqDataSet)){
         stop("Please provide an Anota2seqDataSet")
     }

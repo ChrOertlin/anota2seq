@@ -6,11 +6,10 @@
 \alias{anota2seqGetOutput,Anota2seqDataSet-method}
 \title{Retrieve output for analyzes stored in the Anota2seqDataSet}
 \usage{
-anota2seqGetOutput(object = NULL, analysis = NULL, output = NULL,
-  selContrast = NULL, getRVM = NULL)
+anota2seqGetOutput(object, analysis, output, selContrast, getRVM = TRUE)
 
-\S4method{anota2seqGetOutput}{Anota2seqDataSet}(object = NULL,
-  analysis = NULL, output = NULL, selContrast = NULL, getRVM = TRUE)
+\S4method{anota2seqGetOutput}{Anota2seqDataSet}(object, analysis, output, 
+  selContrast, getRVM = TRUE)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet}

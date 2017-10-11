@@ -6,9 +6,9 @@
 \alias{anota2seqGetQualityControl,Anota2seqDataSet-method}
 \title{Retrieve the anota2seqPerformQC output from the Anota2seqDataSet}
 \usage{
-anota2seqGetQualityControl(object = NULL)
+anota2seqGetQualityControl(object)
 
-\S4method{anota2seqGetQualityControl}{Anota2seqDataSet}(object = NULL)
+\S4method{anota2seqGetQualityControl}{Anota2seqDataSet}(object)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet.}

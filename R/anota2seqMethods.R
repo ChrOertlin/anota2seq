@@ -1,5 +1,5 @@
 setMethod("anota2seqGetOutput","Anota2seqDataSet",
-          function(object = NULL, analysis= NULL, output = NULL,selContrast = NULL,getRVM= TRUE) {
+          function(object, analysis, output,selContrast,getRVM= TRUE) {
               s4MethodChecks(object=object,analysis=analysis,output=output,selContrast=selContrast,getRVM=getRVM,inFunc = "output")
               if(output == "full"){
                   if(getRVM != TRUE & getRVM != FALSE){
@@ -264,7 +264,7 @@ setMethod("anota2seqGetOutput","Anota2seqDataSet",
               }#if regModes
           })
 setMethod("anota2seqGetQualityControl","Anota2seqDataSet",
-          function(object= NULL){
+          function(object){
               s4MethodChecks(object=object,inFunc = "NA")
               if(is.null(object@qualityControl) == FALSE){
                   return(list(
@@ -289,7 +289,7 @@ setMethod("anota2seqGetQualityControl","Anota2seqDataSet",
               
           })
 setMethod("anota2seqGetResidOutlierTest","Anota2seqDataSet",
-          function(object= NULL){
+          function(object){
               s4MethodChecks(object=object,inFunc = "NA")
               
               if(is.null(object@residOutlierTest) == FALSE){
@@ -308,7 +308,7 @@ setMethod("anota2seqGetResidOutlierTest","Anota2seqDataSet",
               }
           })
 setMethod("anota2seqGetDeltaData","Anota2seqDataSet",
-          function(object = NULL,output=NULL,analysis = NULL,selContrast = NULL){
+          function(object, output, analysis, selContrast){
               s4MethodChecks(object=object,output=output,analysis=analysis,selContrast=selContrast,inFunc = "delta")
               if(output == "full"){
                   if(is.null(object@deltaData)){
@@ -340,7 +340,7 @@ setMethod("anota2seqGetDeltaData","Anota2seqDataSet",
               }
           })
 setMethod("anota2seqGetThresholds","Anota2seqDataSet",
-          function(object = NULL,analysis= NULL,selContrast = NULL){
+          function(object = NULL, analysis, selContrast){
               s4MethodChecks(object=object,analysis=analysis,selContrast=selContrast,inFunc = "tresholds")
               if(is.null(anota2seqGetOutputClass(object,output="selected",analysis=analysis)) == TRUE){
                   stop("thresholds can only be retrieved if anota2seqSelSigGenes has been run for specified analysis.\nPlease run anota2seqSelSigGenes on the Anota2seqDataSet.\n")
@@ -374,7 +374,7 @@ setMethod("anota2seqGetContrasts","Anota2seqDataSet",
               }
               return(object@contrasts)})
 setMethod("anota2seqPlotFC","Anota2seqDataSet",
-          function(object=NULL,visualizeRegModes="all",selContrast= NULL,fileName= NULL,plotToFile = TRUE, ...){    
+          function(object,visualizeRegModes="all",selContrast,fileStem = "ANOTA2SEQ_FoldchangePlot",plotToFile = TRUE, ...){    
               message("Creating Fold-change plots.\n")
               if(is.null(object@buffering)&is.null(object@translation)&is.null(object@translatedmRNA)&is.null(object@totalmRNA)){
                   stop("No anota2seqAnalyze output detected. Please run the anota2seqAnalyze function before using the anota2seqPlotFC function.")
@@ -406,12 +406,7 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
                   deltaT <- object@deltaData[[selContrast[i]]][,"deltaT"]
                   
                   if(plotToFile ==TRUE){
-                      if(is.null(fileName)){
-                          pdf(paste("ANOTA2SEQ_FoldchangePlot_contrast_", selContrast[i] ,".pdf",sep=""))
-                      }
-                      if(!is.null(fileName)){
-                          pdf(fileName)
-                      }
+                      pdf(paste(fileStem, "_contrast_", selContrast[i] ,".pdf",sep=""))
                   }
                   # plot foldchanges
                   maxVal <- max(abs(cbind(deltaT,deltaP)),na.rm = TRUE)
@@ -581,7 +576,7 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
               
           })
 setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
-          function(object=NULL,useRVM = TRUE,selContrast = NULL,myBw = 0.05,plotToFile=TRUE, fileName= NULL, ...){ 
+          function(object,useRVM = TRUE,selContrast,myBw = 0.05,plotToFile=TRUE, fileStem = "ANOTA2SEQ_pvalue_density", ...){ 
               message("Creating pvalue and FDR density plots.\n") 
               if(is.null(object@buffering)&is.null(object@translation)&is.null(object@translatedmRNA)&is.null(object@totalmRNA)){
                   stop("No anota2seqAnalyze output detected. Please run the anota2seqAnalyze function before using the anota2seqPlotFC function.")
@@ -647,12 +642,7 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
                   maxFDR <-  max(unlist(lapply(fdrDens[[cont]],function(x) max(x$y))))
                   maxPval <- max(unlist(lapply(pvalDens[[cont]],function(x) max(x$y))))
                   if(plotToFile == TRUE){
-                      if(is.null(fileName)){
-                          pdf(paste("ANOTA2SEQ_pvalue_density_contrast_",selContrast[cont],".pdf",sep=""))
-                      }
-                      if(!is.null(fileName)){
-                          pdf(fileName)
-                      }
+                      pdf(paste(fileStem, "_contrast_",selContrast[cont],".pdf",sep=""))
                   }
                   for(reg in 1:length(pvalDens[[cont]])){
                       if(reg == 1){
@@ -686,7 +676,7 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
               }
           })
 setMethod("anota2seqPlotGenes","Anota2seqDataSet",
-          function(object= NULL,selContrast=NULL,analysis=NULL,geneNames = NULL,plotToFile = TRUE,fileName=NULL){
+          function(object,selContrast,analysis,geneNames = NULL,plotToFile = TRUE,fileStem="ANOTA2SEQ_significantGenes_plot"){
               s4MethodChecks(object=object,selContrast=selContrast,analysis = analysis,plotToFile=plotToFile,inFunc = "anota2seqPlotGenes")
               if(is.null(anota2seqGetOutputClass(object,analysis,"selected"))){
                   stop("No anota2seqSelSigGenes output in Anota2seqDataSet found.\n Please run the anota2seqSelSigGenes function on the Anota2seqDataSet.\n")
@@ -719,12 +709,7 @@ setMethod("anota2seqPlotGenes","Anota2seqDataSet",
               }
               
               if(plotToFile == TRUE){
-                  if(is.null(fileName)){
-                      pdf("ANOTA2SEQ_significantGenes_plot.pdf",width = 12,height = 12)
-                  }
-                  if(!is.null(fileName)){
-                      pdf(fileName, width = 12, height = 12)
-                  }
+                  pdf(paste(fileStem, ".pdf", sep = ""), width = 12,height = 12)
               }
               par(mfrow = c(3, 3))
               for (i in 1:length(useIds)) {
@@ -1015,7 +1000,7 @@ setMethod("anota2seqSetSelectedOutput","Anota2seqDataSet",
               return(object)
           })
 setMethod("anota2seqGetAvailableAnalyzes","Anota2seqDataSet",
-          function(object = NULL){
+          function(object){
               availableAnalyzes <- c("translated mRNA", "total mRNA", "translation", "buffering")[
                   c(!is.null(object@translatedmRNA), !is.null(object@totalmRNA),
                     !is.null(object@translation), !is.null(object@buffering))]

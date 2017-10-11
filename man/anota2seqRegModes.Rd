@@ -6,7 +6,7 @@
   abundance or changes in translational efficiency leading to altered 
   protein levels or buffering)}
 \usage{
-anota2seqRegModes(Anota2seqDataSet = NULL, mRNASelect = c(TRUE, TRUE))
+anota2seqRegModes(Anota2seqDataSet, mRNASelect = c(TRUE, TRUE))
 }
 \arguments{
 \item{Anota2seqDataSet}{An Anota2seqDataSet containing the output of the 

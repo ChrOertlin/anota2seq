@@ -11,26 +11,26 @@
 \alias{anota2seqPlotGenes,Anota2seqDataSet-method}
 \title{Visualization of anota2seq results}
 \usage{
-anota2seqPlotFC(object = NULL, visualizeRegModes = "all",
-  selContrast = NULL, fileName = NULL, plotToFile = TRUE, ...)
+anota2seqPlotFC(object, visualizeRegModes = "all",
+  selContrast, fileStem = "ANOTA2SEQ_FoldchangePlot", plotToFile = TRUE, ...)
 
-anota2seqPlotPvalues(object = NULL, useRVM = TRUE, selContrast = NULL,
-  myBw = 0.05, plotToFile = TRUE, fileName = NULL, ...)
+anota2seqPlotPvalues(object, useRVM = TRUE, selContrast,
+  myBw = 0.05, plotToFile = TRUE, fileStem = "ANOTA2SEQ_pvalue_density", ...)
 
-anota2seqPlotGenes(object = NULL, selContrast = NULL, analysis = NULL,
-  geneNames = NULL, plotToFile = TRUE, fileName = NULL)
+anota2seqPlotGenes(object, selContrast, analysis, geneNames = NULL, 
+plotToFile = TRUE, fileStem = "ANOTA2SEQ_significantGenes_plot")
 
-\S4method{anota2seqPlotFC}{Anota2seqDataSet}(object = NULL,
-  visualizeRegModes = "all", selContrast = NULL, fileName = NULL,
+\S4method{anota2seqPlotFC}{Anota2seqDataSet}(object,
+  visualizeRegModes = "all", selContrast, fileStem = "ANOTA2SEQ_FoldchangePlot",
   plotToFile = TRUE, ...)
 
-\S4method{anota2seqPlotPvalues}{Anota2seqDataSet}(object = NULL,
-  useRVM = TRUE, selContrast = NULL, myBw = 0.05, plotToFile = TRUE,
-  fileName = NULL, ...)
+\S4method{anota2seqPlotPvalues}{Anota2seqDataSet}(object, 
+  useRVM = TRUE, selContrast, myBw = 0.05, plotToFile = TRUE,
+  fileStem = "ANOTA2SEQ_pvalue_density", ...)
 
-\S4method{anota2seqPlotGenes}{Anota2seqDataSet}(object = NULL,
-  selContrast = NULL, analysis = NULL, geneNames = NULL,
-  plotToFile = TRUE, fileName = NULL)
+\S4method{anota2seqPlotGenes}{Anota2seqDataSet}(object,
+  selContrast, analysis, geneNames = NULL,
+  plotToFile = TRUE, fileStem = "ANOTA2SEQ_significantGenes_plot")
 }
 \arguments{
 \item{object}{An object of class Anota2seqDataSet. Should contain output of 
@@ -55,8 +55,8 @@ the contrasts can be found in the output from the anota2seqAnalyze object
 in the usedContrasts slot. Indicate the contrast(s) by a numeric vector of
 the column number(s).}
 
-\item{fileName}{if plotToFile is TRUE, name of the file containing the 
-graphical output.}
+\item{fileStem}{if plotToFile is TRUE, this stem will be added in front of the
+output filename(s).}
 
 \item{plotToFile}{Boolean. If set to TRUE (default) the function will output 
 the plot as a PDF file. If set to FALSE plots will be plotted to the R 
@@ -72,7 +72,7 @@ function. Within one plot, the same bandwidth will be used for all density
 curves.}
 
 \item{analysis}{For which analysis should anota2seqPlotGenes be performed. Can be set 
-to "translation", "buffering".}
+to "translation" or "buffering".}
 
 \item{geneNames}{When anota2seqPlotGenes performs the individual gene plots they will 
 be named by the original row names supplied to the anota2seqAnalyze 

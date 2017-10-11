@@ -6,9 +6,9 @@
 \alias{anota2seqGetContrasts,Anota2seqDataSet-method}
 \title{Accessor for the 'contrasts' slot of an Anota2seqDataSet object.}
 \usage{
-anota2seqGetContrasts(object = NULL)
+anota2seqGetContrasts(object)
 
-\S4method{anota2seqGetContrasts}{Anota2seqDataSet}(object = NULL)
+\S4method{anota2seqGetContrasts}{Anota2seqDataSet}(object)
 }
 \arguments{
 \item{object}{A Anota2seqDataSet.}

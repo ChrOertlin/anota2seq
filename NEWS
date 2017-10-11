@@ -2,7 +2,9 @@ CHANGES IN VERSION 0.99.2
 --------------------------
 
     o renaming to adhere to Bioconductor naming style for classes, functions and data objects
-    o correct mistake in man page of anota2seqData
+    o correct mistake in man page of anota2seq_data
+    o modify default values (no NULL default value for mandatory arguments)
+    o fix a bug with argument fileName in the plot functions
 
 CHANGES IN VERSION 0.99.1
 --------------------------

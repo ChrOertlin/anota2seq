@@ -1,13 +1,13 @@
 # GO over this again later to make sure it is done the right way .... 
 anota2seqDataSetFromMatrix <- function(
-    dataP = NULL,
-    dataT = NULL,
-    phenoVec = NULL,
+    dataP,
+    dataT,
+    phenoVec,
     batchVec = NULL,
-    dataType = NULL,
+    dataType,
     normalize = FALSE,
     transformation = "TMM-log2",
-    filterZeroGenes = FALSE,
+    filterZeroGenes = ifelse(dataType == "RNAseq" & normalize == TRUE, TRUE, FALSE),
     varCutOff = NULL)
 {
     

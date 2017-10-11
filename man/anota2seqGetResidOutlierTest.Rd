@@ -6,9 +6,9 @@
 \alias{anota2seqGetResidOutlierTest,Anota2seqDataSet-method}
 \title{Retrieve residOutlierTest}
 \usage{
-anota2seqGetResidOutlierTest(object = NULL)
+anota2seqGetResidOutlierTest(object)
 
-\S4method{anota2seqGetResidOutlierTest}{Anota2seqDataSet}(object = NULL)
+\S4method{anota2seqGetResidOutlierTest}{Anota2seqDataSet}(object)
 }
 \arguments{
 \item{object}{An Anota2seqDataSet.}

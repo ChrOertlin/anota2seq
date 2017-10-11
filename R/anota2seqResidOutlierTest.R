@@ -1,4 +1,4 @@
-anota2seqResidOutlierTest <- function(Anota2seqDataSet = NULL, confInt=0.01, iter=5, 
+anota2seqResidOutlierTest <- function(Anota2seqDataSet, confInt=0.01, iter=5, 
                                       generateSingleGenePlots=FALSE, nGraphs=200, 
                                       generateSummaryPlot=TRUE, residFitPlot=TRUE, useProgBar=TRUE){
     ##########################

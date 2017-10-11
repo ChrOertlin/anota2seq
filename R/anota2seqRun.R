@@ -1,4 +1,4 @@
-anota2seqRun <- function(Anota2seqDataSet = NULL,contrasts = NULL, 
+anota2seqRun <- function(Anota2seqDataSet,contrasts = NULL, 
                          performQC = TRUE, onlyGroup = FALSE, performROT = TRUE, 
                          generateSingleGenePlots = FALSE, analyzeBuffering =TRUE, 
                          analyzemRNA = TRUE, thresholds = NULL, useRVM = TRUE, correctionMethod ="BH", useProgBar = TRUE){
