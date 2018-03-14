@@ -374,7 +374,7 @@ setMethod("anota2seqGetContrasts","Anota2seqDataSet",
               }
               return(object@contrasts)})
 setMethod("anota2seqPlotFC","Anota2seqDataSet",
-          function(object,visualizeRegModes="all",selContrast,fileStem = "ANOTA2SEQ_FoldchangePlot",plotToFile = TRUE, ...){    
+          function(object,visualizeRegModes="all",selContrast, contrastName = NULL,fileStem = "ANOTA2SEQ_FoldchangePlot",plotToFile = TRUE, myYlim = NULL, myXlim = NULL,...){    
               message("Creating Fold-change plots.\n")
               if(is.null(object@buffering)&is.null(object@translation)&is.null(object@translatedmRNA)&is.null(object@totalmRNA)){
                   stop("No anota2seqAnalyze output detected. Please run the anota2seqAnalyze function before using the anota2seqPlotFC function.")
@@ -394,30 +394,73 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
                       stop("No regModes found. Please run the anota2seqRegModes function on the object before generating fold change plots.\n")
                   }
               }
-              s4MethodChecks(object=object,selContrast=selContrast,visualizeRegModes=visualizeRegModes,plotToFile=plotToFile,inFunc = "anota2seqPlotFC")
+              if(!is.null(myXlim) | !is.null(myXlim)){
+                  if(is.null(myXlim)){
+                      stop("myYlim is set but not myXlim. Please specify both parameters or set both to NULL.\n")
+                  }
+                  if(is.null(myYlim)){
+                      stop("myXlim is set but not myYlim. Please specify both parameters or set both to NULL.\n")
+                  }
+              }
+              
+              if(!is.null(contrastName)){
+                  if(length(contrastName) != length(selContrast)){
+                      stop("Number of contrast names do not match the number of selected contrasts.\nPlease supply a contrast name for each selected contrast.\n")
+                  }
+              }
+              if(is.null(contrastName)){
+                  contrastName <- paste("contrast ",1:length(selContrast))
+              }
+              
+              s4MethodChecks(object=object,
+                             selContrast=selContrast,
+                             visualizeRegModes=visualizeRegModes,
+                             plotToFile=plotToFile,
+                             inFunc = "anota2seqPlotFC")
+              
               cols <- c(RColorBrewer::brewer.pal(8,"Reds")[c(4,8)],
                         RColorBrewer::brewer.pal(8,"Blues")[c(4,8)],
                         RColorBrewer::brewer.pal(8,"Greens")[c(4,8)])
+              
               names(cols) <- c("translation up","translation down","buffering down","buffering up","mRNA abundance up","mRNA abundance down")
               tmpContrasts <- object@contrasts
               
+              graphArgs <- list(...)
+              if(length(graphArgs) < 1){
+                  graphArgs <- list(mar=c(5,5,3,2)+0.1)
+              }
+              
+              if(length(graphArgs) > 0){
+                  if(!"mar" %in% names(graphArgs)){
+                      graphArgs[["mar"]] <- c(5,5,3,2) + 0.1
+                  }
+              }
               for(i in 1:length(selContrast)){
                   deltaP <- object@deltaData[[selContrast[i]]][,"deltaP"]
                   deltaT <- object@deltaData[[selContrast[i]]][,"deltaT"]
                   
                   if(plotToFile ==TRUE){
-                      pdf(paste(fileStem, "_contrast_", selContrast[i] ,".pdf",sep=""))
+                      pdf(paste(fileStem, gsub(" ","",contrastName[i]) ,".pdf",sep=""))
                   }
                   # plot foldchanges
                   maxVal <- max(abs(cbind(deltaT,deltaP)),na.rm = TRUE)
                   
-                  myLim <- c(maxVal*-1,maxVal)
+                  if(is.null(myXlim) & is.null(myYlim)){              
+                      myXlim <- c(maxVal*-1,maxVal)
+                      myYlim <- c(maxVal*-1,maxVal)
+                  }
                   
-                  par(mar=c(5,5,4,2)+0.1, mfrow=c(1,1),...)
-                  plot(x=deltaT,y=deltaP, pch=19, cex=.8,xlab=paste("total mRNA log2FC\n(contrast ",selContrast[i],")", sep = ""),
-                       ylab = paste("translated mRNA log2FC\n (contrast ",selContrast[i],")", sep = ""),
-                       ylim=myLim,
-                       xlim=myLim,
+                  if(!is.null(myXlim) & !is.null(myYlim)){  
+                      myXlim <- myXlim
+                      myYlim <- myYlim
+                  }
+                  
+                  par(graphArgs)
+                  plot(x=deltaT,y=deltaP, pch=19, cex=.8,
+                       xlab=paste("total mRNA log2FC\n(",contrastName[i],")", sep = ""),
+                       ylab = paste("translated mRNA log2FC\n(",contrastName[i],")", sep = ""),
+                       ylim = myYlim,
+                       xlim = myXlim,
                        col="grey")
                   abline(h=0,lty=2)
                   abline(v=0,lty=2)
@@ -525,8 +568,8 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
                   if(visualizeRegModes%in%c("all","buffering","translation")){
                       legendVec <- c(paste("Translation up (", sum(transl[, "apvEff"] > 0), ")", sep = ""),
                                      paste("Translation down (", sum(transl[, "apvEff"] < 0), ")", sep = ""),
-                                     paste("Buffering down (", sum(buff[, "apvEff"] > 0), ")", sep = ""),
-                                     paste("Buffering up (", sum(buff[, "apvEff"] < 0), ")", sep = ""),
+                                     paste("Buffered (mRNA up) (", sum(buff[, "apvEff"] > 0), ")", sep = ""),
+                                     paste("Buffered (mRNA down) (", sum(buff[, "apvEff"] < 0), ")", sep = ""),
                                      paste("mRNA abundance up (", sum(deltaP[abund] > 0), ")", sep = ""),
                                      paste("mRNA abundance down (", sum(deltaP[abund] < 0), ")", sep = ""))
                       
@@ -575,8 +618,9 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
               }
               
           })
+
 setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
-          function(object,useRVM = TRUE,selContrast,myBw = 0.05,plotToFile=TRUE, fileStem = "ANOTA2SEQ_pvalue_density", ...){ 
+          function(object,useRVM = TRUE,selContrast,contrastName = NULL,myBw = 0.05,plotToFile=TRUE, fileStem = "ANOTA2SEQ_pvalue_density", ...){ 
               message("Creating pvalue and FDR density plots.\n") 
               if(is.null(object@buffering)&is.null(object@translation)&is.null(object@translatedmRNA)&is.null(object@totalmRNA)){
                   stop("No anota2seqAnalyze output detected. Please run the anota2seqAnalyze function before using the anota2seqPlotFC function.")
@@ -593,7 +637,7 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
               names(plotList) <- paste("contrast",1:length(selContrast),sep="")
               regulations <- c("translated mRNA", "total mRNA","translation","buffering")
               nameList <- rep(list(NULL),length(selContrast))
-              
+              graphArgs <- list(...)
               for( contr in 1:length(selContrast)){
                   for(regs in 1:length(regulations)){
                       if(is.null(anota2seqGetOutput(object,regulations[regs],output = "full",selContrast  = selContrast[contr],getRVM = useRVM)) == FALSE){
@@ -617,6 +661,15 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
               pvalDens <-rep(list(NULL),length(selContrast))
               fdrMax <- vector("numeric")
               pvalMax <- vector("numeric")
+              
+              if(!is.null(contrastName)){
+                  if(length(contrastName) != length(selContrast)){
+                      stop("More contrasts selected (selContrast) than contrast names supplied (contrastName).\nPlease supply a contrast name for each selected contrast.\n")
+                  }
+              }
+              if(is.null(contrastName)){
+                  contrastName <- paste("contrast ",1:length(selContrast),sep="")
+              }
               
               for(cont in 1:length(selContrast)){
                   for(names in 1:length(plotList[[cont]])){
@@ -642,12 +695,13 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
                   maxFDR <-  max(unlist(lapply(fdrDens[[cont]],function(x) max(x$y))))
                   maxPval <- max(unlist(lapply(pvalDens[[cont]],function(x) max(x$y))))
                   if(plotToFile == TRUE){
-                      pdf(paste(fileStem, "_contrast_",selContrast[cont],".pdf",sep=""))
+                      pdf(paste(fileStem, "_",gsub(" ","",contrastName[cont]),".pdf",sep=""))
                   }
+                  par(graphArgs)
                   for(reg in 1:length(pvalDens[[cont]])){
                       if(reg == 1){
                           plot(pvalDens[[cont]][[reg]],
-                               main = paste("contrast",selContrast[cont],sep=" "),lwd=2,ylim=c(0,maxPval+1),xlim=c(-0.2,1.2),
+                               main = contrastName[cont],lwd=2,ylim=c(0,maxPval+1),xlim=c(-0.2,1.2),
                                xlab = "P-value",col =tmpColours[names(pvalDens[[cont]])[reg]])
                       }
                       else{
@@ -659,7 +713,7 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
                   for(reg in 1:length(fdrDens[[cont]])){
                       if(reg == 1){
                           plot(fdrDens[[cont]][[reg]],
-                               main = paste("contrast",selContrast[cont],sep=" "),lwd=2,ylim=c(0,maxFDR+1),xlim=c(-0.2,1.2),
+                               main = contrastName[cont],lwd=2,ylim=c(0,maxFDR+1),xlim=c(-0.2,1.2),
                                xlab = "FDR",col =tmpColours[names(fdrDens[[cont]])[reg]])
                       }
                       else{
@@ -675,6 +729,7 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
                   }
               }
           })
+
 setMethod("anota2seqPlotGenes","Anota2seqDataSet",
           function(object,selContrast,analysis,geneNames = NULL,plotToFile = TRUE,fileStem="ANOTA2SEQ_significantGenes_plot"){
               s4MethodChecks(object=object,selContrast=selContrast,analysis = analysis,plotToFile=plotToFile,inFunc = "anota2seqPlotGenes")
@@ -824,6 +879,7 @@ setMethod("anota2seqPlotGenes","Anota2seqDataSet",
               }
               
           })
+
 setMethod("anota2seqGetOutputClass","Anota2seqDataSet",
           function(object , analysis, output) {
               

@@ -21,9 +21,9 @@ setGeneric("anota2seqGetAvailableAnalyzes",
            function(object) standardGeneric("anota2seqGetAvailableAnalyzes"))
 
 setGeneric("anota2seqPlotFC",
-           function(object,visualizeRegModes="all",selContrast,fileStem = "ANOTA2SEQ_FoldchangePlot",plotToFile = TRUE, ...) standardGeneric("anota2seqPlotFC"))
+           function(object,visualizeRegModes="all",selContrast,contrastName=NULL,fileStem = "ANOTA2SEQ_FoldchangePlot",plotToFile = TRUE, myYlim = NULL, myXlim = NULL, ...) standardGeneric("anota2seqPlotFC"))
 setGeneric("anota2seqPlotPvalues",
-           function(object,useRVM = TRUE,selContrast,myBw = 0.05,plotToFile=TRUE, fileStem = "ANOTA2SEQ_pvalue_density", ...) standardGeneric("anota2seqPlotPvalues"))
+           function(object,useRVM = TRUE,selContrast,contrastName=NULL,myBw = 0.05,plotToFile=TRUE,fileStem = "ANOTA2SEQ_pvalue_density", ...) standardGeneric("anota2seqPlotPvalues"))
 
 setGeneric("anota2seqPlotGenes",
            function(object,selContrast,analysis,geneNames = NULL,plotToFile = TRUE,fileStem = "ANOTA2SEQ_significantGenes_plot") standardGeneric("anota2seqPlotGenes"))

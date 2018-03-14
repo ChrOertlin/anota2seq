@@ -297,12 +297,10 @@ anota2seqPlotGenes(ads, selContrast = 1, analysis = "translation", plotToFile = 
 anota2seqPlotGenes(ads, selContrast = 1, analysis = "buffering", plotToFile = FALSE)
 @
 
-\subsubsection{Important note about analysis of translational buffering}
-An important note when considering changes in translational efficiency leading to buffering is that a buffered down mRNA will, in the statistical output of anota2seq, have a \emph{positive} log(effect) and inversely, a buffered up gene will have a \emph{negative} log(effect). This can be counterintuitive and requires additional explanation:\\
-
+\subsubsection{Note about analysis of translational buffering}
 The APV model fitted in anota2seq for analysis of changes in translational efficiency leading to altered protein levels consists in a model with translated mRNA as independent variable and total mRNA and the sample class variable as dependent variables. In other words, a common slope for all sample categories is considered and the translational effect is defined as a difference in intercepts \cite{larsson2010}. This regression model can be visualized in Fig. \ref{fig:singleGeneRegressions_translation}.\\ 
 
-Translational buffering is defined as changes in total mRNA level that are not paralleled by changes in levels of translated mRNA. As such, performing analysis of buffering considers total mRNA as independent variable and translated mRNA as dependent variable (together with the sample class; as illustrated in Fig. \ref{fig:singleGeneRegressions_buffering}). Semantically, from a translational control perspective, a mRNA which is called "buffering down" is a mRNA for which the total mRNA logFC is positive and for which this change is buffered at the translational level maintaining translated mRNA constant. For this "buffering down" mRNA, in the above described model, the difference in intercepts will be positive. 
+Translational buffering is defined as changes in total mRNA level that are not paralleled by changes in levels of translated mRNA. As such, performing analysis of buffering considers total mRNA as independent variable and translated mRNA as dependent variable (together with the sample class; as illustrated in Fig. \ref{fig:singleGeneRegressions_buffering}).
 
 \clearpage
 \subsection{Categorizing genes into regulatory modes}\label{regModesSection}

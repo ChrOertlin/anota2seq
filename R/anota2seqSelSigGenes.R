@@ -226,7 +226,8 @@ anota2seqSelSigGenes <- function (Anota2seqDataSet, useRVM = TRUE,
                                                    selectedRvmData = rep(list(NULL),dim(anota2seqSigObj@usedContrasts)[2]),
                                                    useRVM = useRVM,
                                                    deltaData = rep(list(NULL),dim(anota2seqSigObj@usedContrasts)[2]),
-                                                   usedThresholds = rep(list(NULL),dim(anota2seqSigObj@usedContrasts)[2])
+                                                   usedThresholds = rep(list(NULL),dim(anota2seqSigObj@usedContrasts)[2]),
+                                                   regModes = FALSE
                                                )
                 )
             }
