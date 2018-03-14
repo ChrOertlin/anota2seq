@@ -1,3 +1,10 @@
+CHANGES IN VERSION 1.0.2
+--------------------------
+
+    o We changes semantics buffering down into buffered (mRNA up) and buffering up into buffered (mRNA down) - so the interpretation is more intuitive.
+    o Add customization options to anota2seqPlotFC and anotat2seqPlotPvalues functions
+    o Fixed a bug where an unitialized object "regModes" was being accessed causing an uninformative error message.
+    
 CHANGES IN VERSION 0.99.2
 --------------------------
 
