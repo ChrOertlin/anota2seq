@@ -435,6 +435,8 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
                       graphArgs[["mar"]] <- c(5,5,3,2) + 0.1
                   }
               }
+              
+              par(graphArgs)
               for(i in 1:length(selContrast)){
                   deltaP <- object@deltaData[[selContrast[i]]][,"deltaP"]
                   deltaT <- object@deltaData[[selContrast[i]]][,"deltaT"]
@@ -455,7 +457,7 @@ setMethod("anota2seqPlotFC","Anota2seqDataSet",
                       myYlim <- myYlim
                   }
                   
-                  par(graphArgs)
+                  
                   plot(x=deltaT,y=deltaP, pch=19, cex=.8,
                        xlab=paste("total mRNA log2FC\n(",contrastName[i],")", sep = ""),
                        ylab = paste("translated mRNA log2FC\n(",contrastName[i],")", sep = ""),
@@ -690,14 +692,14 @@ setMethod("anota2seqPlotPvalues","Anota2seqDataSet",
                   names(pvalDens[[cont]]) <- nameList[[cont]]
                   names(fdrDens[[cont]]) <- nameList[[cont]]
               }
-              
+              par(graphArgs)
               for(cont in 1:length(selContrast)){
                   maxFDR <-  max(unlist(lapply(fdrDens[[cont]],function(x) max(x$y))))
                   maxPval <- max(unlist(lapply(pvalDens[[cont]],function(x) max(x$y))))
                   if(plotToFile == TRUE){
                       pdf(paste(fileStem, "_",gsub(" ","",contrastName[cont]),".pdf",sep=""))
                   }
-                  par(graphArgs)
+                  
                   for(reg in 1:length(pvalDens[[cont]])){
                       if(reg == 1){
                           plot(pvalDens[[cont]][[reg]],

@@ -46,7 +46,7 @@ translational efficiency leading to altered protein levels are colored),
 "buffering" (only identifiers regulated by change in translational 
 efficiency leading to buffering are colored). The object will be required 
 to contain different outputs depending on the value given to this 
-parameter (see Details)}
+parameter (see Details).}
 
 \item{selContrast}{Which contrast(s) should be considered? Descriptions of
 the contrasts can be found in the output from the anota2seqAnalyze object
