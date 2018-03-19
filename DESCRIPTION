@@ -1,9 +1,5 @@
 Package: anota2seq
-<<<<<<< HEAD
-Version: 1.0.1
-=======
-Version: 1.1.0
->>>>>>> upstream/master
+Version: 1.1.1
 Title: Generally applicable transcriptome-wide analysis of
         translational efficiency using anota2seq
 Author: Christian Oertlin <christian.oertlin@ki.se>, Julie Lorent <julie.lorent@ki.se>, Ola Larsson <ola.larsson@ki.se>
