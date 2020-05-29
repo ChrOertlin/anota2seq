@@ -99,7 +99,8 @@ both translated mRNA (e.g. polysome-associated mRNA or RPFs) and total
 mRNA (rows correspond to identifiers and columns to samples). The 
 annotation needed is supplied within "colData" of the 
 SummarizedExperiment object (rows correspond to samples with identical 
-names as in the assay while columns correspond to various annotation). 
+names as in the assay (rownames of "colData" must be column names in assay),
+while columns correspond to various annotation). 
 The "colData" must contain the following annotation columns with their 
 names within quotes: \itemize{ \item "RNA": under this column each 
 sample must be annotated with one out of two RNA source identifiers: 
